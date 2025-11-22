@@ -1,13 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-    <title>我的首頁</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的酷炫首頁</title>
+    <style>
+        /* 全局設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            /* 題目要求的底色 */
+            background-color: rgb(33, 33, 33); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh; /* 讓畫面佔滿整個視窗高度 */
+            display: flex;
+            justify-content: center; /* 水平置中 */
+            align-items: center;     /* 垂直置中 */
+            color: white;
+            overflow: hidden; /* 防止捲軸出現 */
+        }
+
+        /* 內容容器 */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05); /* 微微透明的背景 */
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1.5s ease; /* 進場動畫 */
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* 按鈕容器 */
+        .btn-group {
+            display: flex;
+            gap: 20px; /* 按鈕之間的距離 */
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* 按鈕基本樣式 */
+        .btn {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #03e9f4; /* 預設青色文字 */
+            border: 2px solid #03e9f4;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            background: transparent;
+            font-weight: bold;
+        }
+
+        /* 第二個按鈕改個顏色 (粉紅色) */
+        .btn-pink {
+            color: #ff007b;
+            border-color: #ff007b;
+        }
+
+        /* 滑鼠懸停 (Hover) 動畫效果 */
+        .btn:hover {
+            background: #03e9f4;
+            color: rgb(33, 33, 33); /* 懸停時文字變深色 */
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 200px #03e9f4; /* 霓虹光暈 */
+            transform: translateY(-5px); /* 微微上浮 */
+        }
+
+        .btn-pink:hover {
+            background: #ff007b;
+            color: rgb(33, 33, 33);
+            box-shadow: 0 0 5px #ff007b,
+                        0 0 25px #ff007b,
+                        0 0 50px #ff007b,
+                        0 0 200px #ff007b;
+        }
+
+        /* 進場動畫定義 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 手機版調整 */
+        @media (max-width: 600px) {
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>歡迎來到我的網站</h1>
-    
-    <p>點擊這裡前往 <a href="https://github.com/alancsi90/alancsi90.github.io/AppBuild.html">A 頁面</a></p>
-    
-    <p>點擊這裡前往 <a href="https://github.com/alancsi90/alancsi90.github.io/Agent.html">B 頁面</a></p>
+
+    <div class="container">
+        <h1>Welcome Project</h1>
+        <p style="color: #aaa; margin-bottom: 30px;">請選擇您要前往的頁面</p>
+        
+        <div class="btn-group">
+            <a href="https://alancsi90.github.io/AppBuild.html" class="btn">前往 App Builder 題庫</a>
+            <a href="https://alancsi90.github.io/Agent.html" class="btn btn-pink">前往 Agentforce 題庫</a>
+        </div>
+    </div>
+
 </body>
 </html>
