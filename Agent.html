@@ -8,8 +8,11 @@
         --h2-color: #c3c381;
         --h3-color: #d49f83;
         --summary-color: #cccccc;
-        --btn-bg: #555;
+        --btn-bg: rgba(255, 255, 255, 0.1);      /* 低透明度白 */
+        --btn-border: rgba(255, 255, 255, 0.2);  /* 邊框稍亮 */
         --btn-text: #fff;
+        --btn-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        --btn-hover-bg: rgba(255, 255, 255, 0.2);
     }
 
     /* 定義淺色模式類別 */
@@ -21,8 +24,11 @@
         --h2-color: #c3c381;
         --h3-color: #d49f83;
         --summary-color: #cccccc;
-        --btn-bg: #555;
+        --btn-bg: rgba(255, 255, 255, 0.1);      /* 低透明度白 */
+        --btn-border: rgba(255, 255, 255, 0.2);  /* 邊框稍亮 */
         --btn-text: #fff;
+        --btn-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        --btn-hover-bg: rgba(255, 255, 255, 0.2);
     }
 
     html {
@@ -110,19 +116,36 @@
 
     /* 通用按鈕樣式 */
     .action-btn {
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--btn-bg);
+        padding: 12px 18px;
+        border-radius: 12px; /* 更圓潤的邊角 */
+        
+        /* 玻璃擬態核心屬性 */
+        background: var(--btn-bg);
+        backdrop-filter: blur(10px);       /* 背景模糊 */
+        -webkit-backdrop-filter: blur(10px); /* Safari 支援 */
+        border: 1px solid var(--btn-border); /* 半透明邊框 */
+        box-shadow: var(--btn-shadow);
+        
         color: var(--btn-text);
         cursor: pointer;
         font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         font-size: 14px;
-        transition: opacity 0.2s;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        text-align: left; /* 文字靠左，圖示對齊 */
+        display: flex;
+        align-items: center;
+        gap: 8px; /* 圖示與文字間距 */
     }
+
     .action-btn:hover {
-        opacity: 0.9;
+        background: var(--btn-hover-bg);
+        transform: translateY(-2px); /* 懸浮時輕微上浮 */
+        box-shadow: 0 6px 40px rgba(0, 0, 0, 0.15); /* 加深陰影 */
+    }
+    
+    .action-btn:active {
+        transform: translateY(0);
     }
 </style>
 
@@ -155,14 +178,35 @@
         // 平滑滾動到該元素
         randomQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    // 全部展開/收合詳解
+    let allOpen = false; // 追蹤目前狀態
+    function toggleAllAnswers() {
+        const allDetails = document.querySelectorAll('details');
+        const btn = document.getElementById('toggle-ans-btn');
+        
+        allOpen = !allOpen; // 切換狀態
+
+        allDetails.forEach(detail => {
+            if (allOpen) {
+                detail.setAttribute('open', 'true');
+            } else {
+                detail.removeAttribute('open');
+            }
+        });
+
+        // 更新按鈕文字
+        btn.textContent = allOpen ? "全部收合" : "全部展開";
+    }
 </script>
 
 <html>
 <title>Agentforce 題庫</title>
 <div class="header">Agentforce 題庫</div>
+
 <div class="btn-container">
     <button class="action-btn" id="theme-toggle" onclick="toggleTheme()">不顯示中文</button>
-    <button class="action-btn" id="random-btn" onclick="goToRandomQuestion()">🎲 隨機一題</button>
+    <button class="action-btn" id="random-btn" onclick="goToRandomQuestion()">🎲 隨機</button>
+    <button class="action-btn" id="toggle-ans-btn" onclick="toggleAllAnswers()">展開/收合</button>
 </div>
 
 <div class="text1">
