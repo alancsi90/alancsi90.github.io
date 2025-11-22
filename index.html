@@ -3,33 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alan測試網站</title>
+    <title>Alan測試頁面</title>
     <style>
         /* 全局設定 */
         body {
             margin: 0;
             padding: 0;
-            /* 題目要求的底色 */
             background-color: rgb(33, 33, 33); 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh; /* 讓畫面佔滿整個視窗高度 */
+            height: 100vh;
             display: flex;
-            justify-content: center; /* 水平置中 */
-            align-items: center;     /* 垂直置中 */
+            justify-content: center;
+            align-items: center;
             color: white;
-            overflow: hidden; /* 防止捲軸出現 */
+            overflow: hidden;
         }
 
-        /* 內容容器 */
+        /* --- 霓虹燈條容器的核心設定 --- */
         .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05); /* 微微透明的背景 */
-            padding: 3rem;
+            position: relative; /* 為了讓偽元素定位 */
+            z-index: 0;         /* 建立堆疊環境 */
+            width: 400px;       /* 設定固定寬度效果較好，也可設 % */
+            max-width: 90%;
+            padding: 4rem 3rem; /* 內距加大一點 */
             border-radius: 20px;
-            backdrop-filter: blur(10px); /* 毛玻璃效果 */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1.5s ease; /* 進場動畫 */
+            overflow: hidden;   /* 裁切掉超出圓角的旋轉光芒 */
+            
+            /* 讓內容置中 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 1. 旋轉的彩色光盤 (負責發光與顏色) */
+        .container::before {
+            content: '';
+            position: absolute;
+            z-index: -2;        /* 放在最底層 */
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            /* 這裡設定霓虹顏色：青色 -> 粉色 -> 青色 */
+            background-image: conic-gradient(
+                transparent, 
+                #03e9f4, 
+                transparent 30%, 
+                #ff007b,
+                transparent 70%
+            );
+            /* 套用旋轉動畫 */
+            animation: rotate 4s linear infinite;
+        }
+
+        /* 2. 中間的黑色遮罩 (蓋住中間，只留邊框) */
+        .container::after {
+            content: '';
+            position: absolute;
+            z-index: -1;        /* 放在光盤上面，內容下面 */
+            left: 6px;          /* 這裡決定邊框的粗細 (6px) */
+            top: 6px;
+            width: calc(100% - 12px);
+            height: calc(100% - 12px);
+            background: rgb(33, 33, 33); /* 與背景同色，製造鏤空感 */
+            border-radius: 16px; /* 稍微比外框小一點 */
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5); /* 內部陰影增加立體感 */
+        }
+
+        /* 定義旋轉動畫 */
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         h1 {
@@ -37,23 +85,29 @@
             font-weight: 300;
             letter-spacing: 2px;
             text-transform: uppercase;
+            z-index: 1; /* 確保文字在遮罩之上 */
+        }
+        
+        p {
+            z-index: 1;
         }
 
         /* 按鈕容器 */
         .btn-group {
             display: flex;
-            gap: 20px; /* 按鈕之間的距離 */
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            z-index: 1; /* 確保按鈕在遮罩之上 */
         }
 
-        /* 按鈕基本樣式 */
+        /* 按鈕基本樣式 (保持不變) */
         .btn {
             position: relative;
             padding: 15px 40px;
             font-size: 1.2rem;
             text-decoration: none;
-            color: #03e9f4; /* 預設青色文字 */
+            color: #03e9f4;
             border: 2px solid #03e9f4;
             border-radius: 5px;
             text-transform: uppercase;
@@ -64,43 +118,27 @@
             font-weight: bold;
         }
 
-        /* 第二個按鈕改個顏色 (粉紅色) */
         .btn-pink {
             color: #ff007b;
             border-color: #ff007b;
         }
 
-        /* 滑鼠懸停 (Hover) 動畫效果 */
         .btn:hover {
             background: #03e9f4;
-            color: rgb(33, 33, 33); /* 懸停時文字變深色 */
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 200px #03e9f4; /* 霓虹光暈 */
-            transform: translateY(-5px); /* 微微上浮 */
+            color: rgb(33, 33, 33);
+            box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4;
+            transform: translateY(-5px);
         }
 
         .btn-pink:hover {
             background: #ff007b;
             color: rgb(33, 33, 33);
-            box-shadow: 0 0 5px #ff007b,
-                        0 0 25px #ff007b,
-                        0 0 50px #ff007b,
-                        0 0 200px #ff007b;
+            box-shadow: 0 0 5px #ff007b, 0 0 25px #ff007b, 0 0 50px #ff007b;
         }
 
-        /* 進場動畫定義 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 手機版調整 */
         @media (max-width: 600px) {
-            .btn-group {
-                flex-direction: column;
-            }
+            .btn-group { flex-direction: column; }
+            .container { width: 85%; }
         }
     </style>
 </head>
@@ -117,5 +155,4 @@
     </div>
 
 </body>
-
 </html>
