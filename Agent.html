@@ -98,11 +98,18 @@
         color: white;
     }
 
-    /* 切換按鈕樣式 */
-    #theme-toggle {
+    /* 按鈕容器 */
+    .btn-container {
         position: fixed;
         top: 20px;
         right: 20px;
+        display: flex;
+        gap: 10px; /* 按鈕間距 */
+        z-index: 1000;
+    }
+
+    /* 通用按鈕樣式 */
+    .action-btn {
         padding: 10px 15px;
         border: none;
         border-radius: 5px;
@@ -111,9 +118,10 @@
         cursor: pointer;
         font-weight: bold;
         box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        z-index: 1000;
+        font-size: 14px;
+        transition: opacity 0.2s;
     }
-    #theme-toggle:hover {
+    .action-btn:hover {
         opacity: 0.9;
     }
 </style>
@@ -131,16 +139,36 @@
             btn.textContent = "不顯示中文";
         }
     }
+    // 隨機跳題功能
+    function goToRandomQuestion() {
+        // 獲取所有 h3 元素 (因為每個題目都有一個 h3 作為標題)
+        const questions = document.querySelectorAll('h3');
+        
+        if (questions.length === 0) return;
+
+        // 產生隨機索引
+        const randomIndex = Math.floor(Math.random() * questions.length);
+        
+        // 獲取隨機題目元素
+        const randomQuestion = questions[randomIndex];
+
+        // 平滑滾動到該元素
+        randomQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 </script>
 
 <html>
 <title>Agentforce 題庫</title>
 <div class="header">Agentforce 題庫</div>
-<button id="theme-toggle" onclick="toggleTheme()">不顯示中文</button>
+<div class="btn-container">
+    <button class="action-btn" id="theme-toggle" onclick="toggleTheme()">不顯示中文</button>
+    <button class="action-btn" id="random-btn" onclick="goToRandomQuestion()">🎲 隨機一題</button>
+</div>
 
 <div class="text1">
 
 <!-- Q1 -->
+<div>
 <h3>【第一題 / NO. 1】<br></h3> 
 <br><p>
 An administrator is responsible for ensuring the security and reliability of Universal Containers' (UC) CRM data. UC needs enhanced data protection and up-to-date AI capabilities. UC also needs to include relevant information from a Salesforce record to be merged with the prompt. Which feature in the Einstein Trust Layer best supports UC's need?
@@ -163,6 +191,8 @@ Dynamic grounding with secure data retrieval is a key feature in Salesforce's Ei
 <br>
 
 <!-- Q2 -->
+</div>
+<div>
 <h3>【第二題 / NO. 2】<br></h3> 
 <br><p>
 Universal Containers wants to reduce overall customer support handling time by minimizing the time spent typing routine answers for common questions in-chat, and reducing the post-chat analysis by suggesting values for case fields. Which combination of Agentforce for Service features enables this effort?
@@ -188,6 +218,8 @@ Einstein 回覆推薦 (Reply Recommendations)：利用 AI 根據聊天上下文�
 <br>
 
 <!-- Q3 -->
+</div>
+<div>
 <h3>【第三題 / NO. 3】<br></h3> 
 <br><p>
 Universal Containers (UC) plans to automatically populate the Description field on the Account object. Which type of prompt template should UC use?
@@ -210,6 +242,8 @@ A Field Generation prompt template is specifically designed to create or fill in
 <br>
 
 <!-- Q4 -->
+</div>
+<div>
 <h3>【第四題 / NO. 4】<br></h3> 
 <br><p>
 Universal Containers (UC) uses a file upload-based data library and custom prompt to support AI-driven training content. However, users report that the AI frequently returns outdated documents. Which corrective action should UC implement to improve content relevancy?
@@ -232,6 +266,8 @@ To improve relevancy by ensuring only current documents are retrieved, the most 
 <br>
 
 <!-- Q5 -->
+</div>
+<div>
 <h3>【第五題 / NO. 5】<br></h3> 
 <br><p>
 An Agentforce has created a copilot custom action using flow as the reference action type. However, it is not delivering the expected results to the conversation preview, and therefore needs troubleshooting. What should the Agentforce Specialist do to identify the root cause of the problem?
@@ -254,6 +290,8 @@ When troubleshooting a copilot custom action using flow... enabling dynamic debu
 <br>
 
 <!-- Q6 -->
+</div>
+<div>
 <h3>【第六題 / NO. 6】<br></h3> 
 <br><p>
 What is true of Agentforce Testing Center?
@@ -276,6 +314,8 @@ Running tests does not consume Einstein Requests. Testing Center uses synthetic 
 <br>
 
 <!-- Q7 -->
+</div>
+<div>
 <h3>【第七題 / NO. 7】<br></h3> 
 <br><p>
 Universal Containers (UC) is preparing to use the Agentforce Testing Center to ensure the reliability of a new agent. UC has a CSV file with test cases... Which best practice should the company follow to avoid modifying CRM data while running tests in the Testing Center?
@@ -298,6 +338,8 @@ According to the AgentForce Testing and Validation Guidelines... all automated o
 <br>
 
 <!-- Q8 -->
+</div>
+<div>
 <h3>【第八題 / NO. 8】<br></h3> 
 <br><p>
 An Agentforce Specialist is building a Flex prompt template. Which best practice should the Agentforce Specialist follow when creating the Flex prompt template?
@@ -320,6 +362,8 @@ Flex 提示範本的最佳實踐是確保為 LLM 提供清晰的「上下文資�
 <br>
 
 <!-- Q9 -->
+</div>
+<div>
 <h3>【第九題 / NO. 9】<br></h3> 
 <br><p>
 Universal Containers plans to enhance the customer support team's productivity using AI. Which specific use case necessitates the use of Prompt Builder?
@@ -342,6 +386,8 @@ Prompt Builder allows the Agentforce Specialist to create and refine prompts tha
 <br>
 
 <!-- Q10 -->
+</div>
+<div>
 <h3>【第十題 / NO. 10】<br></h3> 
 <br><p>
 Universal Containers (UC) is using Einstein Generative AI to generate an account summary. UC aims to ensure the content is safe and inclusive... What does a safety category score of 1 indicate in the Einstein Generative Toxicity Score?
@@ -364,6 +410,8 @@ A toxicity score of 1 indicates that the content is deemed safe. The scoring sys
 <br>
 
 <!-- Q11 -->
+</div>
+<div>
 <h3>【第十一題 / NO. 11】<br></h3> 
 <br><p>
 An Agentforce at Universal Containers (UC) is building with no-code tools only... UC wants to help prep the sales team for the calls by summarizing past purchases, interests in products... and a recap of past email and phone conversations. Which approach should the Agentforce Specialist recommend?
@@ -386,6 +434,8 @@ For no-code implementations, Prompt Builder allows Agentforce Specialists to cre
 <br>
 
 <!-- Q12 -->
+</div>
+<div>
 <h3>【第十二題 / NO. 12】<br></h3> 
 <br><p>
 An Agentforce is creating a custom action for Agentforce. Which setting should they ensure the action performs as expected?
@@ -408,6 +458,8 @@ Action Instructions are critical for defining how the bot processes and executes
 <br>
 
 <!-- Q13 -->
+</div>
+<div>
 <h3>【第十三題 / NO. 13】<br></h3> 
 <br><p>
 The Agentforce Specialist for Coral Cloud Resorts wants to create an agent that will automate the resolution of a large portion of guest complaints... The agent will also be in charge of escalating the case to a human when a guest has suffered a major disruption. Following Salesforce best practices, which type of agent should the Agentforce Specialist create?
@@ -430,6 +482,8 @@ Service Agents handle customer inquiries, complaints, and issue resolution workf
 <br>
 
 <!-- Q14 -->
+</div>
+<div>
 <h3>【第十四題 / NO. 14】<br></h3> 
 <br><p>
 What does it mean when a prompt template version is described as immutable?
@@ -452,6 +506,8 @@ When a prompt template version is marked as immutable, it means that no edits or
 <br>
 
 <!-- Q15 -->
+</div>
+<div>
 <h3>【第十五題 / NO. 15】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to limit an agent's access to Knowledge articles while deploying the "Answer Questions with Knowledge" action. How should UC achieve this?
@@ -481,6 +537,8 @@ Salesforce Knowledge 使用「資料類別 (Data Categories)」來組織文章�
  
 
 <!-- Q16 -->
+</div>
+<div>
 <h3>【第十六題 / NO. 16】<br></h3> 
 <br><p>
 A data scientist needs to view and manage models in Einstein Studio, and also needs to create prompt templates in Prompt Builder. Which permission sets should an Agentforce Specialist assign to the data scientist?
@@ -503,6 +561,8 @@ The "Data Cloud Admin" permission set grants access to manage models in Data Clo
 <br>
 
 <!-- Q17 -->
+</div>
+<div>
 <h3>【第十七題 / NO. 17】<br></h3> 
 <br><p>
 A sales manager is using Agent Assistant to streamline their daily tasks. They ask the agent to "Show me a list of my open opportunities." How does the large language model (LLM) in Agentforce identify and execute the action to show the sales manager a list of open opportunities?
@@ -525,6 +585,8 @@ Agentforce 的 LLM 會動態解讀自然語言請求（例如「顯示我的機�
 <br>
 
 <!-- Q18 -->
+</div>
+<div>
 <h3>【第十八題 / NO. 18】<br></h3> 
 <br><p>
 An Agentforce at Universal Containers is working on a prompt template to generate personalized emails for product demonstration requests from customers. It is important for the AI-generated email to adhere strictly to the guidelines, using only associated opportunity information, and to encourage the recipient to take the desired action. How should the Agentforce Specialist include these instructions on a new line in the prompt template?
@@ -547,6 +609,8 @@ In Salesforce prompt templates, instructions that guide how the LLM should gener
 <br>
 
 <!-- Q19 -->
+</div>
+<div>
 <h3>【第十九題 / NO. 19】<br></h3> 
 <br><p>
 Universal Containers (UC) is implementing Einstein Generative AI to improve customer insights and interactions. UC needs audit and feedback data to be accessible for reporting purposes. What is a consideration for this requirement?
@@ -569,6 +633,8 @@ When implementing Einstein Generative AI... the Data Cloud is a key consideratio
 <br>
 
 <!-- Q20 -->
+</div>
+<div>
 <h3>【第二十題 / NO. 20】<br></h3> 
 <br><p>
 Universal Containers has a new AI project. What should An Agentforce consider when adding a related list on the Account object to be used in the prompt template?
@@ -591,6 +657,8 @@ The recommended approach... is to select a related list and then use the field p
 <br>
 
 <!-- Q21 -->
+</div>
+<div>
 <h3>【第二十一題 / NO. 21】<br></h3> 
 <br><p>
 An administrator at Universal Containers has successfully deployed a new agent from a sandbox to production using a change set. The agent uses a prompt template that invokes a Salesforce flow to perform a complex calculation. In production, when users interact with the agent, it fails with an error message every time the flow is supposed to run. The flow was included in the change set and is present in production. What is the most likely cause of this issue?
@@ -613,6 +681,8 @@ When deploying flows via change sets, the flows arrive in the production org in 
 <br>
 
 <!-- Q22 -->
+</div>
+<div>
 <h3>【第二十二題 / NO. 22】<br></h3> 
 <br><p>
 What is the primary advantage of creating an individual retriever instead of the default retriever?
@@ -635,6 +705,8 @@ Individual retrievers allow specialists to define filters, select specific field
 <br>
 
 <!-- Q23 -->
+</div>
+<div>
 <h3>【第二十三題 / NO. 23】<br></h3> 
 <br><p>
 Universal Containers aims to streamline the sales team's daily tasks by using AI. When considering these new workflows, which improvement requires the use of Prompt Builder?
@@ -657,6 +729,8 @@ Prompt Builder 是建立 AI 生成摘要欄位（例如摘要合約條款）的�
 <br>
 
 <!-- Q24 -->
+</div>
+<div>
 <h3>【第二十四題 / NO. 24】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to use the Draft with Einstein feature in Sales Cloud to create a personalized introduction email. After creating a proposed draft email, which predefined adjustment should UC choose to revise the draft with a more casual tone?
@@ -679,6 +753,8 @@ The predefined adjustment to Make Less Formal is the correct option to revise th
 <br>
 
 <!-- Q25 -->
+</div>
+<div>
 <h3>【第二十五題 / NO. 25】<br></h3> 
 <br><p>
 Universal Containers (UC) plans to send one of three different emails to its customers based on the customer's lifetime value score and their market segment. Considering that UC are required to explain why an e-mail was selected, which AI model should UC use to achieve this?
@@ -701,6 +777,8 @@ Predictive models analyze data to forecast outcomes... and offer the ability to 
 <br>
 
 <!-- Q26 -->
+</div>
+<div>
 <h3>【第二十六題 / NO. 26】<br></h3> 
 <br><p>
 An AI Specialist is tasked with creating a prompt template for a sales team. The template needs to generate a summary of all related opportunities for a given Account. Which grounding technique should the AI Specialist use to include data from the related list of opportunities in the prompt template?
@@ -723,6 +801,8 @@ The standard and straightforward method is using merge fields tied to the defaul
 <br>
 
 <!-- Q27 -->
+</div>
+<div>
 <h3>【第二十七題 / NO. 27】<br></h3> 
 <br><p>
 An Agentforce turned on Einstein Generative AI in Setup. Now, the Agentforce Specialist would like to create custom prompt templates in Prompt Builder. However, they cannot access Prompt Builder in the Setup menu. What is causing the problem?
@@ -745,6 +825,8 @@ In order to access and create custom prompt templates in Prompt Builder, the Age
 <br>
 
 <!-- Q28 -->
+</div>
+<div>
 <h3>【第二十八題 / NO. 28】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to use Flow to bring data from unified Data Cloud objects to prompt templates. Which type of flow should UC use?
@@ -767,6 +849,8 @@ In this scenario... the best way to do that is through a Template-triggered prom
 <br>
 
 <!-- Q29 -->
+</div>
+<div>
 <h3>【第二十九題 / NO. 29】<br></h3> 
 <br><p>
 Universal Containers (UC) is implementing generative AI and wants to leverage a prompt template to provide responses to customers that gives personalized product recommendations to website visitors based on their browsing history. Which initial step should UC take to ensure the chatbot can deliver accurate recommendations?
@@ -789,6 +873,8 @@ The foundational step... is collecting and analyzing browsing data. Personalized
 <br>
 
 <!-- Q30 -->
+</div>
+<div>
 <h3>【第三十題 / NO. 30】<br></h3> 
 <br><p>
 An Agentforce Specialist is creating a custom agent action. The topic is selected correctly, but the action is not. Which setting should the Agentforce Specialist test and iterate on to ensure the action performs as expected?
@@ -818,6 +904,8 @@ If a topic is correctly triggered but the wrong action is executed, the issue ty
  
 
 <!-- Q31 -->
+</div>
+<div>
 <h3>【第三十一題 / NO. 31】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to ensure its compliance team can retrieve exact matches of policy clause numbers from a structured legal document library. Which search type should UC implement?
@@ -840,6 +928,8 @@ When the use case requires retrieving exact matches (such as policy clause numbe
 <br>
 
 <!-- Q32 -->
+</div>
+<div>
 <h3>【第三十二題 / NO. 32】<br></h3> 
 <br><p>
 Universal Containers (UC) would like to implement the Sales Development Representative (SDR) Agent. Which channel consideration should UC be aware of while implementing it?
@@ -862,6 +952,8 @@ Agentforce SDR Agent 旨在主要透過「訊息 (Messaging)」頻道（例如 S
 <br>
 
 <!-- Q33 -->
+</div>
+<div>
 <h3>【第三十三題 / NO. 33】<br></h3> 
 <br><p>
 Universal Containers has multiple Salesforce orgs, each with a unique customer service agent where a verification agent must pass customer identity data to downstream agents handling account modifications. The customer ID must remain secure and persistent across agent handoffs without exposure to large language model (LLM) modification. What is the most appropriate configuration?
@@ -884,6 +976,8 @@ When sensitive identity data... must be shared between agents, the correct appro
 <br>
 
 <!-- Q34 -->
+</div>
+<div>
 <h3>【第三十四題 / NO. 34】<br></h3> 
 <br><p>
 An administrator wants to check the response of the Flex prompt template they've built, but the preview button is greyed out. What is the reason for this?
@@ -906,6 +1000,8 @@ Flex 提示範本會動態地從 Salesforce 記錄中提取資料。如果沒有
 <br>
 
 <!-- Q35 -->
+</div>
+<div>
 <h3>【第三十五題 / NO. 35】<br></h3> 
 <br><p>
 Universal Containers (UC) configured a new PDF file ingestion in Data Cloud with all the required fields, and also created the mapping and the search Index. UC Is now setting up the retriever and notices a required field is missing. How should UC resolve this?
@@ -928,6 +1024,8 @@ When configuring a retriever in Data Cloud... all necessary fields must be inclu
 <br>
 
 <!-- Q36 -->
+</div>
+<div>
 <h3>【第三十六題 / NO. 36】<br></h3> 
 <br><p>
 Which use case is best supported by Salesforce Agent's capabilities?
@@ -950,6 +1048,8 @@ Salesforce Agent 的核心價值在於提供一個通用的「對話式 AI 介�
 <br>
 
 <!-- Q37 -->
+</div>
+<div>
 <h3>【第三十七題 / NO. 37】<br></h3> 
 <br><p>
 An AI Specialist is tasked with configuring a generative model to create personalized sales emails using customer data stored in Salesforce. The AI Specialist has already fine-tuned a large language model (LLM) on the OpenAI platform. Security and data privacy are critical concerns for the client. How should the Agentforce Specialist integrate the custom LLM into Salesforce?
@@ -972,6 +1072,8 @@ Einstein Studio 允許組織「自帶模型 (BYOM)」，確保模型在 Salesfor
 <br>
 
 <!-- Q38 -->
+</div>
+<div>
 <h3>【第三十八題 / NO. 38】<br></h3> 
 <br><p>
 Cloud Kicks (CK) recently finished the development of a new prompt template that uses its own large language model (LLM). CK is deploying a prompt template from a sandbox to a production org, and is receiving an error. When trying to deploy the change set, CK is getting an error related to the LLM used in the prompt template. What is the cause of the error?
@@ -994,6 +1096,8 @@ Each prompt template references a specific LLM configuration by name and ID. Whe
 <br>
 
 <!-- Q39 -->
+</div>
+<div>
 <h3>【第三十九題 / NO. 39】<br></h3> 
 <br><p>
 Universal Containers deploys a new Agentforce Service Agent into the company's website but is getting feedback that the Agentforce Service Agent is not providing answers to customer questions that are found in the company's Salesforce Knowledge articles. What is the likely issue?
@@ -1016,6 +1120,8 @@ Agentforce 服務 Agent 需要對 Knowledge 文章擁有讀取權限才能根據
 <br>
 
 <!-- Q40 -->
+</div>
+<div>
 <h3>【第四十題 / NO. 40】<br></h3> 
 <br><p>
 An Agentforce is tasked with analyzing Agent interactions looking into user inputs, requests, and queries to identify patterns and trends. What functionality allows the AI Specialist to achieve this?
@@ -1038,6 +1144,8 @@ The User Utterances dashboard is the correct functionality for analyzing user in
 <br>
 
 <!-- Q41 -->
+</div>
+<div>
 <h3>【第四十一題 / NO. 41】<br></h3> 
 <br><p>
 Universal Containers has a strict change management process that requires all possible configuration to be completed in a sandbox which will be deployed to production. The Agentforce Specialist is tasked with setting up Work Summaries for Enhanced Messaging... Which other configuration steps should the Agentforce Specialist take in the sandbox that can be deployed to the production org?
@@ -1060,6 +1168,8 @@ The main deployable items you can reliably create and test in a sandbox, and the
 <br>
 
 <!-- Q42 -->
+</div>
+<div>
 <h3>【第四十二題 / NO. 42】<br></h3> 
 <br><p>
 A business stakeholder wants to use AI to generate a summary based on Data Cloud data. Which method(s) should the stakeholder use to access Data Cloud data from Prompt Builder?
@@ -1082,6 +1192,8 @@ Prompt Builder 支援透過「Data Cloud 相關清單」進行上下文接地，
 <br>
 
 <!-- Q43 -->
+</div>
+<div>
 <h3>【第四十三題 / NO. 43】<br></h3> 
 <br><p>
 The sales team at a hotel resort would like to generate a guest summary about the guests' interests and provide recommendations based on their activity preferences captured in each guest profile. They want the summary to be available only on the contact record page. Which AI capability should the team use?
@@ -1104,6 +1216,8 @@ Prompt Builder 允許建立提示範本來生成文字（如摘要、推薦）�
 <br>
 
 <!-- Q44 -->
+</div>
+<div>
 <h3>【第四十四題 / NO. 44】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to use Generative AI Salesforce functionality to reduce Service Agent handling time by providing recommended replies based on the existing Knowledge articles. On which AI capability should UC train the service agents?
@@ -1126,6 +1240,8 @@ Service Replies (specifically Einstein Service Replies) is the Salesforce Genera
 <br>
 
 <!-- Q45 -->
+</div>
+<div>
 <h3>【第四十五題 / NO. 45】<br></h3> 
 <br><p>
 Universal Containers (UC) is preparing and defining success criteria for Agentforce Testing Center test cases. Which details should UC specify as the expected output to ensure the tests accurately reflect the agent's functionality?
@@ -1148,6 +1264,8 @@ The Expected Topic API Name acts as the validation reference - it ensures that t
 <br>
 
 <!-- Q46 -->
+</div>
+<div>
 <h3>【第四十六題 / NO. 46】<br></h3> 
 <br><p>
 Universal Containers has implemented an agent that answers questions based on Knowledge articles. Which topic and Agent Action will be shown in the Agent Builder?
@@ -1170,6 +1288,8 @@ Universal Containers has implemented an agent that answers questions based on Kn
 <br>
 
 <!-- Q47 -->
+</div>
+<div>
 <h3>【第四十七題 / NO. 47】<br></h3> 
 <br><p>
 Before activating a custom copilot action, An Agentforce would like is to understand multiple real-world user utterances to ensure the action being selected appropriately. Which tool should the Agentforce Specialist recommend?
@@ -1192,6 +1312,8 @@ Model Playground... allows you to test and refine the behavior of your AI models
 <br>
 
 <!-- Q48 -->
+</div>
+<div>
 <h3>【第四十八題 / NO. 48】<br></h3> 
 <br><p>
 What is best practice when refining Agent custom action instructions?
@@ -1214,6 +1336,8 @@ It is considered best practice to provide examples of user messages that are exp
 <br>
 
 <!-- Q49 -->
+</div>
+<div>
 <h3>【第四十九題 / NO. 49】<br></h3> 
 <br><p>
 During configuration, Universal Containers (UC) forgot to grant Knowledge access to the Agentforce Service Agent. Which permission must UC add for the agent to interact with Knowledge articles and answer customer questions effectively?
@@ -1236,6 +1360,8 @@ For an agent to interact with and retrieve Knowledge articles, it must have Know
 <br>
 
 <!-- Q50 -->
+</div>
+<div>
 <h3>【第五十題 / NO. 50】<br></h3> 
 <br><p>
 Universal Containers needs to restrict access to refund processing actions so only customers with Active account status can initiate refunds. How should an Agentforce Specialist apply the restriction deterministically?
@@ -1265,6 +1391,8 @@ Deterministic restrictions on action execution should be implemented using conte
  
 
 <!-- Q51 -->
+</div>
+<div>
 <h3>【第五十一題 / NO. 51】<br></h3> 
 <br><p>
 An Agentforce Specialist created a Field Generation prompt template. What should the Agentforce Specialist do to expose the template to the user?
@@ -1287,6 +1415,8 @@ The Field Generation prompt template type is specifically designed to enable gen
 <br>
 
 <!-- Q52 -->
+</div>
+<div>
 <h3>【第五十二題 / NO. 52】<br></h3> 
 <br><p>
 Universal Containers tests out a new Einstein Generative AI feature for its sales team to create personalized and contextualized emails for its customers. Sometimes, users find that the draft email contains placeholders for attributes that could have been derived from the recipient's contact record. What is the most likely explanation for why the draft email shows these placeholders?
@@ -1309,6 +1439,8 @@ Einstein 銷售電子郵件功能會從記錄中提取資料來填入草稿。�
 <br>
 
 <!-- Q53 -->
+</div>
+<div>
 <h3>【第五十三題 / NO. 53】<br></h3> 
 <br><p>
 A Salesforce Administrator wants to generate personalized, targeted emails that incorporate customer interaction data. The admin wants to leverage large language models (LLMs) to write the emails, and wants to reuse templates for different products and customers. Which solution approach should the admin leverage?
@@ -1331,6 +1463,8 @@ Sales Email Prompt Template Type is designed specifically for generating dynamic
 <br>
 
 <!-- Q54 -->
+</div>
+<div>
 <h3>【第五十四題 / NO. 54】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to assess Salesforce's generative features but has concerns over its company data being exposed to third-party large language models (LLMs). Specifically, UC wants the following capabilities to be part of Einstein's generative AI service:
@@ -1361,6 +1495,8 @@ Einstein 信任層中的「零資料保留政策 (Zero-Data Retention Policy)」
 <br>
 
 <!-- Q55 -->
+</div>
+<div>
 <h3>【第五十五題 / NO. 55】<br></h3> 
 <br><p>
 How does the Einstein Trust Layer ensure that sensitive data is protected while generating useful and meaningful responses?
@@ -1383,6 +1519,8 @@ Einstein 信任層在將提示發送給 LLM 之前會先遮罩敏感資料（如
 <br>
 
 <!-- Q56 -->
+</div>
+<div>
 <h3>【第五十六題 / NO. 56】<br></h3> 
 <br><p>
 An Agentforce Specialist is creating a custom action in Agentforce. Which option is available for the Agentforce Specialist to choose for the custom Agent action?
@@ -1405,6 +1543,8 @@ In Agentforce Studio's Agent Builder, custom actions can be created using Salesf
 <br>
 
 <!-- Q57 -->
+</div>
+<div>
 <h3>【第五十七題 / NO. 57】<br></h3> 
 <br><p>
 Universal Containers has a custom Agent action calling a flow to retrieve the real-time status of an order from the order fulfillment system. For the given flow, what should the Agentforce Specialist consider about the running user's data access?
@@ -1427,6 +1567,8 @@ When a flow is invoked via a custom Agent action, its data access depends on the
 <br>
 
 <!-- Q58 -->
+</div>
+<div>
 <h3>【第五十八題 / NO. 58】<br></h3> 
 <br><p>
 In a Knowledge-based data library configuration, what is the primary difference between the identifying fields and the content fields?
@@ -1449,6 +1591,8 @@ Identifying fields (e.g., Title, Article Number...) are used to search and pinpo
 <br>
 
 <!-- Q59 -->
+</div>
+<div>
 <h3>【第五十九題 / NO. 59】<br></h3> 
 <br><p>
 Coral Cloud Resorts is implementing Agentforce retrieval. Customers sometimes type ambiguous terms (for example, "package" could mean vacation package or baggage). Which retrieval strategy best balances precision and contextual disambiguation?
@@ -1471,6 +1615,8 @@ Hybrid search is a combined retrieval method that leverages keyword-based precis
 <br>
 
 <!-- Q60 -->
+</div>
+<div>
 <h3>【第六十題 / NO. 60】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to ensure the effectiveness, reliability, and trust of its agents prior to deploying them in production. UC would like to efficiently test a large and repeatable number of utterances. What should the Agentforce Specialist recommend?
@@ -1493,6 +1639,8 @@ Agentforce 測試中心專門設計用於此目的。透過上傳包含測試話
 <br>
 
 <!-- Q61 -->
+</div>
+<div>
 <h3>【第六十一題 / NO. 61】<br></h3> 
 <br><p>
 Universal Containers' administrator has developed a new agent in a sandbox environment and now wants to deploy it to production. What should the administrator do to deploy an agent?
@@ -1515,6 +1663,8 @@ Agentforce 的 Agent 元件（包括主題、動作、提示範本等）是可�
 <br>
 
 <!-- Q62 -->
+</div>
+<div>
 <h3>【第六十二題 / NO. 62】<br></h3> 
 <br><p>
 Universal Containers built a Field Generation prompt template that worked for many records, but users are reporting random failures with token limit errors. What is the cause of the random nature of this error?
@@ -1537,6 +1687,8 @@ Since the data varies by record—some records might have short text fields whil
 <br>
 
 <!-- Q63 -->
+</div>
+<div>
 <h3>【第六十三題 / NO. 63】<br></h3> 
 <br><p>
 Universal Containers (UC) users are complaining that agent answers are not satisfactory. The agent is using PDF files as a knowledge source. How should UC troubleshoot this issue?
@@ -1559,6 +1711,8 @@ If agent answers are not satisfactory... the issue is likely caused by Retriever
 <br>
 
 <!-- Q64 -->
+</div>
+<div>
 <h3>【第六十四題 / NO. 64】<br></h3> 
 <br><p>
 Universal Containers' current AI data masking rules do not align with organizational privacy and security policies and requirements. What should An Agentforce recommend to resolve the issue?
@@ -1581,6 +1735,8 @@ Einstein 信任層是管理 AI 資料隱私和安全的核心位置。如果遮�
 <br>
 
 <!-- Q65 -->
+</div>
+<div>
 <h3>【第六十五題 / NO. 65】<br></h3> 
 <br><p>
 Universal Containers (UC) plans to implement prompt templates that utilize the standard foundation models. What should UC consider when building prompt templates in Prompt Builder?
@@ -1603,6 +1759,8 @@ Instructing the LLM to adopt a role (e.g., "Act as a sales expert") enhances con
 <br>
 
 <!-- Q66 -->
+</div>
+<div>
 <h3>【第六十六題 / NO. 66】<br></h3> 
 <br><p>
 Universal Containers Is Interested In Improving the sales operation efficiency by analyzing their data using AI-powered predictions in Einstein Studio. Which use case works for this scenario?
@@ -1625,6 +1783,8 @@ One of the most valuable use cases is predicting customer lifetime value, which 
 <br>
 
 <!-- Q67 -->
+</div>
+<div>
 <h3>【第六十七題 / NO. 67】<br></h3> 
 <br><p>
 An Agentforce needs to enable the use of Sales Email prompt templates for the sales team. The Agentforce Specialist has already created the templates in Prompt Builder. According to best practices, which steps should the Agentforce Specialist take to ensure the sales team can use these templates?
@@ -1647,6 +1807,8 @@ To enable Sales Email prompt templates: Assign the Prompt Template User permissi
 <br>
 
 <!-- Q68 -->
+</div>
+<div>
 <h3>【第六十八題 / NO. 68】<br></h3> 
 <br><p>
 Once a data source is chosen for an Agentforce Data Library, what is true about changing that data source later?
@@ -1669,6 +1831,8 @@ Agentforce 資料庫的資料來源設定是永久性的。為了維護資料完
 <br>
 
 <!-- Q69 -->
+</div>
+<div>
 <h3>【第六十九題 / NO. 69】<br></h3> 
 <br><p>
 Which configuration must An Agentforce complete for users to access generative AI-enabled fields in the Salesforce mobile app?
@@ -1692,6 +1856,8 @@ Ensuring that these AI-driven fields are visible on mobile is accomplished by tu
 <br>
 
 <!-- Q70 -->
+</div>
+<div>
 <h3>【第七十題 / NO. 70】<br></h3> 
 <br><p>
 Coral Cloud Resorts is about to start testing its concierge agent with guests. Which metrics should be captured to monitor the performance, correctness, and user experience?
@@ -1725,6 +1891,8 @@ The three key dimensions for measuring AI agent quality are performance, correct
  
 
 <!-- Q71 -->
+</div>
+<div>
 <h3>【第七十一題 / NO. 71】<br></h3> 
 <br><p>
 An Agentforce Service Agent, who has been successfully assisting customers with service requests in Salesforce, is now unable to help customers with issues related to a new product replacement process. The company recently implemented a custom Product Replacement object in Salesforce to track and manage these replacements. Which Agentforce Agent User change must be implemented to address this issue?
@@ -1747,6 +1915,8 @@ Agent 無法協助新流程，最可能的原因是缺乏對新自訂物件的�
 <br>
 
 <!-- Q72 -->
+</div>
+<div>
 <h3>【第七十二題 / NO. 72】<br></h3> 
 <br><p>
 What is automatically created when a custom search index is created in Data Cloud?
@@ -1769,6 +1939,8 @@ When a custom search index is created in Data Cloud, a corresponding retriever i
 <br>
 
 <!-- Q73 -->
+</div>
+<div>
 <h3>【第七十三題 / NO. 73】<br></h3> 
 <br><p>
 Universal Container (UC) has effectively utilized prompt templates to update summary fields on Lightning record pages. An admin now wishes to incorporate similar functionality into UC's automation process using Flow. How can the admin get a response from this prompt template from within a flow to use as part of UC's automation?
@@ -1792,6 +1964,8 @@ Salesforce 提供了標準的方法在 Flow 步驟中調用生成式 AI 範本�
 <br>
 
 <!-- Q74 -->
+</div>
+<div>
 <h3>【第七十四題 / NO. 74】<br></h3> 
 <br><p>
 What is the main benefit of using a Knowledge article in an Agentforce Data Library?
@@ -1814,6 +1988,8 @@ Using a Knowledge Article in an Agentforce Data Library ensures that agents can 
 <br>
 
 <!-- Q75 -->
+</div>
+<div>
 <h3>【第七十五題 / NO. 75】<br></h3> 
 <br><p>
 Universal Containers (UC) has implemented Generative AI within Salesforce to enable summarization of a custom object called Guest. Users have reported mismatches in the generated information. In refining its prompt design strategy, which key practices should UC prioritize?
@@ -1836,6 +2012,8 @@ The best practice is to focus on crafting concise, clear, and consistent prompt 
 <br>
 
 <!-- Q76 -->
+</div>
+<div>
 <h3>【第七十六題 / NO. 76】<br></h3> 
 <br><p>
 Universal Containers (UC) wants its AI agent to return responses quickly. UC needs to optimize the retriever's configuration to ensure minimal latency when grounding AI responses. Which configuration aspect should UC prioritize?
@@ -1858,6 +2036,8 @@ The most effective approach is narrowing the scope of searches by applying speci
 <br>
 
 <!-- Q77 -->
+</div>
+<div>
 <h3>【第七十七題 / NO. 77】<br></h3> 
 <br><p>
 A Salesforce Administrator is exploring the capabilities of Agent to enhance user interaction within their organization... How does Agent handle user requests In Salesforce?
@@ -1880,6 +2060,8 @@ Agent 的核心運作方式是利用自然語言處理 (NLP) 分析使用者的�
 <br>
 
 <!-- Q78 -->
+</div>
+<div>
 <h3>【第七十八題 / NO. 78】<br></h3> 
 <br><p>
 How does Agentforce select the correct action to resolve a user's request?
@@ -1902,6 +2084,8 @@ Agentforce 的推理引擎依賴 LLM 來理解使用者的意圖。LLM 會評估
 <br>
 
 <!-- Q79 -->
+</div>
+<div>
 <h3>【第七十九題 / NO. 79】<br></h3> 
 <br><p>
 For an Agentforce Data Library that contains uploaded files, what occurs once it is created and configured?
@@ -1924,6 +2108,8 @@ Data Cloud handles the indexing of uploaded files, storing them in its vector da
 <br>
 
 <!-- Q80 -->
+</div>
+<div>
 <h3>【第八十題 / NO. 80】<br></h3> 
 <br><p>
 An administrator at Universal Containers is setting up a new Sales Development Representative (SDR) Agent. The agent's purpose is to nurture cold leads before connecting them to the assigned sales rep. To ensure the agent has all the necessary access to the leads in the North America sales region, what should the administrator data?
@@ -1946,6 +2132,8 @@ The best practice for ensuring an agent... can access specific records while mai
 <br>
 
 <!-- Q81 -->
+</div>
+<div>
 <h3>【第八十一題 / NO. 81】<br></h3> 
 <br><p>
 Universal Containers' Agent Action includes several Apex classes for the new Agentforce Agent. What is an important consideration when deploying Apex that is invoked by an Agent Action?
@@ -1968,6 +2156,8 @@ Salesforce enforces a strict requirement that all Apex classes must achieve at l
 <br>
 
 <!-- Q82 -->
+</div>
+<div>
 <h3>【第八十二題 / NO. 82】<br></h3> 
 <br><p>
 Universal Containers has created an Employee Agent. Which step should an Agentforce Specialist take to connect the agent with a Slack channel?
@@ -1990,6 +2180,8 @@ The required setup step is to create a connection between Salesforce and the Sla
 <br>
 
 <!-- Q83 -->
+</div>
+<div>
 <h3>【第八十三題 / NO. 83】<br></h3> 
 <br><p>
 Universal Containers has grounded a prompt template with a related list. During user acceptance testing (UAT), users are not getting the correct responses. What is causing this issue?
@@ -2012,6 +2204,8 @@ If the related list isn't on the layout, the AI might not recognize or retrieve 
 <br>
 
 <!-- Q84 -->
+</div>
+<div>
 <h3>【第八十四題 / NO. 84】<br></h3> 
 <br><p>
 A sales manager needs to contact leads at scale with hyper-relevant solutions and customized communications in the most efficient manner possible. Which Salesforce solution best suits this need?
@@ -2034,6 +2228,8 @@ Prompt Builder stands out because it directly addresses hyper-relevance and cust
 <br>
 
 <!-- Q85 -->
+</div>
+<div>
 <h3>【第八十五題 / NO. 85】<br></h3> 
 <br><p>
 What is the importance of Action Instructions when creating a custom Agent action?
@@ -2056,6 +2252,8 @@ Action Instructions... define the expected user experience by outlining how the 
 <br>
 
 <!-- Q86 -->
+</div>
+<div>
 <h3>【第八十六題 / NO. 86】<br></h3> 
 <br><p>
 When is the Agent-to-Agent (A2A) protocol an appropriate communication choice?
@@ -2078,6 +2276,8 @@ A2A 協定專門設計用於讓不同的 AI Agent 之間進行通訊、交接任
 <br>
 
 <!-- Q87 -->
+</div>
+<div>
 <h3>【第八十七題 / NO. 87】<br></h3> 
 <br><p>
 Universal Containers (UC) uses Salesforce Service Cloud to support its customers and agents handling cases. UC is considering implementing Agent and extending Service Cloud to mobile users. When would Agent implementation be most advantageous?
@@ -2100,6 +2300,8 @@ Agent 的核心優勢在於自動化和輔助。在 Service Cloud 環境中，Ag
 <br>
 
 <!-- Q88 -->
+</div>
+<div>
 <h3>【第八十八題 / NO. 88】<br></h3> 
 <br><p>
 The Agentforce Specialist of Northern Trail Outfitters reviewed the organization's data masking settings within the Configure Data Masking menu within Setup. Upon assessing all of the fields, a few additional fields were deemed sensitive and have been masked within Einstein's Trust Layer. Which steps should the Agentforce Specialist take upon modifying the masked fields?
@@ -2122,6 +2324,8 @@ After modifying masked fields... the next important step is to test and confirm 
 <br>
 
 <!-- Q89 -->
+</div>
+<div>
 <h3>【第八十九題 / NO. 89】<br></h3> 
 <br><p>
 Cloud Kicks (CK) is launching a new partner portal on Experience Cloud, CK wants to provide partners with an agent that can answer questions about product specifications from the knowledge base and allow them to submit a new Lead for a potential customer they've identified. The agent must be accessible only to authenticated partner users on the portal. Which agent type is required to meet this scenario?
@@ -2144,6 +2348,8 @@ The required agent type is the Service Agent. The core function described—answ
 <br>
 
 <!-- Q90 -->
+</div>
+<div>
 <h3>【第九十題 / NO. 90】<br></h3> 
 <br><p>
 Universal Containers wants to utilize Agentforce for Sales to help sales reps reach their sales quotas by providing AI-generated plans containing guidance and steps for closing deals. Which feature meets this requirement?
@@ -2173,6 +2379,8 @@ The "Create Close Plan" feature in Agentforce for Sales uses AI to generate a de
  
 
 <!-- Q91 -->
+</div>
+<div>
 <h3>【第九十一題 / NO. 91】<br></h3> 
 <br><p>
 What is a Salesforce Agentforce Specialist able to configure in Data Masking within the Einstein Trust Layer?
@@ -2195,6 +2403,8 @@ In the Einstein Trust Layer, the Salesforce Agentforce Specialist can configure 
 <br>
 
 <!-- Q92 -->
+</div>
+<div>
 <h3>【第九十二題 / NO. 92】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -2225,6 +2435,8 @@ The recommended diagnostic process involves inspecting the prompt template instr
 <br>
 
 <!-- Q93 -->
+</div>
+<div>
 <h3>【第九十三題 / NO. 93】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -2255,6 +2467,8 @@ The AI Agent Session (AIAgentSession) object represents an overarching container
 <br>
 
 <!-- Q94 -->
+</div>
+<div>
 <h3>【第九十四題 / NO. 94】<br></h3> 
 <br><p>
 Coral Cloud Resorts (CCR) wants to configure its agent so that booking actions are only available when a customer's membership tier is "Premium" or "Elite". This business rule must be enforced deterministically.
@@ -2281,6 +2495,8 @@ Enforcing deterministic business rules—such as restricting certain actions bas
 <br>
 
 <!-- Q95 -->
+</div>
+<div>
 <h3>【第九十五題 / NO. 95】<br></h3> 
 <br><p>
 A Universal Containers administrator is setting up Einstein Data Libraries. After creating a new library, the administrator notices that only the file upload option is available; there is no option to configure the library using a Salesforce Knowledge base.
@@ -2307,6 +2523,8 @@ Einstein 資料庫要能使用 Salesforce Knowledge 作為來源，前提是該�
 <br>
 
 <!-- Q96 -->
+</div>
+<div>
 <h3>【第九十六題 / NO. 96】<br></h3> 
 <br><p>
 Universal Containers (UC) implements a custom retriever to improve the accuracy of AI generated responses.
@@ -2333,6 +2551,8 @@ The best solution is to define filters to refine the retriever's search criteria
 <br>
 
 <!-- Q97 -->
+</div>
+<div>
 <h3>【第九十七題 / NO. 97】<br></h3> 
 <br><p>
 An Agentforce needs to create a Sales Email with a custom prompt template. They need to ground on the following data:
@@ -2363,6 +2583,8 @@ The Agentforce Specialist should use a prompt-initiated flow. This flow can dyna
 <br>
 
 <!-- Q98 -->
+</div>
+<div>
 <h3>【第九十八題 / NO. 98】<br></h3> 
 <br><p>
 Coral Cloud Resorts (CCR) uses Agentforce to assist customers with booking and service issues. CCR wants to implement a triage process so that:
@@ -2401,6 +2623,8 @@ The AgentForce Conditional Logic and Triage Design Guide recommends using custom
 <br>
 
 <!-- Q99 -->
+</div>
+<div>
 <h3>【第九十九題 / NO. 99】<br></h3> 
 <br><p>
 An Agentforce is tasked to optimize a business process flow by assigning actions to agents within the Salesforce Agentforce Platform.
@@ -2427,6 +2651,8 @@ In the Salesforce Agentforce Platform, assigning actions to Agents requires mapp
 <br>
 
 <!-- Q100 -->
+</div>
+<div>
 <h3>【第一百題 / NO. 100】<br></h3> 
 <br><p>
 In Model Playground, which hyperparameters of an existing Salesforce-enabled foundational model can An Agentforce change?
@@ -2453,6 +2679,8 @@ Salesforce documentation confirms that these three are the key tunable hyperpara
 <br>
 
 <!-- Q101 -->
+</div>
+<div>
 <h3>【第一百零一題 / NO. 101】<br></h3> 
 <br><p>
 An Agentforce Agent has been developed with multiple topics and Agent Actions that use flows and Apex.
@@ -2479,6 +2707,8 @@ Agentforce 的所有元件（包括 Agent 本身、主題、動作、相關的 F
 <br>
 
 <!-- Q102 -->
+</div>
+<div>
 <h3>【第一百零二題 / NO. 102】<br></h3> 
 <br><p>
 An Agentforce is creating a custom action in Agent.
@@ -2505,6 +2735,8 @@ When creating a custom action in Agent, one of the available options is to use F
 <br>
 
 <!-- Q103 -->
+</div>
+<div>
 <h3>【第一百零三題 / NO. 103】<br></h3> 
 <br><p>
 Universal Containers is building a digital shopping assistant that needs to dynamically generate product recommendations using information from the company's external product recommendation predictive model through APIs.
@@ -2531,6 +2763,8 @@ The Model Context Protocol (MCP) enables agents to interact dynamically with ext
 <br>
 
 <!-- Q104 -->
+</div>
+<div>
 <h3>【第一百零四題 / NO. 104】<br></h3> 
 <br><p>
 An Agentforce Specialist builds a new Service Agent that uses a custom action built on a flow. The agent has been tested in a sandbox and is now ready to deploy.
@@ -2557,6 +2791,8 @@ Activation does not carry over automatically... Agents must be manually activate
 <br>
 
 <!-- Q105 -->
+</div>
+<div>
 <h3>【第一百零五題 / NO. 105】<br></h3> 
 <br><p>
 Universal Containers (UC) has recently received an increased number of support cases. As a result, UC has hired more customer support reps and has started to assign some of the ongoing cases to newer reps.
@@ -2583,6 +2819,8 @@ New customer support reps... can use Einstein Work Summaries to quickly understa
 <br>
 
 <!-- Q106 -->
+</div>
+<div>
 <h3>【第一百零六題 / NO. 106】<br></h3> 
 <br><p>
 A service agent is looking at a custom object that stores travel information. They recently received a weather alert and now need to cancel flights for the customers that are related with this itinerary. The service agent needs to review the Knowledge articles about canceling and rebooking the customer flights.
@@ -2610,6 +2848,8 @@ Agent can assist the service agent by providing relevant Knowledge articles on c
 <br>
 
 <!-- Q107 -->
+</div>
+<div>
 <h3>【第一百零七題 / NO. 107】<br></h3> 
 <br><p>
 What is an appropriate use case for leveraging Agentforce Sales Agent in a sales context?
@@ -2632,6 +2872,8 @@ Agentforce 銷售 Agent 的核心優勢在於「自然語言互動」與「任�
 <br>
 
 <!-- Q108 -->
+</div>
+<div>
 <h3>【第一百零八題 / NO. 108】<br></h3> 
 <br><p>
 Universal Containers wants to use an external large language model (LLM) in Prompt Builder.
@@ -2658,6 +2900,8 @@ Einstein Studio 提供了原生的「自帶模型 (BYO-LLM)」功能，允許企
 <br>
 
 <!-- Q109 -->
+</div>
+<div>
 <h3>【第一百零九題 / NO. 109】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -2684,6 +2928,8 @@ When uploading large volumes of structured content such as HTML... the system sh
 <br>
 
 <!-- Q110 -->
+</div>
+<div>
 <h3>【第一百一十題 / NO. 110】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to improve the productivity of its sales team with generative AI technology. However, UC is concerned that public AI virtual assistants lack adequate company data to general useful responses.
@@ -2717,6 +2963,8 @@ Fine-tuning the Einstein AI model with UC's CRM data... ensures that the generat
  
 
 <!-- Q111 -->
+</div>
+<div>
 <h3>【第一百十一題 / NO. 111】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to create a new Sales Email prompt template in Prompt Builder using the "Save As" function. However, UC notices that the new template produces different results compared to the standard Sales Email prompt due to missing hyperparameters.
@@ -2743,6 +2991,8 @@ When Universal Containers creates a new Sales Email prompt template using the "S
 <br>
 
 <!-- Q112 -->
+</div>
+<div>
 <h3>【第一百十二題 / NO. 112】<br></h3> 
 <br><p>
 An Agentforce created a custom Agent action, but it is not being picked up by the planner service in the correct order.
@@ -2769,6 +3019,8 @@ When a custom Agent action is not being prioritized correctly by the planner ser
 <br>
 
 <!-- Q113 -->
+</div>
+<div>
 <h3>【第一百十三題 / NO. 113】<br></h3> 
 <br><p>
 Universal Containers (UC) is implementing Agentforce Service Agent on Email, UC made an email template and now needs to connect it to a Service Agent.
@@ -2795,6 +3047,8 @@ According to the AgentForce for Service Configuration Guide, when implementing S
 <br>
 
 <!-- Q114 -->
+</div>
+<div>
 <h3>【第一百十四題 / NO. 114】<br></h3> 
 <br><p>
 An Agentforce Specialist needs to create a prompt template to fill a custom field named Latest Opportunities Summary on the Account object with information from the three most recently opened opportunities. How should the Agentforce Specialist gather the necessary data for the prompt template?
@@ -2817,6 +3071,8 @@ The most robust and flexible way to achieve this is by using a Flow (Option B). 
 <br>
 
 <!-- Q115 -->
+</div>
+<div>
 <h3>【第一百十五題 / NO. 115】<br></h3> 
 <br><p>
 Which object stores the conversation transcript between the customer and the agent?
@@ -2839,6 +3095,8 @@ In Agentforce, the Messaging Session object stores the conversation transcript b
 <br>
 
 <!-- Q116 -->
+</div>
+<div>
 <h3>【第一百十六題 / NO. 116】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to implement an AI-powered customer service agent that can:
@@ -2873,6 +3131,8 @@ The Agentforce Data Library (Option A) is the correct starting point. A Data Lib
 <br>
 
 <!-- Q117 -->
+</div>
+<div>
 <h3>【第一百十七題 / NO. 117】<br></h3> 
 <br><p>
 Universal Containers (UC) is Implementing Service AI Grounding to enhance its customer service operations.
@@ -2903,6 +3163,8 @@ Supported Objects for Service AI Grounding: Case and Knowledge. Grounding AI res
 <br>
 
 <!-- Q118 -->
+</div>
+<div>
 <h3>【第一百十八題 / NO. 118】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to enable its sales reps to explore opportunities that are similar to previously won opportunities by entering the utterance, "Show me other opportunities like this one." How should UC achieve this with Agents?
@@ -2925,6 +3187,8 @@ Agentforce (或 Einstein Copilot) 提供了一組標準動作，其中包含尋�
 <br>
 
 <!-- Q119 -->
+</div>
+<div>
 <h3>【第一百十九題 / NO. 119】<br></h3> 
 <br><p>
 Universal Containers (UC) is expanding its Agentforce for Service capabilities to include case management. For security purposes, UC wants the agent to verify a customer's identity before providing any case-related information. The verification must be deterministic-ensuring that no case details are shared unless identity verification has been successfully completed.
@@ -2951,6 +3215,8 @@ The AgentForce for Service Implementation Guide clearly outlines that when an ag
 <br>
 
 <!-- Q120 -->
+</div>
+<div>
 <h3>【第一百二十題 / NO. 120】<br></h3> 
 <br><p>
 An Agentforce Specialist is creating a prompt template to assist support reps in drafting responses to customer complaints.
@@ -2977,6 +3243,8 @@ The Prompt Builder Best Practices Guide emphasizes including a role instruction 
 <br>
 
 <!-- Q121 -->
+</div>
+<div>
 <h3>【第一百二十一題 / NO. 121】<br></h3> 
 <br><p>
 The marketing team at Universal Containers is looking for a way personalize emails based on customer behavior, preferences, and purchase history.
@@ -3003,6 +3271,8 @@ Agent 的核心優勢在於生成式 AI 的能力，它能利用豐富的客戶�
 <br>
 
 <!-- Q122 -->
+</div>
+<div>
 <h3>【第一百二十二題 / NO. 122】<br></h3> 
 <br><p>
 When configuring a prompt template, an Agentforce Specialist previews the results of the prompt template they've written. They see two distinct text outputs: Resolution and Response.
@@ -3039,6 +3309,8 @@ Correction based on provided explanation text: The provided explanation text say
 <br>
 
 <!-- Q123 -->
+</div>
+<div>
 <h3>【第一百二十三題 / NO. 123】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to empower its marketing team with Al capabilities that help employees quickly find campaign data, generate creative content, and manage project tasks. The solution should also allow marketers to receive personalized support, surface relevant information, and complete work directly in Salesforce.
@@ -3065,6 +3337,8 @@ The Employee Agent is designed to empower internal teams, such as marketing, sal
 <br>
 
 <!-- Q124 -->
+</div>
+<div>
 <h3>【第一百二十四題 / NO. 124】<br></h3> 
 <br><p>
 Universal Containers (UC) is experimenting with using public Generative AI models and is familiar with the language required to get the information it needs. However, it can be time consuming for both UC's sales and service reps to type in the prompt to get the information they need, and ensure prompt consistency. Which Salesforce feature should the company use to address these concerns?
@@ -3087,6 +3361,8 @@ Einstein Prompt Builder allows users to create reusable prompt templates... UC c
 <br>
 
 <!-- Q125 -->
+</div>
+<div>
 <h3>【第一百二十五題 / NO. 125】<br></h3> 
 <br><p>
 Universal Containers (UC) has configured an Agentforce Data Library using Knowledge articles. When testing in Agent Builder and the Experience Cloud site, the agent is not responding with grounded Knowledge article information. However, when tested in Prompt Builder, the response returns correctly. What should UC do to troubleshoot the issue?
@@ -3109,6 +3385,8 @@ The Agentforce Service Agent User... needs the "Data Cloud User" permission set 
 <br>
 
 <!-- Q126 -->
+</div>
+<div>
 <h3>【第一百二十六題 / NO. 126】<br></h3> 
 <br><p>
 An Agentforce wants to ground a new prompt template with the User related list.
@@ -3135,6 +3413,8 @@ Salesforce 對於提示範本中可以使用的物件和相關清單有限制。
 <br>
 
 <!-- Q127 -->
+</div>
+<div>
 <h3>【第一百二十七題 / NO. 127】<br></h3> 
 <br><p>
 Universal Containers (UC) is creating a new custom prompt template to populate a field with generated output. UC enabled the Einstein Trust Layer to ensure AI Audit data is captured and monitored for adoption and possible enhancements. Which prompt template type should UC use and which consideration should UC review?
@@ -3157,6 +3437,8 @@ UC needs to populate a field... which directly aligns with the Field Generation 
 <br>
 
 <!-- Q128 -->
+</div>
+<div>
 <h3>【第一百二十八題 / NO. 128】<br></h3> 
 <br><p>
 Universal Containers (UC) has configured a data library and wants to restrict indexing of knowledge articles to articles which are only publicly available in their knowledge base, UC also wants the agent to link sources that the large language model (LLM) grounded its response on.
@@ -3183,6 +3465,8 @@ Within the data library settings, under Knowledge Settings, enable 'Use Public K
 <br>
 
 <!-- Q129 -->
+</div>
+<div>
 <h3>【第一百二十九題 / NO. 129】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to offer personalized service experiences and reduce agent handling time with Al-generated email responses, grounded in Knowledge base.
@@ -3209,6 +3493,8 @@ The best solution is Einstein Service Replies for Email. This capability leverag
 <br>
 
 <!-- Q130 -->
+</div>
+<div>
 <h3>【第一百三十題 / NO. 130】<br></h3> 
 <br><p>
 Universal Containers deployed the new Agentforce Sales Development Representative (SDR) Into production, but sales reps are saying they can't find it. What is causing this issue?
@@ -3238,6 +3524,8 @@ Agentforce 的功能存取通常透過特定的「權限集 (Permission Set)」�
  
 
 <!-- Q131 -->
+</div>
+<div>
 <h3>【第一百三十一題 / NO. 131】<br></h3> 
 <br><p>
 Amid their busy schedules, sales reps at Universal Containers dedicate time to follow up with prospects and existing clients via email regarding renewals or new deals. They spend many hours throughout the week reviewing past communications and details about their customers before performing their outreach.
@@ -3264,6 +3552,8 @@ For sales reps who need to draft personalized emails based on previous communica
 <br>
 
 <!-- Q132 -->
+</div>
+<div>
 <h3>【第一百三十二題 / NO. 132】<br></h3> 
 <br><p>
 What is the primary function of the planner service in the Agent system?
@@ -3286,6 +3576,8 @@ The primary function of the planner service in the Agent system is to identify c
 <br>
 
 <!-- Q133 -->
+</div>
+<div>
 <h3>【第一百三十三題 / NO. 133】<br></h3> 
 <br><p>
 Universal Containers (UC) plans to answer questions based on similar cases that have been successfully resolved in the past.
@@ -3312,6 +3604,8 @@ When using previous case records to power AI-driven Q&A or similarity-based retr
 <br>
 
 <!-- Q134 -->
+</div>
+<div>
 <h3>【第一百三十四題 / NO. 134】<br></h3> 
 <br><p>
 Universal Containers (UC) is looking to enhance its operational efficiency. UC has recently adopted Salesforce and is considering implementing Agent to improve its processes.
@@ -3338,6 +3632,8 @@ Agent 的主要價值在於透過 AI 協助使用者處理重複性、瑣碎的�
 <br>
 
 <!-- Q135 -->
+</div>
+<div>
 <h3>【第一百三十五題 / NO. 135】<br></h3> 
 <br><p>
 Universal Containers recently launched a pilot program to integrate conversational AI into its CRM business operations with Agentforce Agents. How should the Agentforce Specialist monitor Agents' usability and the assignment of actions?
@@ -3360,6 +3656,8 @@ Agent Analytics 提供了專門的儀表板和報告，用於追蹤 Agent 的效
 <br>
 
 <!-- Q136 -->
+</div>
+<div>
 <h3>【第一百三十六題 / NO. 136】<br></h3> 
 <br><p>
 Universal Containers wants support agents to use Agentforce to ask questions about its product tutorials and product guides.
@@ -3386,6 +3684,8 @@ Publishing product tutorials and guides as Knowledge articles in Salesforce ensu
 <br>
 
 <!-- Q137 -->
+</div>
+<div>
 <h3>【第一百三十七題 / NO. 137】<br></h3> 
 <br><p>
 A company wants to retrieve patient history details to augment the Al agent response. The company wants to leverage the Data Cloud search index feature.
@@ -3412,6 +3712,8 @@ According to the AgentForce Data Governance and RAG Security Guidelines... best 
 <br>
 
 <!-- Q138 -->
+</div>
+<div>
 <h3>【第一百三十八題 / NO. 138】<br></h3> 
 <br><p>
 Coral Cloud Resorts wants visibility into credit usage associated with testing.
@@ -3438,6 +3740,8 @@ The AgentForce Testing Center Guide specifies that all testing activity... consu
 <br>
 
 <!-- Q139 -->
+</div>
+<div>
 <h3>【第一百三十九題 / NO. 139】<br></h3> 
 <br><p>
 What is the main purpose of Prompt Builder?
@@ -3460,6 +3764,8 @@ Prompt Builder 的核心目的是讓企業能夠建立、測試並管理可重�
 <br>
 
 <!-- Q140 -->
+</div>
+<div>
 <h3>【第一百四十題 / NO. 140】<br></h3> 
 <br><p>
 An Agentforce is considering using a Field Generation prompt template type.
@@ -3486,6 +3792,8 @@ Field Generation 提示範本的功能（即在欄位旁顯示 AI 生成按鈕�
 <br>
 
 <!-- Q141 -->
+</div>
+<div>
 <h3>【第一百四十一題 / NO. 141】<br></h3> 
 <br><p>
 A data science team has trained an XGBoost classification model for product recommendations on Databricks. The Agentforce Specialist is tasked with bringing inferences for product recommendations from this model into Data Cloud as a stand-alone data model object (DMO).
@@ -3512,6 +3820,8 @@ To integrate inferences from an XGBoost model into Salesforce's Data Cloud... Cr
 <br>
 
 <!-- Q142 -->
+</div>
+<div>
 <h3>【第一百四十二題 / NO. 142】<br></h3> 
 <br><p>
 Universal Containers (UC) needs to create a prompt template that provides a detailed product description based on the latest product data. The description will be used in marketing materials to ensure consistency and accuracy.
@@ -3538,6 +3848,8 @@ Record Summary is the most appropriate template type. While "Field Generation" c
 <br>
 
 <!-- Q143 -->
+</div>
+<div>
 <h3>【第一百四十三題 / NO. 143】<br></h3> 
 <br><p>
 After an agent selects a topic, what is an important factor the reasoning engine uses to select the action?
@@ -3560,6 +3872,8 @@ The primary mechanism for action selection is the evaluation of the Action Prior
 <br>
 
 <!-- Q144 -->
+</div>
+<div>
 <h3>【第一百四十四題 / NO. 144】<br></h3> 
 <br><p>
 Universal Containers (UC) is using standard Service AI Grounding. UC created a custom rich text field to be used with Service AI Grounding.
@@ -3586,6 +3900,8 @@ Service AI Grounding retrieves data from Salesforce objects to ground AI-generat
 <br>
 
 <!-- Q145 -->
+</div>
+<div>
 <h3>【第一百四十五題 / NO. 145】<br></h3> 
 <br><p>
 Which business requirement presents a good use case for leveraging Einstein Prompt Builder?
@@ -3608,6 +3924,8 @@ Einstein Prompt Builder 的核心功能是利用生成式 AI 創建文字內容�
 <br>
 
 <!-- Q146 -->
+</div>
+<div>
 <h3>【第一百四十六題 / NO. 146】<br></h3> 
 <br><p>
 An Agentforce configured Data Masking within the Einstein Trust Layer.
@@ -3634,6 +3952,8 @@ To begin validating... the Agentforce Specialist should enable the collection an
 <br>
 
 <!-- Q147 -->
+</div>
+<div>
 <h3>【第一百四十七題 / NO. 147】<br></h3> 
 <br><p>
 Universal Containers (UC) needs to capture and store detailed interaction data for all agents.
@@ -3660,6 +3980,8 @@ Session Tracing captures the entire execution flow for each agent session - incl
 <br>
 
 <!-- Q148 -->
+</div>
+<div>
 <h3>【第一百四十八題 / NO. 148】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -3686,6 +4008,8 @@ MCP 是一個標準協定，旨在讓 AI Agent 能夠動態發現並連接外部
 <br>
 
 <!-- Q149 -->
+</div>
+<div>
 <h3>【第一百四十九題 / NO. 149】<br></h3> 
 <br><p>
 Universal Containers wants to keep retrieval accurate as product documentation changes frequently.
@@ -3712,6 +4036,8 @@ When product documentation or knowledge base content changes, the underlying tex
 <br>
 
 <!-- Q150 -->
+</div>
+<div>
 <h3>【第一百五十題 / NO. 150】<br></h3> 
 <br><p>
 What considerations should an Agentforce Specialist be aware of when using Record Snapshots grounding in a prompt template?
@@ -3741,6 +4067,8 @@ Record Snapshot 能夠快速獲取記錄的當前狀態用於 AI 接地，但它
  
 
 <!-- Q151 -->
+</div>
+<div>
 <h3>【第一百五十一題 / NO. 151】<br></h3> 
 <br><p>
 Universal Containers would like to route SMS text messages to a service rep from an Agentforce Service Agent. Which Service Channel should the company use in the flow to ensure it's routed properly?
@@ -3763,6 +4091,8 @@ The "Messaging" Service Channel (part of Messaging for In-App and Web or SMS) ha
 <br>
 
 <!-- Q152 -->
+</div>
+<div>
 <h3>【第一百五十二題 / NO. 152】<br></h3> 
 <br><p>
 Which element in the Omni-Channel Flow should be used to connect the flow with the agent?
@@ -3785,6 +4115,8 @@ The "Route Work" action in Omni-Channel Flow assigns work items (e.g., cases, ch
 <br>
 
 <!-- Q153 -->
+</div>
+<div>
 <h3>【第一百五十三題 / NO. 153】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -3815,6 +4147,8 @@ Agentforce 測試中心提供的「AI 生成合成測試話語」功能，可以
 <br>
 
 <!-- Q154 -->
+</div>
+<div>
 <h3>【第一百五十四題 / NO. 154】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -3845,6 +4179,8 @@ When an organization wants to modify or enhance how structured data (like Salesf
 <br>
 
 <!-- Q155 -->
+</div>
+<div>
 <h3>【第一百五十五題 / NO. 155】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -3875,6 +4211,8 @@ According to the AgentForce Session Memory and Context Management Guide, when sp
 <br>
 
 <!-- Q156 -->
+</div>
+<div>
 <h3>【第一百五十六題 / NO. 156】<br></h3> 
 <br><p>
 Universal Containers is very concerned about security compliance and wants to understand:
@@ -3913,6 +4251,8 @@ Einstein 信任層的「稽核追蹤 (Audit Trail)」功能專門用於記錄 AI
 <br>
 
 <!-- Q157 -->
+</div>
+<div>
 <h3>【第一百五十七題 / NO. 157】<br></h3> 
 <br><p>
 An Agentforce wants to use the related lists from an account in a custom prompt template.
@@ -3939,6 +4279,8 @@ When configuring a custom prompt template to use related lists, the Agentforce S
 <br>
 
 <!-- Q158 -->
+</div>
+<div>
 <h3>【第一百五十八題 / NO. 158】<br></h3> 
 <br><p>
 Universal Containers (UC) has configured a data library and wants to restrict indexing of knowledge articles to articles which are only publicly available in their knowledge base, UC also wants the agent to link sources that the large language model (LLM) grounded its response on.
@@ -3965,6 +4307,8 @@ Within the data library settings, under Knowledge Settings, enable 'Use Public K
 <br>
 
 <!-- Q159 -->
+</div>
+<div>
 <h3>【第一百五十九題 / NO. 159】<br></h3> 
 <br><p>
 Universal Containers (UC) is discussing its AI strategy in an agile Scrum meeting.
@@ -3991,6 +4335,8 @@ Einstein Studio (Model Builder) allows organizations to connect and utilize exte
 <br>
 
 <!-- Q160 -->
+</div>
+<div>
 <h3>【第一百六十題 / NO. 160】<br></h3> 
 <br><p>
 Universal Containers (UC) needs to improve the agent productivity in replying to customer chats.
@@ -4017,6 +4363,8 @@ Service Replies: This generative AI feature automates and assists in generating 
 <br>
 
 <!-- Q161 -->
+</div>
+<div>
 <h3>【第一百六十一題 / NO. 161】<br></h3> 
 <br><p>
 A business stakeholder wants to use Al to generate a summary based on Data Cloud data.
@@ -4043,6 +4391,8 @@ Prompt Builder 提供了兩種主要方式來存取 Data Cloud 資料：1. 透�
 <br>
 
 <!-- Q162 -->
+</div>
+<div>
 <h3>【第一百六十二題 / NO. 162】<br></h3> 
 <br><p>
 How does the AI Retriever function within Data Cloud?
@@ -4065,6 +4415,8 @@ AI 檢索器的核心功能是「語意檢索」。它利用向量索引來理�
 <br>
 
 <!-- Q163 -->
+</div>
+<div>
 <h3>【第一百六十三題 / NO. 163】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -4095,6 +4447,8 @@ To prevent unauthorized access to sensitive data... administrators should exclud
 <br>
 
 <!-- Q164 -->
+</div>
+<div>
 <h3>【第一百六十四題 / NO. 164】<br></h3> 
 <br><p>
 Universal Containers implements Custom Agent Actions to enhance its customer service operations. The development team needs to understand the core components of a Custom Agent Action to ensure proper configuration and functionality. What should the development team review in the Custom Agent Action configuration to identify one of the core components of a Custom Agent Action?
@@ -4117,6 +4471,8 @@ Instructions are a core component of a Custom Agent Action in Agentforce. Define
 <br>
 
 <!-- Q165 -->
+</div>
+<div>
 <h3>【第一百六十五題 / NO. 165】<br></h3> 
 <br><p>
 What is the purpose of applying filters in a custom retriever configuration?
@@ -4139,6 +4495,8 @@ Filters operate by applying conditions on indexed fields... This targeted filter
 <br>
 
 <!-- Q166 -->
+</div>
+<div>
 <h3>【第一百六十六題 / NO. 166】<br></h3> 
 <br><p>
 Universal Containers (UC) is building a Flex prompt template. UC needs to use data returned by the flow in the prompt template.
@@ -4165,6 +4523,8 @@ When configuring the prompt, you must specify how data from the running Flow is 
 <br>
 
 <!-- Q167 -->
+</div>
+<div>
 <h3>【第一百六十七題 / NO. 167】<br></h3> 
 <br><p>
 In the context of retriever and search indexes, what best describes the data preparation process in Data Cloud?
@@ -4187,6 +4547,8 @@ Data Cloud 的資料準備過程是為了支援 AI 檢索。這包括將長文�
 <br>
 
 <!-- Q168 -->
+</div>
+<div>
 <h3>【第一百六十八題 / NO. 168】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -4217,6 +4579,8 @@ Agentforce Agent 是以系統使用者的身分運行的。如果這個使用者
 <br>
 
 <!-- Q169 -->
+</div>
+<div>
 <h3>【第一百六十九題 / NO. 169】<br></h3> 
 <br><p>
 Universal Containers wants to be able to detect with a high level confidence if content generated by a large language model (LLM) contains toxic language.
@@ -4243,6 +4607,8 @@ Einstein 信任層的稽核資料會儲存在 Data Cloud 中。為了監控和�
 <br>
 
 <!-- Q170 -->
+</div>
+<div>
 <h3>【第一百七十題 / NO. 170】<br></h3> 
 <br><p>
 Universal Containers is indexing millions of product manuals where users may ask both structured queries (model numbers) and natural language questions (for example, "How do I reset my device?"), Which retrieval approach should the company use?
@@ -4272,6 +4638,8 @@ Hybrid search combines the precision of keyword retrieval for structured terms, 
  
 
 <!-- Q171 -->
+</div>
+<div>
 <h3>【第一百七十一題 / NO. 171】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -4302,6 +4670,8 @@ AgentForce 測試中心是專門設計用於在啟用前驗證和微調 Agent �
 <br>
 
 <!-- Q172 -->
+</div>
+<div>
 <h3>【第一百七十二題 / NO. 172】<br></h3> 
 <br><p>
 An Agentforce is setting up a new org and needs to ensure that users can create and execute prompt templates.
@@ -4334,6 +4704,8 @@ To effectively manage and use prompt templates, two distinct permission sets are
 <br>
 
 <!-- Q173 -->
+</div>
+<div>
 <h3>【第一百七十三題 / NO. 173】<br></h3> 
 <br><p>
 When a customer chat is initiated, which functionality in Salesforce provides generative AI replies or draft emails based on recommended Knowledge articles?
@@ -4356,6 +4728,8 @@ Einstein Service Replies is designed to generate contextual, AI-powered response
 <br>
 
 <!-- Q174 -->
+</div>
+<div>
 <h3>【第一百七十四題 / NO. 174】<br></h3> 
 <br><p>
 Universal Containers is using Agentforce for Sales to find similar opportunities to help close deals faster. The team wants to understand the criteria used by the Agent to match opportunities.
@@ -4382,6 +4756,8 @@ Agentforce for Sales 在尋找相似機會時，會優先考慮那些在過去 1
 <br>
 
 <!-- Q175 -->
+</div>
+<div>
 <h3>【第一百七十五題 / NO. 175】<br></h3> 
 <br><p>
 Universal Containers' service team wants to customize the standard case summary response from Agentforce.
@@ -4408,6 +4784,8 @@ To customize the case summary, the Agentforce Specialist can create a new custom
 <br>
 
 <!-- Q176 -->
+</div>
+<div>
 <h3>【第一百七十六題 / NO. 176】<br></h3> 
 <br><p>
 Universal Containers wants to use an Al agent to answer questions about warranties, Warranty information has already been uploaded as unstructured data in Data Cloud. When answering user questions, the results must be filterable by product line and ranked by recent updates.
@@ -4434,6 +4812,8 @@ When a business requires custom ranking or filtering logic (such as by product l
 <br>
 
 <!-- Q177 -->
+</div>
+<div>
 <h3>【第一百七十七題 / NO. 177】<br></h3> 
 <br><p>
 Universal Containers needs a tool that can analyze voice and video call records to provide insights on competitor mentions, coaching opportunities, and other key information. The goal is to enhance the team's performance by identifying areas for improvement and competitive intelligence.
@@ -4460,6 +4840,8 @@ Call Explorer, a part of Einstein Conversation Insights, enables sales teams to 
 <br>
 
 <!-- Q178 -->
+</div>
+<div>
 <h3>【第一百七十八題 / NO. 178】<br></h3> 
 <br><p>
 Universal Containers plans to enable Agentforce in Slack so teams can interact with agents directly in Slack channels.
@@ -4486,6 +4868,8 @@ The AgentForce for Slack Deployment Guide outlines the process: Configuring the 
 <br>
 
 <!-- Q179 -->
+</div>
+<div>
 <h3>【第一百七十九題 / NO. 179】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -4516,6 +4900,8 @@ An agent is intentionally limited to a single Agentforce Data Library assignment
 <br>
 
 <!-- Q180 -->
+</div>
+<div>
 <h3>【第一百八十題 / NO. 180】<br></h3> 
 <br><p>
 Universal Containers needs its sales reps to be able to only execute prompt templates. What should the company use to achieve this requirement?
@@ -4538,6 +4924,8 @@ The "Prompt Template User" permission set is an official Salesforce permission s
 <br>
 
 <!-- Q181 -->
+</div>
+<div>
 <h3>【第一百八十一題 / NO. 181】<br></h3> 
 <br><p>
 Which part of the Einstein Trust Layer architecture leverages an organization's own data within a large language model (LLM) prompt to confidently return relevant and accurate responses?
@@ -4560,6 +4948,8 @@ Dynamic Grounding in the Einstein Trust Layer architecture ensures that LLM prom
 <br>
 
 <!-- Q182 -->
+</div>
+<div>
 <h3>【第一百八十二題 / NO. 182】<br></h3> 
 <br><p>
 Universal Containers plans to enhance its sales team's productivity using AI. Which specific requirement necessitates the use of Prompt Builder?
@@ -4582,6 +4972,8 @@ Prompt Builder 的強項在於「生成式 AI」應用，特別是生成文字�
 <br>
 
 <!-- Q183 -->
+</div>
+<div>
 <h3>【第一百八十三題 / NO. 183】<br></h3> 
 <br><p>
 A support team handles a high volume of chat interactions and needs a solution to provide quick, relevant responses to customer inquiries.
@@ -4612,6 +5004,8 @@ Einstein Service Replies is designed to generate contextual, AI-powered response
 <br>
 
 <!-- Q184 -->
+</div>
+<div>
 <h3>【第一百八十四題 / NO. 184】<br></h3> 
 <br><p>
 Universal Containers is evaluating Einstein Generative AI features to improve the productivity of the service center operation.
@@ -4638,6 +5032,8 @@ Service Replies helps agents by automatically generating suggested responses to 
 <br>
 
 <!-- Q185 -->
+</div>
+<div>
 <h3>【第一百八十五題 / NO. 185】<br></h3> 
 <br><p>
 What is An Agentforce able to do when the "Enrich event logs with conversation data" setting in Agent is enabled?
@@ -4660,6 +5056,8 @@ This setting enriches the event logs with detailed conversational data for bette
 <br>
 
 <!-- Q186 -->
+</div>
+<div>
 <h3>【第一百八十六題 / NO. 186】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to build an Agentforce Service Agent that provides the latest, active, and relevant policy and compliance information to customers. The agent must:
@@ -4696,6 +5094,8 @@ The Agentforce Data Library integrates with Salesforce Knowledge, indexing HR po
 <br>
 
 <!-- Q187 -->
+</div>
+<div>
 <h3>【第一百八十七題 / NO. 187】<br></h3> 
 <br><p>
 What should Universal Containers consider when deploying an Agentforce Service Agent with multiple topics and Agent Actions to production?
@@ -4718,6 +5118,8 @@ This is a comprehensive approach: dependencies (e.g., flows, Apex) must be deplo
 <br>
 
 <!-- Q188 -->
+</div>
+<div>
 <h3>【第一百八十八題 / NO. 188】<br></h3> 
 <br><p>
 Universal Containers (UC) is rolling out an AI-powered support assistant to help customer service agents quickly retrieve relevant troubleshooting steps and policy guidelines. The assistant relies on a search index in Data Cloud that contains product manuals, policy documents, and past case resolutions. During testing, UC notices that agents are receiving too many irrelevant results from older product versions that no longer apply.
@@ -4751,6 +5153,8 @@ Let's stick to the provided answer **C** as per the source file, but with the no
 <br>
 
 <!-- Q189 -->
+</div>
+<div>
 <h3>【第一百八十九題 / NO. 189】<br></h3> 
 <br><p>
 An Agentforce Specialist is tasked with analyzing Agent interactions, looking into user inputs, requests, and queries to identify patterns and trends. What functionality allows the Agentforce Specialist to achieve this?
@@ -4773,6 +5177,8 @@ The User Utterances dashboard in Agentforce Analytics is specifically designed t
 <br>
 
 <!-- Q190 -->
+</div>
+<div>
 <h3>【第一百九十題 / NO. 190】<br></h3> 
 <br><p>
 What is the role of the large language model (LLM) in understanding intent and executing an Agent Action?
@@ -4802,6 +5208,8 @@ LLM 在 Agentforce 中的核心作用是「推理 (Reasoning)」。它不僅識�
  
 
 <!-- Q191 -->
+</div>
+<div>
 <h3>【第一百九十一題 / NO. 191】<br></h3> 
 <br><p>
 At Universal Containers, a sales manager is tackling a tough challenge as several new junior sales reps struggle with objection handling and price negotiations for complex deals. The manager lacks the time to personally guide each sales rep through their specific customer scenarios before their critical meetings. The junior sales reps have asked for a tool that would allow them to practice their pitches by simulating tough conversations and receive personalized feedback that is specific to the commerce opportunity they are working on.
@@ -4828,6 +5236,8 @@ The Sales Coach is the AI-powered solution designed to help sales professionals 
 <br>
 
 <!-- Q192 -->
+</div>
+<div>
 <h3>【第一百九十二題 / NO. 192】<br></h3> 
 <br><p>
 In addition to Recipient and Sender, which object should An Agentforce utilize for inserting merge fields into a Sales email template prompt?
@@ -4850,6 +5260,8 @@ When creating a Sales email template, it is standard practice to reference the R
 <br>
 
 <!-- Q193 -->
+</div>
+<div>
 <h3>【第一百九十三題 / NO. 193】<br></h3> 
 <br><p>
 An Agentforce Specialist wants to ensure their custom agent action performs as expected in conversations.
@@ -4876,6 +5288,8 @@ Action instructions should be concise, clearly define the purpose of the action,
 <br>
 
 <!-- Q194 -->
+</div>
+<div>
 <h3>【第一百九十四題 / NO. 194】<br></h3> 
 <br><p>
 Support agents at Universal Containers are using Agentforce to find troubleshooting information. They've reported that the agent frequently provides knowledge articles that are outdated, even when newer versions of the articles are available. The administrator has confirmed that all articles are correctly chunked and indexed.
@@ -4902,6 +5316,8 @@ Adding a recency ranking factor using the LastModifiedDate or LastPublishedDate 
 <br>
 
 <!-- Q195 -->
+</div>
+<div>
 <h3>【第一百九十五題 / NO. 195】<br></h3> 
 <br><p>
 Universal Containers (UC) noticed an increase in customer contract cancellations in the last few months. UC is seeking ways to address this issue by implementing a proactive outreach program to customers before they cancel their contracts and is asking the Salesforce team to provide suggestions.
@@ -4928,6 +5344,8 @@ Customer churn prediction is the best use case for Model Builder in addressing U
 <br>
 
 <!-- Q196 -->
+</div>
+<div>
 <h3>【第一百九十六題 / NO. 196】<br></h3> 
 <br><p>
 An account manager is preparing for an upcoming customer call and wishes to get a snapshot of key data points from accounts, contacts, leads, and opportunities in Salesforce.
@@ -4954,6 +5372,8 @@ Sales Insight Summary aggregates key data points from multiple Salesforce object
 <br>
 
 <!-- Q197 -->
+</div>
+<div>
 <h3>【第一百九十七題 / NO. 197】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -4984,6 +5404,8 @@ To ensure the LLM produces consistent and precise outputs, prompts must include 
 <br>
 
 <!-- Q198 -->
+</div>
+<div>
 <h3>【第一百九十八題 / NO. 198】<br></h3> 
 <br><p>
 A Salesforce Agentforce Specialist is reviewing the feedback from a customer about the ineffectiveness of the prompt template.
@@ -5010,6 +5432,8 @@ Prompt Builder 內建的「評分卡 (Scorecard)」工具提供了結構化的�
 <br>
 
 <!-- Q199 -->
+</div>
+<div>
 <h3>【第一百九十九題 / NO. 199】<br></h3> 
 <br><p>
 Universal Containers (UC) recently rolled out Einstein Generative AI capabilities and has created a custom prompt to summarize case records. Users have reported that the case summaries generated are not returning the appropriate information. What is a possible explanation for the poor prompt performance?
@@ -5032,6 +5456,8 @@ If the grounding data—sourced from Record Snapshots, Data Cloud, or other inte
 <br>
 
 <!-- Q200 -->
+</div>
+<div>
 <h3>【第二百題 / NO. 200】<br></h3> 
 <br><p>
 Universal Containers is planning a marketing email about products that most closely match a customer's expressed interests.
@@ -5058,6 +5484,8 @@ Using a custom sales email template that is grounded with interest and product i
 <br>
 
 <!-- Q201 -->
+</div>
+<div>
 <h3>【第二百零一題 / NO. 201】<br></h3> 
 <br><p>
 When creating a custom retriever in Einstein Studio, which step is considered essential?
@@ -5080,6 +5508,8 @@ The essential step is defining the foundation of the retriever: selecting the se
 <br>
 
 <!-- Q202 -->
+</div>
+<div>
 <h3>【第二百零二題 / NO. 202】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to enable its sales team with automatic post-call visibility into mention of competitors, products, and other custom phrases.
@@ -5107,6 +5537,8 @@ Call Insights analyzes voice and video calls for key phrases, topics, and mentio
 <br>
 
 <!-- Q203 -->
+</div>
+<div>
 <h3>【第二百零三題 / NO. 203】<br></h3> 
 <br><p>
 Universal Containers built a Field Generation prompt template that worked for many records, but users are reporting random failures with token limit errors. What is the cause of the random nature of this error?
@@ -5129,6 +5561,8 @@ Since the data varies by record—some records might have short text fields whil
 <br>
 
 <!-- Q204 -->
+</div>
+<div>
 <h3>【第二百零四題 / NO. 204】<br></h3> 
 <br><p>
 After a successful implementation of Agentforce Sales Agent with sales users. Universal Containers now aims to deploy it to the service team.
@@ -5155,6 +5589,8 @@ Agent Topics and Actions are context-specific. Service Cloud use cases (e.g., ca
 <br>
 
 <!-- Q205 -->
+</div>
+<div>
 <h3>【第二百零五題 / NO. 205】<br></h3> 
 <br><p>
 Northern Trail Outfitters (NTO) wants to configure Einstein Trust Layer in its production org but is unable to see the option on the Setup page.
@@ -5181,6 +5617,8 @@ Einstein 信任層是生成式 AI 功能的基礎設施。要存取信任層的�
 <br>
 
 <!-- Q206 -->
+</div>
+<div>
 <h3>【第二百零六題 / NO. 206】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -5211,6 +5649,8 @@ The batch testing feature allows organizations to upload structured CSV test tem
 <br>
 
 <!-- Q207 -->
+</div>
+<div>
 <h3>【第二百零七題 / NO. 207】<br></h3> 
 <br><p>
 Universal Containers (UC) has a legacy system that needs to integrate with Salesforce. UC wishes to create a digest of account action plans using the generative API feature.
@@ -5237,6 +5677,8 @@ Salesforce 的生成式 AI 功能（如 Generations API）是透過標準的 RES
 <br>
 
 <!-- Q208 -->
+</div>
+<div>
 <h3>【第二百零八題 / NO. 208】<br></h3> 
 <br><p>
 What is the primary function of the reasoning engine in Agentforce?
@@ -5259,6 +5701,8 @@ The reasoning engine interprets the meaning behind natural language user inputs.
 <br>
 
 <!-- Q209 -->
+</div>
+<div>
 <h3>【第二百零九題 / NO. 209】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to enable its sales team to use Al to suggest recommended products from its catalog.
@@ -5285,6 +5729,8 @@ A Flex prompt template is designed to provide flexible, customizable AI-driven r
 <br>
 
 <!-- Q210 -->
+</div>
+<div>
 <h3>【第二百一十題 / NO. 210】<br></h3> 
 <br><p>
 Sales reps at Universal Containers should not be able to create or edit prompt templates.
@@ -5319,6 +5765,8 @@ The Prompt Execute User permission set is designed for users who can invoke and 
  
 
 <!-- Q211 -->
+</div>
+<div>
 <h3>【第二百十一題 / NO. 211】<br></h3> 
 <br><p>
 A Service Agent at Universal Containers (UC) is designed to help customers resolve issues by searching against knowledge articles.
@@ -5349,6 +5797,8 @@ To include content from attached files such as PDFs in Knowledge articles, the c
 <br>
 
 <!-- Q212 -->
+</div>
+<div>
 <h3>【第二百十二題 / NO. 212】<br></h3> 
 <br><p>
 Universal Container's internal auditing team asks An Agentforce to verify that address information is properly masked in the prompt being generated.
@@ -5375,6 +5825,8 @@ Einstein 信任層的「AI 稽核追蹤」功能專門用於記錄 AI 互動過�
 <br>
 
 <!-- Q213 -->
+</div>
+<div>
 <h3>【第二百十三題 / NO. 213】<br></h3> 
 <br><p>
 Universal Containers needs to bring individual customer warranties from an external system into Data Cloud.
@@ -5405,6 +5857,8 @@ When external data must be filtered by specific criteria... the correct approach
 <br>
 
 <!-- Q214 -->
+</div>
+<div>
 <h3>【第二百十四題 / NO. 214】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -5435,6 +5889,8 @@ Flex prompt templates are the correct type for custom or embedded integrations, 
 <br>
 
 <!-- Q215 -->
+</div>
+<div>
 <h3>【第二百十五題 / NO. 215】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -5461,6 +5917,8 @@ Enabling "Enrich event logs with conversation data" allows administrators to cap
 <br>
 
 <!-- Q216 -->
+</div>
+<div>
 <h3>【第二百十六題 / NO. 216】<br></h3> 
 <br><p>
 Universal Containers (UC) currently tracks Leads with a custom object. UC is preparing to implement the Sales Development Representative (SDR) Agent. Which consideration should UC keep in mind?
@@ -5483,6 +5941,8 @@ Agentforce 的預建 Agent（如 SDR Agent）通常是針對 Salesforce 的標�
 <br>
 
 <!-- Q217 -->
+</div>
+<div>
 <h3>【第二百十七題 / NO. 217】<br></h3> 
 <br><p>
 An Agentforce implements Einstein Sales Emails for a sales team. The team wants to send personalized follow-up emails to leads based on their interactions and data stored in Salesforce. The Agentforce Specialist needs to configure the system to use the most accurate and up-to-date information for email generation.
@@ -5510,6 +5970,8 @@ Draft with Einstein 功能內建了智慧接地機制，能夠自動識別當前
 <br>
 
 <!-- Q218 -->
+</div>
+<div>
 <h3>【第二百十八題 / NO. 218】<br></h3> 
 <br><p>
 A service manager wants to use Salesforce Prompt Builder to help agents summarize customer case notes after a support call.
@@ -5552,6 +6014,8 @@ Option A follows the RTCCF framework (Role, Task, Context, Constraints, Format) 
 <br>
 
 <!-- Q219 -->
+</div>
+<div>
 <h3>【第二百十九題 / NO. 219】<br></h3> 
 <br><p>
 Which statement explains why a company might prefer a hybrid search index in Data Cloud for Agentforce?
@@ -5574,6 +6038,8 @@ Hybrid search indexes are preferred when organizations need both literal keyword
 <br>
 
 <!-- Q220 -->
+</div>
+<div>
 <h3>【第二百二十題 / NO. 220】<br></h3> 
 <br><p>
 How should an organization use the Einstein Trust layer to audit, track, and view masked data?
@@ -5596,6 +6062,8 @@ Einstein 信任層會將詳細的互動日誌（包括原始提示、遮罩後�
 <br>
 
 <!-- Q221 -->
+</div>
+<div>
 <h3>【第二百二十一題 / NO. 221】<br></h3> 
 <br><p>
 Which feature in the Einstein Trust Layer helps to minimize the risks of jailbreaking and prompt injection attacks?
@@ -5618,6 +6086,8 @@ Prompt Defense guards against malicious prompts or injection attacks but focuses
 <br>
 
 <!-- Q222 -->
+</div>
+<div>
 <h3>【第二百二十二題 / NO. 222】<br></h3> 
 <br><p>
 Which scenario best demonstrates when an Agentforce Data Library is most useful for improving an AI agent' s response accuracy?
@@ -5640,6 +6110,8 @@ Agentforce 資料庫的核心價值在於為 AI 提供一個「受控」且「�
 <br>
 
 <!-- Q223 -->
+</div>
+<div>
 <h3>【第二百二十三題 / NO. 223】<br></h3> 
 <br><p>
 How does an Agent respond when it can't understand the request or find any requested information?
@@ -5662,6 +6134,8 @@ When an Agentforce Agent fails to understand a request or find information, it d
 <br>
 
 <!-- Q224 -->
+</div>
+<div>
 <h3>【第二百二十四題 / NO. 224】<br></h3> 
 <br><p>
 What is the role of the large language model (LLM) in executing an Agent Action?
@@ -5684,6 +6158,8 @@ LLM 充當 Agent 的推理引擎。它負責解讀使用者的意圖，從可用
 <br>
 
 <!-- Q225 -->
+</div>
+<div>
 <h3>【第二百二十五題 / NO. 225】<br></h3> 
 <br><p>
 Amid their busy schedules, sales reps at Universal Containers dedicate time to follow up with prospects and existing clients via email regarding renewals or new deals. They spend many hours throughout the week reviewing past communications and details about their customers before performing their outreach. Which standard Agent action helps sales reps draft personalized emails to prospects by generating text based on previous successful communications?
@@ -5706,6 +6182,8 @@ The "Draft or Revise Sales Email" action in Agentforce for Sales uses the Atlas 
 <br>
 
 <!-- Q226 -->
+</div>
+<div>
 <h3>【第二百二十六題 / NO. 226】<br></h3> 
 <br><p>
 Universal Containers is rolling out a new generative AI initiative.
@@ -5732,6 +6210,8 @@ One key limitation is that changes to prompt templates (creation, edits, or dele
 <br>
 
 <!-- Q227 -->
+</div>
+<div>
 <h3>【第二百二十七題 / NO. 227】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to enable its sales team to use AI to suggest recommended products from its catalog. Which type of prompt template should UC use?
@@ -5754,6 +6234,8 @@ Flex prompt templates are versatile, allowing custom inputs (e.g., catalog data 
 <br>
 
 <!-- Q228 -->
+</div>
+<div>
 <h3>【第二百二十八題 / NO. 228】<br></h3> 
 <br><p>
 An Agentforce Specialist wants to troubleshoot their Agent's performance. Where should the Agentforce Specialist go to access all user interactions with the Agent, including Agent errors, incorrectly triggered actions, and incomplete plans?
@@ -5776,6 +6258,8 @@ Event Logs in Agentforce (accessible via Setup or Agent Analytics) record all us
 <br>
 
 <!-- Q229 -->
+</div>
+<div>
 <h3>【第二百二十九題 / NO. 229】<br></h3> 
 <br><p>
 Universal Containers recently added a custom flow for processing returns and created a new Agent Action.
@@ -5802,6 +6286,8 @@ Agentforce Agent 是一個自動化使用者。為了讓它能夠執行任何 Fl
 <br>
 
 <!-- Q230 -->
+</div>
+<div>
 <h3>【第二百三十題 / NO. 230】<br></h3> 
 <br><p>
 What does it mean when a prompt template version is described as immutable?
@@ -5831,6 +6317,8 @@ When a prompt template version is immutable, it means that once the version is a
  
 
 <!-- Q231 -->
+</div>
+<div>
 <h3>【第二百三十一題 / NO. 231】<br></h3> 
 <br><p>
 Universal Containers (UC) is tracking web activities in Data Cloud for a unified contact, and wants to use that in a prompt template to help extract insights from the data.
@@ -5857,6 +6345,8 @@ The correct approach is to enrich the Contact object with the activity records a
 <br>
 
 <!-- Q232 -->
+</div>
+<div>
 <h3>【第二百三十二題 / NO. 232】<br></h3> 
 <br><p>
 What should An Agentforce consider when using related list merge fields in a prompt template associated with an Account object in Prompt Builder?
@@ -5879,6 +6369,8 @@ Prompt Builder 在處理相關清單時有一些限制。具體來說，「活�
 <br>
 
 <!-- Q233 -->
+</div>
+<div>
 <h3>【第二百三十三題 / NO. 233】<br></h3> 
 <br><p>
 How does Secure Data Retrieval ensure that only authorized users can access necessary Salesforce data for dynamic grounding?
@@ -5901,6 +6393,8 @@ Einstein 信任層的「安全資料檢索」機制嚴格遵循 Salesforce 的�
 <br>
 
 <!-- Q234 -->
+</div>
+<div>
 <h3>【第二百三十四題 / NO. 234】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -5931,6 +6425,8 @@ The required step to route any messaging session, including those from Messaging
 <br>
 
 <!-- Q235 -->
+</div>
+<div>
 <h3>【第二百三十五題 / NO. 235】<br></h3> 
 <br><p>
 Coral Cloud Resorts needs to ensure its booking agent executes actions in a specific sequence: first retrieve available sessions, then verify customer eligibility, and finally create the booking. The current implementation allows the large language model (LLM) to execute these actions in any order, causing booking failures.
@@ -5957,6 +6453,8 @@ Deterministic execution order is best achieved by using custom state variables a
 <br>
 
 <!-- Q236 -->
+</div>
+<div>
 <h3>【第二百三十六題 / NO. 236】<br></h3> 
 <br><p>
 An Agentforce wants to include data from the response of external service invocation (REST API callout) into the prompt template.
@@ -5983,6 +6481,8 @@ Salesforce 的 External Services 功能允許您以宣告式的方式連接外�
 <br>
 
 <!-- Q237 -->
+</div>
+<div>
 <h3>【第二百三十七題 / NO. 237】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -6013,6 +6513,8 @@ The Agent API enables external web or mobile applications to communicate directl
 <br>
 
 <!-- Q238 -->
+</div>
+<div>
 <h3>【第二百三十八題 / NO. 238】<br></h3> 
 <br><p>
 Universal Containers (UC) needs to save agents time with AI-generated case summaries. UC has implemented the Work Summary feature.
@@ -6039,6 +6541,8 @@ Einstein 工作摘要不僅僅總結對話內容。為了提供更全面和準�
 <br>
 
 <!-- Q239 -->
+</div>
+<div>
 <h3>【第二百三十九題 / NO. 239】<br></h3> 
 <br><p>
 After configuring and saving a Salesforce Agentforce Data Library (regardless of the data source), which components are automatically created and available in Data Cloud?
@@ -6061,6 +6565,8 @@ Agentforce 資料庫的建立會觸發 Data Cloud 中的一系列自動化流程
 <br>
 
 <!-- Q240 -->
+</div>
+<div>
 <h3>【第二百四十題 / NO. 240】<br></h3> 
 <br><p>
 Universal Containers' sales team engages in numerous video sales calls with prospects across the nation. Sales management wants an easy way to understand key information such as deal terms or customer sentiments.
@@ -6087,6 +6593,8 @@ Einstein Conversation Insights analyzes sales calls (including video and voice) 
 <br>
 
 <!-- Q241 -->
+</div>
+<div>
 <h3>【第二百四十一題 / NO. 241】<br></h3> 
 <br><p>
 Universal Containers implemented Agent for its users.
@@ -6117,6 +6625,8 @@ Agentforce Agent 的標準動作庫目前不包含「刪除記錄 (Delete Record
 <br>
 
 <!-- Q242 -->
+</div>
+<div>
 <h3>【第二百四十二題 / NO. 242】<br></h3> 
 <br><p>
 Universal Containers wants to implement a solution in Salesforce with a custom UX that allows users to enter a sales order number. Subsequently, the system will invoke a custom prompt template to create and display a summary of the sales order header and sales order details. Which solution should an Agentforce Specialist implement to meet this requirement?
@@ -6139,6 +6649,8 @@ A screen flow provides a customizable user interface within Salesforce, allowing
 <br>
 
 <!-- Q243 -->
+</div>
+<div>
 <h3>【第二百四十三題 / NO. 243】<br></h3> 
 <br><p>
 Universal Containers implements three custom actions to get three distinct types of sales summaries for its users. Users are complaining that they are not getting the right summary based on their utterances. What should the Agentforce Specialist investigate as the root cause?
@@ -6161,6 +6673,8 @@ The root cause likely lies in non-unique action instructions. If instructions fo
 <br>
 
 <!-- Q244 -->
+</div>
+<div>
 <h3>【第二百四十四題 / NO. 244】<br></h3> 
 <br><p>
 A customer service representative is looking at a custom object that stores travel information. They recently received a weather alert and now need to cancel flights for the customers that are related to this Itinerary. The representative needs to review the Knowledge articles about canceling and rebooking the customer flights.
@@ -6187,6 +6701,8 @@ Agentforce Agent 能同時處理「執行動作」和「回答問題」。在這
 <br>
 
 <!-- Q245 -->
+</div>
+<div>
 <h3>【第二百四十五題 / NO. 245】<br></h3> 
 <br><p>
 Universal Containers wants to test agents while preserving real data and isolating from production.
@@ -6213,6 +6729,8 @@ The AgentForce Testing Center Implementation Guide specifies that organizations 
 <br>
 
 <!-- Q246 -->
+</div>
+<div>
 <h3>【第二百四十六題 / NO. 246】<br></h3> 
 <br><p>
 Coral Cloud Resorts needs consistent pass/fail logic for agent testing.
@@ -6239,6 +6757,8 @@ Structured batch testing allows specialists to define expected outputs per test 
 <br>
 
 <!-- Q247 -->
+</div>
+<div>
 <h3>【第二百四十七題 / NO. 247】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -6269,6 +6789,8 @@ The metadata component that contains the complete configuration for an Agentforc
 <br>
 
 <!-- Q248 -->
+</div>
+<div>
 <h3>【第二百四十八題 / NO. 248】<br></h3> 
 <br><p>
 How is Data Cloud leveraged by the Answer Questions with Knowledge action in Agentforce?
@@ -6291,6 +6813,8 @@ Indexed Knowledge articles are stored and retrieved in real-time from Data Cloud
 <br>
 
 <!-- Q249 -->
+</div>
+<div>
 <h3>【第二百四十九題 / NO. 249】<br></h3> 
 <br><p>
 Universal Containers wants to assign agents to improve department efficiency.
@@ -6317,6 +6841,8 @@ Agentforce 提供了針對不同業務領域優化的專用 Agent 類型。最�
 <br>
 
 <!-- Q250 -->
+</div>
+<div>
 <h3>【第二百五十題 / NO. 250】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to enable its sales team to get insights into product and competitor names mentioned during calls. How should UC meet this requirement?
@@ -6346,6 +6872,8 @@ Einstein Conversation Insights analyzes call recordings to identify keywords lik
  
 
 <!-- Q251 -->
+</div>
+<div>
 <h3>【第二百五十一題 / NO. 251】<br></h3> 
 <br><p>
 Coral Cloud Resorts wants to handle frequent customer misspellings of package names in queries.
@@ -6373,6 +6901,8 @@ The AgentForce Retrieval and Semantic Search Guide explains that vector search (
 <br>
 
 <!-- Q252 -->
+</div>
+<div>
 <h3>【第二百五十二題 / NO. 252】<br></h3> 
 <br><p>
 Universal Containers needs to provide insights on the usability of Agents to drive adoption in the organization.
@@ -6399,6 +6929,8 @@ To measure adoption and usability of Agents across the organization, Agentforce 
 <br>
 
 <!-- Q253 -->
+</div>
+<div>
 <h3>【第二百五十三題 / NO. 253】<br></h3> 
 <br><p>
 Universal Containers (UC) has a mature Salesforce org with a lot of data in cases and Knowledge articles. UC is concerned that there are many legacy fields, with data that might not be applicable for Einstein AI to draft accurate email responses.
@@ -6425,6 +6957,8 @@ Service AI Grounding is the solution that Universal Containers should use to ens
 <br>
 
 <!-- Q254 -->
+</div>
+<div>
 <h3>【第二百五十四題 / NO. 254】<br></h3> 
 <br><p>
 Universal Containers implemented Agentforce for its users. One user complains that an Agent is not deleting activities from the past 7 days. What is the reason for this issue?
@@ -6447,6 +6981,8 @@ Agentforce 目前的標準動作庫中不包含「刪除記錄 (Delete Record)�
 <br>
 
 <!-- Q255 -->
+</div>
+<div>
 <h3>【第二百五十五題 / NO. 255】<br></h3> 
 <br><p>
 Universal Containers wants to incorporate the current order fulfillment status into a prompt for a large language model (LLM). The order status is stored in the external enterprise resource planning (ERP) system.
@@ -6473,6 +7009,8 @@ Data grounding ensures the Large Language Model has access to the most current a
 <br>
 
 <!-- Q256 -->
+</div>
+<div>
 <h3>【第二百五十六題 / NO. 256】<br></h3> 
 <br><p>
 Universal Containers (UC) recently attended a major trade show and received thousands of new leads from event badge scans. UC is struggling to follow up with each lead in a timely, personalized way.
@@ -6519,6 +7057,8 @@ Agentforce SDR helps sales teams qualify and nurture leads at scale, around the 
 <br>
 
 <!-- Q257 -->
+</div>
+<div>
 <h3>【第二百五十七題 / NO. 257】<br></h3> 
 <br><p>
 What is a key benefit of the Agent-to-Agent (A2A) protocol?
@@ -6541,6 +7081,8 @@ A2A 協定的核心價值在於「互操作性 (Interoperability)」。它提供
 <br>
 
 <!-- Q258 -->
+</div>
+<div>
 <h3>【第二百五十八題 / NO. 258】<br></h3> 
 <br><p>
 A sales rep at Universal Containers is extremely busy and sometimes will have very long sales calls on voice and video calls and might miss key details. They are just starting to adopt new generative AI features.
@@ -6567,6 +7109,8 @@ For a sales rep who may miss key details during long sales calls, the Agentforce
 <br>
 
 <!-- Q259 -->
+</div>
+<div>
 <h3>【第二百五十九題 / NO. 259】<br></h3> 
 <br><p>
 An Agentforce Specialist is assisting Universal Containers with troubleshooting an agent. The Agentforce Specialist notices that the agent is not using topic actions in the desired sequence, causing inconsistent outcomes.
@@ -6594,6 +7138,8 @@ To achieve deterministic control, sequence the topic's actions in the desired or
 <br>
 
 <!-- Q260 -->
+</div>
+<div>
 <h3>【第二百六十題 / NO. 260】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -6624,6 +7170,8 @@ The recommended clicks-only approach is to upload the documents as a File Source
 <br>
 
 <!-- Q261 -->
+</div>
+<div>
 <h3>【第二百六十一題 / NO. 261】<br></h3> 
 <br><p>
 Universal Containers is considering leveraging the Einstein Trust Layer in conjunction with Einstein Generative AI Audit Data.
@@ -6650,6 +7198,8 @@ Einstein 信任層的稽核功能專注於安全和隱私。它會記錄哪些�
 <br>
 
 <!-- Q262 -->
+</div>
+<div>
 <h3>【第二百六十二題 / NO. 262】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -6680,6 +7230,8 @@ Agentforce 服務 Agent 通常會被指派一個預設的權限集群組 (Agentf
 <br>
 
 <!-- Q263 -->
+</div>
+<div>
 <h3>【第二百六十三題 / NO. 263】<br></h3> 
 <br><p>
 After creating a foundation model in Einstein Studio, which hyperparameter should An Agentforce use to adjust the balance between consistency and randomness of a response?
@@ -6702,6 +7254,8 @@ The Temperature hyperparameter controls the randomness of model outputs. Low Tem
 <br>
 
 <!-- Q264 -->
+</div>
+<div>
 <h3>【第二百六十四題 / NO. 264】<br></h3> 
 <br><p>
 Universal Containers would like to route a service agent conversation to a human agent queue. Which tool connects the service agent to the human agent queue for escalation?
@@ -6724,6 +7278,8 @@ In Agentforce, when a service agent's conversation needs to be escalated to a hu
 <br>
 
 <!-- Q265 -->
+</div>
+<div>
 <h3>【第二百六十五題 / NO. 265】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to make a sales proposal and directly use data from multiple unrelated objects (standard and custom) in a prompt template. How should UC accomplish this?
@@ -6747,6 +7303,8 @@ In Agentforce's Prompt Builder, a Flex template allows users to define dynamic i
 <br>
 
 <!-- Q266 -->
+</div>
+<div>
 <h3>【第二百六十六題 / NO. 266】<br></h3> 
 <br><p>
 Universal Containers wants to allow its service agents to query the current fulfillment status of an order with natural language. There is an existing auto launched flow to query the information from Oracle ERP, which is the system of record for the order fulfillment process.
@@ -6773,6 +7331,8 @@ The best solution is to create a custom copilot action that calls the flow. This
 <br>
 
 <!-- Q267 -->
+</div>
+<div>
 <h3>【第二百六十七題 / NO. 267】<br></h3> 
 <br><p>
 Universal Containers wants to allow its service agents to query the current fulfillment status of an order with natural language. There is an existing autolaunched flow to query the Information from Oracle ERP, which is the system of record for the order fulfillment process.
@@ -6800,6 +7360,8 @@ In Agentforce, the best way to allow service agents to query order fulfillment s
 <br>
 
 <!-- Q268 -->
+</div>
+<div>
 <h3>【第二百六十八題 / NO. 268】<br></h3> 
 <br><p>
 An Agentforce Specialist at Universal Containers (UC) is building with no-code tools only. They have many small accounts that are only touched periodically by a specialized sales team, and UC wants to maximize the sales operations team's time, UC wants to help prep the sales team for calls by:
@@ -6838,6 +7400,8 @@ No-code users can leverage standard foundation models with prompt templates grou
 <br>
 
 <!-- Q269 -->
+</div>
+<div>
 <h3>【第二百六十九題 / NO. 269】<br></h3> 
 <br><p>
 Universal Containers (UC) wants to improve the efficiency of addressing customer questions and reduce agent handling time with AI- generated responses. The agents should be able to leverage their existing knowledge base and identify whether the responses are coming from the large language model (LLM) or from Salesforce Knowledge.
@@ -6865,6 +7429,8 @@ To meet Universal Containers' goal... the best approach is to enable Service Rep
 <br>
 
 <!-- Q270 -->
+</div>
+<div>
 <h3>【第二百七十題 / NO. 270】<br></h3> 
 <br><p>
 What is a valid use case for Data Cloud retrievers?
@@ -6894,6 +7460,8 @@ Data Cloud 檢索器的核心功能是從「向量資料庫」中檢索語意相
  
 
 <!-- Q271 -->
+</div>
+<div>
 <h3>【第二百七十一題 / NO. 271】<br></h3> 
 <br><p>
 Universal Containers (UC) has a library of custom-built personalized investment portfolio APIs, and is planning to extend it to agents.
@@ -6920,6 +7488,8 @@ The most appropriate and advanced method for an Agentforce agent to dynamically 
 <br>
 
 <!-- Q272 -->
+</div>
+<div>
 <h3>【第二百七十二題 / NO. 272】<br></h3> 
 <br><p>
 Universal Containers has an active standard email prompt template that does not fully deliver on the business requirements. Which steps should an Agentforce Specialist take to use the content of the standard prompt email template in question and customize it to fully meet the business requirements?
@@ -6942,6 +7512,8 @@ Salesforce documentation confirms that standard prompt templates (e.g., for emai
 <br>
 
 <!-- Q273 -->
+</div>
+<div>
 <h3>【第二百七十三題 / NO. 273】<br></h3> 
 <br><p>
 Leadership needs to populate a dynamic form field with a summary or description created by a large language model (LLM) to facilitate more productive conversations with customers. Leadership also wants to keep a human in the loop to be considered in their AI strategy. Which prompt template type should the Agentforce Specialist recommend?
@@ -6964,6 +7536,8 @@ In Agentforce, the Field Generation prompt template type is designed to populate
 <br>
 
 <!-- Q274 -->
+</div>
+<div>
 <h3>【第二百七十四題 / NO. 274】<br></h3> 
 <br><p>
 Universal Containers, dealing with a high volume of chat inquiries, implements Einstein Work Summaries to boost productivity.
@@ -6990,6 +7564,8 @@ Einstein 工作摘要不僅提供自由格式的文字摘要，還會結構化�
 <br>
 
 <!-- Q275 -->
+</div>
+<div>
 <h3>【第二百七十五題 / NO. 275】<br></h3> 
 <br><p>
 Choose 1 option.
@@ -7020,6 +7596,8 @@ As outlined in the AgentForce External Services and Prompt Flow Integration Guid
 <br>
 
 <!-- Q276 -->
+</div>
+<div>
 <h3>【第二百七十六題 / NO. 276】<br></h3> 
 <br><p>
 When using a prompt template, what should an Agentforce Specialist consider with their grounding data and chosen model?
@@ -7042,6 +7620,8 @@ Every LLM has a fixed context window limit, typically expressed in tokens... The
 <br>
 
 <!-- Q277 -->
+</div>
+<div>
 <h3>【第二百七十七題 / NO. 277】<br></h3> 
 <br><p>
 Universal Containers wants to incorporate CRM data as well-formatted JSON in a prompt to a large language model (LLM).
@@ -7068,6 +7648,8 @@ Prompt Builder 本身沒有內建的「一鍵轉 JSON」功能。如果需要將
 <br>
 
 <!-- Q278 -->
+</div>
+<div>
 <h3>【第二百七十八題 / NO. 278】<br></h3> 
 <br><p>
 What is the correct process to leverage Prompt Builder in a Salesforce org?
@@ -7096,6 +7678,8 @@ When using Prompt Builder in a Salesforce org, the correct process involves seve
 <br>
 
 <!-- Q279 -->
+</div>
+<div>
 <h3>【第二百七十九題 / NO. 279】<br></h3> 
 <br><p>
 Universal Containers is interested in using Call Explorer to quickly gain insights from meetings recorded by its sales team.
@@ -7122,6 +7706,8 @@ Call Explorer 是 Einstein Conversation Insights (ECI) 的一部分。要存取�
 <br>
 
 <!-- Q280 -->
+</div>
+<div>
 <h3>【第二百八十題 / NO. 280】<br></h3> 
 <br><p>
 Universal Containers has set up a Service Agent to allow customers to look up their order status. The topic setup includes:
@@ -7160,6 +7746,8 @@ The AgentForce Reasoning Engine Guide explains that the engine relies primarily 
 <br>
 
 <!-- Q281 -->
+</div>
+<div>
 <h3>【第二百八十一題 / NO. 281】<br></h3> 
 <br><p>
 Universal Containers has seen a high adoption rate of a new feature that uses generative AI to populate a summary field of a custom object, Competitor Analysis. All sales users have the same profile but one user cannot see the generative AlI-enabled field icon next to the summary field.
@@ -7186,6 +7774,8 @@ In Salesforce, Generative AI capabilities are controlled by specific permission 
 <br>
 
 <!-- Q282 -->
+</div>
+<div>
 <h3>【第二百八十二題 / NO. 282】<br></h3> 
 <br><p>
 Universal Containers wants to leverage the Record Snapshots grounding feature in a prompt template. What preparations are required?
@@ -7208,6 +7798,8 @@ Record Snapshots in Salesforce Prompt Builder leverage the data visible on the u
 <br>
 
 <!-- Q283 -->
+</div>
+<div>
 <h3>【第二百八十三題 / NO. 283】<br></h3> 
 <br><p>
 Universal Containers (UC) is looking to improve its sales team's productivity by providing real-time insights and recommendations during customer interactions.
@@ -7234,6 +7826,8 @@ Agentforce 銷售 Agent 的核心價值在於透過 AI 輔助來「簡化流程�
 <br>
 
 <!-- Q284 -->
+</div>
+<div>
 <h3>【第二百八十四題 / NO. 284】<br></h3> 
 <br><p>
 Based on the user utterance, 'Show me all the customers in New York', which standard Agent action will the planner service use?
@@ -7256,6 +7850,8 @@ When a user issues a command like "Show me all the customers in New York", the s
 <br>
 
 <!-- Q285 -->
+</div>
+<div>
 <h3>【第二百八十五題 / NO. 285】<br></h3> 
 <br><p>
 What is one key purpose of action instructions when creating a custom agent action in Agentforce?
@@ -7278,6 +7874,8 @@ Action instructions guide the reasoning engine by describing the action's purpos
 <br>
 
 <!-- Q286 -->
+</div>
+<div>
 <h3>【第二百八十六題 / NO. 286】<br></h3> 
 <br><p>
 Universal Containers wants its AI agent to answer customer questions with precise and up-to-date information. How does an Agentforce Data Library simplify and enable this?
@@ -7300,6 +7898,8 @@ Agentforce 資料庫簡化了 RAG (檢索增強生成) 的設置流程。只需�
 <br>
 
 <!-- Q287 -->
+</div>
+<div>
 <h3>【第二百八十七題 / NO. 287】<br></h3> 
 <br><p>
 Where should the Agentforce Specialist go to add/update actions assigned to a copilot?
@@ -7322,6 +7922,8 @@ To add or update actions assigned to a copilot, An Agentforce can manage this th
 <br>
 
 <!-- Q288 -->
+</div>
+<div>
 <h3>【第二百八十八題 / NO. 288】<br></h3> 
 <br><p>
 Universal Containers wants to implement a customer verification process where sensitive account information can only be accessed after the customer passes identity verification. The agent must enforce this security rule deterministically without allowing the large language model (LLM) to bypass the verification requirement.
@@ -7348,6 +7950,8 @@ The AgentForce Security and Deterministic Logic Guide specifies that sensitive a
 <br>
 
 <!-- Q289 -->
+</div>
+<div>
 <h3>【第二百八十九題 / NO. 289】<br></h3> 
 <br><p>
 Universal Containers (UC) is using Einstein Generative AI to generate an account summary. UC aims to ensure the content is safe and inclusive, utilizing the Einstein Trust Layer's toxicity scoring to assess the content's safety level.
@@ -7374,6 +7978,8 @@ Einstein Trust Layer's Toxicity Scoring categorizes content on a scale of 0 to 1
 <br>
 
 <!-- Q290 -->
+</div>
+<div>
 <h3>【第二百九十題 / NO. 290】<br></h3> 
 <br><p>
 An Agentforce at Universal Containers is trying to set up a new Field Generation prompt template. They take the following steps.
@@ -7423,6 +8029,8 @@ For Field Generation prompt templates to display the Sparkle icon (indicating AI
  
 
 <!-- Q291 -->
+</div>
+<div>
 <h3>【第二百九十一題 / NO. 291】<br></h3> 
 <br><p>
 When a verified customer in a help center says, "I want to upgrade my service plan," an AI agent needs to complete the following tasks:
@@ -7465,6 +8073,8 @@ This scenario represents a revenue-generating interaction where the AI agent is 
 <br>
 
 <!-- Q292 -->
+</div>
+<div>
 <h3>【第二百九十二題 / NO. 292】<br></h3> 
 <br><p>
 Universal Containers' data science team is hosting a generative large language model (LLM) on Amazon Web Services (AWS).
@@ -7489,6 +8099,6 @@ Einstein Studio 中的「模型產生器 (Model Builder)」是 Salesforce 連接
 <br>
 </details>
 <br>
-
+</div>
 </div>
 </html>
