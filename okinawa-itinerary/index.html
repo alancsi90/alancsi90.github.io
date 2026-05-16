@@ -221,6 +221,13 @@
       margin-bottom: 8px;
     }
 
+    .map-link .desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
     .map-link .open-map {
       color: var(--sea);
       font-size: 13px;
@@ -1006,32 +1013,32 @@
   <button class="print-button" onclick="window.print()">列印 / 存成 PDF</button>
   <script>
     const wishlistPlaces = [
-      ["萬座毛", "万座毛"],
-      ["Sairaiin 達磨寺", "西来院（だるま寺）"],
-      ["Okinawa Cerrado Coffee", "沖縄セラードコーヒー"],
-      ["Shinmei Coffee", "Shinmay Coffee Okinawa"],
-      ["守禮門", "守礼門"],
-      ["泊港漁市場", "泊いゆまち"],
-      ["糸滿魚市場", "糸満お魚センター"],
-      ["Public Market Alley", "市場本通り / 公設市場周辺"],
-      ["PARCO CITY", "サンエー浦添西海岸 PARCO CITY"],
-      ["San-A Naha Main Place", "サンエー那覇メインプレイス"],
-      ["沖繩 ASHIBINAA Outlet", "沖縄アウトレットモール あしびなー"],
-      ["AEON MALL Okinawa Rycom", "イオンモール沖縄ライカム"],
-      ["古宇利海灘", "古宇利ビーチ"],
-      ["美國村", "美浜アメリカンビレッジ"],
-      ["波上宮", "波上宮"],
-      ["玉泉洞", "玉泉洞 / おきなわワールド"],
-      ["那霸國際通商店街", "国際通り"],
-      ["Bic Camera Select 那霸國際通店", "ビックカメラセレクト那覇国際通り店"],
-      ["琉貿百貨", "デパートリウボウ"],
-      ["安利美特 那霸國際通店", "アニメイト那覇国際通り店"],
-      ["炸牛 元村 那霸國際通本店", "牛かつもと村 那覇国際通り本店"],
-      ["敘敘苑燒肉 歌町店", "叙々苑 沖縄おもろまち店"],
-      ["Panza Okinawa Zipline", "PANZA沖縄 ジップライン"],
-      ["JR 九州 Blossom 那霸酒店", "JR九州ホテル ブラッサム那覇"],
-      ["ちゅらさん6沖縄", "ちゅらさん6沖縄"],
-      ["COSTCO 好市多沖繩店", "コストコ沖縄南城倉庫店"]
+      ["萬座毛", "万座毛", "恩納海岸代表景點，適合排北部回程看海與夕景。"],
+      ["Sairaiin 達磨寺", "西来院（だるま寺）", "首里附近的小寺院，可和守禮門、首里城公園一起走。"],
+      ["Okinawa Cerrado Coffee", "沖縄セラードコーヒー", "浦添港川一帶的咖啡停靠點，適合中部日早上開場。"],
+      ["Shinmei Coffee", "Shinmay Coffee Okinawa", "今歸仁/名護路線上的北部咖啡休息點，接古宇利很順。"],
+      ["守禮門", "守礼門", "首里城公園代表門景，早上去拍照和散步最穩。"],
+      ["泊港漁市場", "泊いゆまち", "那霸北側魚市場，可短停吃海鮮或買小食。"],
+      ["糸滿魚市場", "糸満お魚センター", "南部午餐好選擇，適合吃現烤海鮮、海葡萄和沖繩魚。"],
+      ["Public Market Alley", "市場本通り / 公設市場周辺", "國際通旁市場巷弄，適合回程日前採買和覓食。"],
+      ["PARCO CITY", "サンエー浦添西海岸 PARCO CITY", "浦添海邊大型商場，雨天、吹冷氣、看海都好用。"],
+      ["San-A Naha Main Place", "サンエー那覇メインプレイス", "那霸市區大型購物中心，適合補日用品、藥妝與伴手禮。"],
+      ["沖繩 ASHIBINAA Outlet", "沖縄アウトレットモール あしびなー", "南部回那霸順路的 Outlet，適合安排在糸滿後。"],
+      ["AEON MALL Okinawa Rycom", "イオンモール沖縄ライカム", "中部最大型商場之一，餐廳多，雨天備案很強。"],
+      ["古宇利海灘", "古宇利ビーチ", "北部海景重點，可順看古宇利大橋，天氣好時最值得。"],
+      ["美國村", "美浜アメリカンビレッジ", "北谷海邊散步與拍照點，下午到晚上最有氣氛。"],
+      ["波上宮", "波上宮", "那霸海邊神社，回程日上午短停很順。"],
+      ["玉泉洞", "玉泉洞 / おきなわワールド", "南部主景點，鐘乳洞和琉球文化村可一起看。"],
+      ["那霸國際通商店街", "国際通り", "飯店旁核心商店街，晚到和最後採買都方便。"],
+      ["Bic Camera Select 那霸國際通店", "ビックカメラセレクト那覇国際通り店", "國際通採買電器、美妝小物、免稅商品的便利點。"],
+      ["琉貿百貨", "デパートリウボウ", "那霸市中心百貨，適合找伴手禮、甜點與較精緻採買。"],
+      ["安利美特 那霸國際通店", "アニメイト那覇国際通り店", "動漫商品補貨點，和國際通採買可排同一段。"],
+      ["炸牛 元村 那霸國際通本店", "牛かつもと村 那覇国際通り本店", "國際通晚餐備案，想吃炸牛排時很方便。"],
+      ["敘敘苑燒肉 歌町店", "叙々苑 沖縄おもろまち店", "想吃高級燒肉時的那霸備案，建議提前訂位。"],
+      ["Panza Okinawa Zipline", "PANZA沖縄 ジップライン", "恩納活動點，天氣好、體力夠時可接在萬座毛附近。"],
+      ["JR 九州 Blossom 那霸酒店", "JR九州ホテル ブラッサム那覇", "全程住宿基地，查回飯店路線或叫車時可直接開。"],
+      ["ちゅらさん6沖縄", "ちゅらさん6沖縄", "那霸夜間備案點，視當天體力和同行需求再決定。"],
+      ["COSTCO 好市多沖繩店", "コストコ沖縄南城倉庫店", "南部採買點，適合買零食飲料，但要注意行李空間。"]
     ];
 
     function mapsUrl(name, jp) {
@@ -1040,10 +1047,11 @@
 
     const wishlistContainer = document.querySelector("#wishlist-links");
     if (wishlistContainer) {
-      wishlistContainer.innerHTML = wishlistPlaces.map(([name, jp]) => (
+      wishlistContainer.innerHTML = wishlistPlaces.map(([name, jp, desc]) => (
         `<a class="map-link" href="${mapsUrl(name, jp)}" target="_blank" rel="noopener">
           <b>${name}</b>
           <span class="jp">${jp}</span>
+          <span class="desc">${desc}</span>
           <span class="open-map">Google Maps で開く</span>
         </a>`
       )).join("");
