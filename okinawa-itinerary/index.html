@@ -162,11 +162,11 @@
 
     .map-panel {
       position: relative;
-      min-height: 640px;
+      aspect-ratio: 1321 / 1191;
+      min-height: 560px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 30% 18%, rgba(255,255,255,.85), rgba(255,255,255,0) 24%),
-        linear-gradient(160deg, #d8f0ee, #f8fbf7 58%, #f3ead9);
+        linear-gradient(180deg, #ffffff, #fbf7f7);
       border: 1px solid var(--line);
       border-radius: 8px;
       box-shadow: var(--shadow);
@@ -175,7 +175,7 @@
     .map-panel svg {
       width: 100%;
       height: 100%;
-      min-height: 640px;
+      min-height: 560px;
       display: block;
     }
 
@@ -184,7 +184,8 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: white;
     }
 
     .map-overlay {
@@ -250,7 +251,7 @@
 
     .pin text {
       fill: var(--ink);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 800;
       paint-order: stroke;
       stroke: rgba(255,255,255,.9);
@@ -342,6 +343,13 @@
       padding: 4px 10px;
       font-size: 12px;
       font-weight: 800;
+    }
+
+    .jp-name {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 800;
+      margin-top: -4px;
     }
 
     .mini-list {
@@ -574,93 +582,93 @@
       <div class="map-shell">
         <div class="map-panel" aria-label="沖繩概略地圖">
           <img class="map-art" src="assets/okinawa-map-bg.png" alt="精緻沖繩本島旅行地圖底圖">
-          <svg class="map-overlay" viewBox="0 0 760 980" role="img" aria-labelledby="map-title map-desc">
+          <svg class="map-overlay" viewBox="0 0 1321 1191" role="img" aria-labelledby="map-title map-desc">
             <title id="map-title">沖繩行程概略地圖</title>
             <desc id="map-desc">概略標示那霸、南部、中部、恩納、北部古宇利等行程點位。</desc>
 
-            <text x="338" y="114" class="city-label">古宇利島</text>
-            <text x="308" y="205" class="city-label">今歸仁</text>
-            <text x="374" y="272" class="city-label">名護</text>
-            <text x="402" y="430" class="city-label">恩納</text>
-            <text x="362" y="568" class="city-label">沖繩市</text>
-            <text x="316" y="632" class="city-label">北谷</text>
-            <text x="290" y="700" class="city-label">浦添</text>
-            <text x="272" y="792" class="city-label">那霸</text>
-            <text x="222" y="840" class="city-label">豐見城</text>
-            <text x="326" y="858" class="city-label">南城</text>
-            <text x="196" y="902" class="city-label">糸滿</text>
+            <text x="640" y="260" class="city-label">古宇利島</text>
+            <text x="720" y="370" class="city-label">今歸仁</text>
+            <text x="805" y="450" class="city-label">名護</text>
+            <text x="910" y="545" class="city-label">恩納</text>
+            <text x="710" y="618" class="city-label">沖繩市</text>
+            <text x="625" y="680" class="city-label">北谷</text>
+            <text x="548" y="728" class="city-label">浦添</text>
+            <text x="530" y="820" class="city-label">那霸</text>
+            <text x="452" y="872" class="city-label">豐見城</text>
+            <text x="615" y="1014" class="city-label">南城</text>
+            <text x="402" y="1054" class="city-label">糸滿</text>
 
             <g class="day-layer" data-day="d1">
-              <path class="route-line active" data-day="d1" d="M282 782 L296 768 L306 774"/>
+              <path class="route-line active" data-day="d1" d="M540 805 L552 792 L570 798"/>
             </g>
             <g class="day-layer" data-day="d2">
-              <path class="route-line active" data-day="d2" d="M282 782 L336 744 L306 762 L264 724 L282 704"/>
+              <path class="route-line active" data-day="d2" d="M540 805 L600 780 L548 784 L482 728 L504 708"/>
             </g>
             <g class="day-layer" data-day="d3">
-              <path class="route-line active" data-day="d3" d="M282 782 C332 656 366 470 372 284 C360 210 322 154 352 120 M372 284 C406 330 430 390 430 456 L410 472"/>
+              <path class="route-line active" data-day="d3" d="M540 805 C610 690 700 540 758 390 C690 330 650 286 642 250 M758 390 C825 420 900 490 910 540 L890 552"/>
             </g>
             <g class="day-layer" data-day="d4">
-              <path class="route-line active" data-day="d4" d="M282 782 L330 856 L212 900 L250 838 L204 812"/>
+              <path class="route-line active" data-day="d4" d="M540 805 L602 1018 L408 1054 L488 930 L432 890"/>
             </g>
             <g class="day-layer" data-day="d5">
-              <path class="route-line active" data-day="d5" d="M282 782 L300 704 L322 632 L366 584"/>
+              <path class="route-line active" data-day="d5" d="M540 805 L545 716 L632 676 L704 642"/>
             </g>
             <g class="day-layer" data-day="d6">
-              <path class="route-line active" data-day="d6" d="M282 782 L246 760 L300 790 L266 804"/>
+              <path class="route-line active" data-day="d6" d="M540 805 L500 778 L570 798 L548 784"/>
             </g>
 
-            <g class="pin" data-id="hotel" data-day="d1 d2 d3 d4 d5 d6" transform="translate(282 782)">
-              <circle r="12"/><text x="18" y="4">JR Blossom</text>
+            <g class="pin" data-id="hotel" data-day="d1 d2 d3 d4 d5 d6" transform="translate(540 805)">
+              <circle r="12"/><text x="18" y="4">JR九州ホテル</text>
             </g>
-            <g class="pin" data-id="kokusai" data-day="d1 d6" transform="translate(300 790)">
-              <circle r="10"/><text x="16" y="4">國際通</text>
+            <g class="pin" data-id="kokusai" data-day="d1 d6" transform="translate(570 798)">
+              <circle r="10"/><text x="16" y="4">国際通り</text>
             </g>
-            <g class="pin" data-id="makishi" data-day="d6" transform="translate(306 796)">
+            <g class="pin" data-id="makishi" data-day="d6" transform="translate(582 792)">
               <circle r="10"/><text x="16" y="4">牧志市場</text>
             </g>
-            <g class="pin" data-id="shuri" data-day="d2" transform="translate(336 744)">
-              <circle r="10"/><text x="16" y="4">首里/守禮門</text>
+            <g class="pin" data-id="shuri" data-day="d2" transform="translate(600 780)">
+              <circle r="10"/><text x="16" y="4">首里城公園</text>
             </g>
-            <g class="pin" data-id="tomari" data-day="d2" transform="translate(306 762)">
-              <circle r="10"/><text x="16" y="4">泊港</text>
+            <g class="pin" data-id="tomari" data-day="d2" transform="translate(548 784)">
+              <circle r="10"/><text x="16" y="4">泊いゆまち</text>
             </g>
-            <g class="pin" data-id="parco" data-day="d2" transform="translate(264 724)">
+            <g class="pin" data-id="parco" data-day="d2" transform="translate(482 728)">
               <circle r="10"/><text x="-78" y="4">PARCO</text>
             </g>
-            <g class="pin" data-id="kouri" data-day="d3" transform="translate(352 120)">
-              <circle r="11"/><text x="17" y="4">古宇利</text>
+            <g class="pin" data-id="kouri" data-day="d3" transform="translate(642 250)">
+              <circle r="11"/><text x="17" y="4">古宇利ビーチ</text>
             </g>
-            <g class="pin" data-id="shinmei" data-day="d3" transform="translate(372 284)">
+            <g class="pin" data-id="shinmei" data-day="d3" transform="translate(758 390)">
               <circle r="10"/><text x="16" y="4">Shinmei Coffee</text>
             </g>
-            <g class="pin" data-id="panza" data-day="d3" transform="translate(430 456)">
-              <circle r="10"/><text x="16" y="4">Panza</text>
+            <g class="pin" data-id="panza" data-day="d3" transform="translate(910 540)">
+              <circle r="10"/><text x="16" y="4">PANZA沖縄</text>
             </g>
-            <g class="pin" data-id="manzamo" data-day="d3" transform="translate(410 472)">
-              <circle r="11"/><text x="16" y="4">萬座毛</text>
+            <g class="pin" data-id="manzamo" data-day="d3" transform="translate(890 552)">
+              <circle r="11"/><text x="16" y="4">万座毛</text>
             </g>
-            <g class="pin" data-id="gyokusendo" data-day="d4" transform="translate(330 856)">
+            <g class="pin" data-id="gyokusendo" data-day="d4" transform="translate(602 1018)">
               <circle r="10"/><text x="16" y="4">玉泉洞</text>
             </g>
-            <g class="pin" data-id="itoman" data-day="d4" transform="translate(212 900)">
-              <circle r="10"/><text x="-80" y="4">糸滿魚市場</text>
+            <g class="pin" data-id="itoman" data-day="d4" transform="translate(408 1054)">
+              <circle r="10"/><text x="-116" y="4">糸満お魚センター</text>
             </g>
-            <g class="pin" data-id="costco" data-day="d4" transform="translate(250 838)">
-              <circle r="10"/><text x="16" y="4">Costco</text>
+            <g class="pin" data-id="costco" data-day="d4" transform="translate(488 930)">
+              <circle r="10"/><text x="16" y="4">コストコ南城</text>
             </g>
-            <g class="pin" data-id="ashibinaa" data-day="d4" transform="translate(204 812)">
-              <circle r="10"/><text x="-84" y="4">ASHIBINAA</text>
+            <g class="pin" data-id="ashibinaa" data-day="d4" transform="translate(432 890)">
+              <circle r="10"/><text x="-110" y="4">あしびなー</text>
             </g>
-            <g class="pin" data-id="cerrado" data-day="d5" transform="translate(300 704)">
+            <g class="pin" data-id="cerrado" data-day="d5" transform="translate(545 716)">
               <circle r="10"/><text x="16" y="4">Cerrado</text>
             </g>
-            <g class="pin" data-id="american" data-day="d5" transform="translate(322 632)">
-              <circle r="11"/><text x="16" y="4">美國村</text>
+            <g class="pin" data-id="american" data-day="d5" transform="translate(632 676)">
+              <circle r="11"/><text x="16" y="4">アメリカンビレッジ</text>
             </g>
-            <g class="pin" data-id="rycom" data-day="d5" transform="translate(366 584)">
-              <circle r="11"/><text x="16" y="4">AEON Rycom</text>
+            <g class="pin" data-id="rycom" data-day="d5" transform="translate(704 642)">
+              <circle r="11"/><text x="16" y="4">ライカム</text>
             </g>
-            <g class="pin" data-id="naminoue" data-day="d6" transform="translate(246 760)">
+            <g class="pin" data-id="naminoue" data-day="d6" transform="translate(500 778)">
               <circle r="10"/><text x="-66" y="4">波上宮</text>
             </g>
           </svg>
@@ -1021,6 +1029,7 @@
     const places = {
       hotel: {
         name: "JR 九州 Blossom 那霸酒店",
+        jp: "JR九州ホテル ブラッサム那覇",
         day: "全程住宿",
         type: "住宿基地",
         image: "https://source.unsplash.com/900x520/?naha,okinawa,hotel",
@@ -1028,6 +1037,7 @@
       },
       kokusai: {
         name: "那霸國際通商店街",
+        jp: "国際通り",
         day: "5/21、5/26",
         type: "市區散步",
         image: "https://source.unsplash.com/900x520/?naha,kokusai-dori,okinawa",
@@ -1035,6 +1045,7 @@
       },
       makishi: {
         name: "第一牧志公設市場 / Public Market Alley",
+        jp: "第一牧志公設市場",
         day: "5/26",
         type: "午餐與市場",
         image: "https://source.unsplash.com/900x520/?okinawa,market,seafood",
@@ -1042,6 +1053,7 @@
       },
       shuri: {
         name: "守禮門、首里城公園、Sairaiin",
+        jp: "守礼門 / 首里城公園 / 西来院",
         day: "5/22",
         type: "歷史文化",
         image: "https://source.unsplash.com/900x520/?shuri,castle,okinawa",
@@ -1049,6 +1061,7 @@
       },
       tomari: {
         name: "泊港漁市場",
+        jp: "泊いゆまち",
         day: "5/22",
         type: "海鮮市場",
         image: "https://source.unsplash.com/900x520/?okinawa,fish,market",
@@ -1056,6 +1069,7 @@
       },
       parco: {
         name: "PARCO CITY 浦添",
+        jp: "サンエー浦添西海岸 PARCO CITY",
         day: "5/22",
         type: "海景商場",
         image: "https://source.unsplash.com/900x520/?okinawa,shopping,mall,sea",
@@ -1063,6 +1077,7 @@
       },
       kouri: {
         name: "古宇利海灘 / 古宇利大橋",
+        jp: "古宇利ビーチ / 古宇利大橋",
         day: "5/23",
         type: "北部海景",
         image: "https://source.unsplash.com/900x520/?kouri,bridge,okinawa,beach",
@@ -1070,6 +1085,7 @@
       },
       shinmei: {
         name: "Shinmei Coffee",
+        jp: "Shinmay Coffee Okinawa",
         day: "5/23",
         type: "北部咖啡",
         image: "https://source.unsplash.com/900x520/?okinawa,cafe,coffee",
@@ -1077,6 +1093,7 @@
       },
       panza: {
         name: "Panza Okinawa Zipline",
+        jp: "PANZA沖縄 ジップライン",
         day: "5/23",
         type: "活動體驗",
         image: "https://source.unsplash.com/900x520/?okinawa,zipline,resort",
@@ -1084,6 +1101,7 @@
       },
       manzamo: {
         name: "萬座毛",
+        jp: "万座毛",
         day: "5/23",
         type: "夕景海岬",
         image: "https://source.unsplash.com/900x520/?cape,manzamo,okinawa,cliff",
@@ -1091,6 +1109,7 @@
       },
       gyokusendo: {
         name: "玉泉洞 / Okinawa World",
+        jp: "玉泉洞 / おきなわワールド",
         day: "5/24",
         type: "南部景點",
         image: "https://source.unsplash.com/900x520/?okinawa,cave,limestone",
@@ -1098,6 +1117,7 @@
       },
       itoman: {
         name: "糸滿魚市場",
+        jp: "糸満お魚センター",
         day: "5/24",
         type: "午餐海鮮",
         image: "https://source.unsplash.com/900x520/?okinawa,seafood,fish",
@@ -1105,6 +1125,7 @@
       },
       costco: {
         name: "COSTCO 好市多沖繩店",
+        jp: "コストコ沖縄南城倉庫店",
         day: "5/24",
         type: "採買備案",
         image: "https://source.unsplash.com/900x520/?okinawa,shopping,warehouse",
@@ -1112,6 +1133,7 @@
       },
       ashibinaa: {
         name: "沖繩 ASHIBINAA Outlet",
+        jp: "沖縄アウトレットモール あしびなー",
         day: "5/24",
         type: "Outlet",
         image: "https://source.unsplash.com/900x520/?okinawa,outlet,shopping",
@@ -1119,6 +1141,7 @@
       },
       cerrado: {
         name: "Okinawa Cerrado Coffee",
+        jp: "沖縄セラードコーヒー",
         day: "5/25",
         type: "中部咖啡",
         image: "https://source.unsplash.com/900x520/?okinawa,coffee,roastery",
@@ -1126,6 +1149,7 @@
       },
       american: {
         name: "美國村",
+        jp: "美浜アメリカンビレッジ",
         day: "5/25",
         type: "北谷海邊",
         image: "https://source.unsplash.com/900x520/?american-village,okinawa,chatan",
@@ -1133,6 +1157,7 @@
       },
       rycom: {
         name: "AEON MALL Okinawa Rycom",
+        jp: "イオンモール沖縄ライカム",
         day: "5/25",
         type: "大型商場",
         image: "https://source.unsplash.com/900x520/?okinawa,mall,shopping",
@@ -1140,6 +1165,7 @@
       },
       naminoue: {
         name: "波上宮",
+        jp: "波上宮",
         day: "5/26",
         type: "海邊神社",
         image: "https://source.unsplash.com/900x520/?naminoue,shrine,okinawa",
@@ -1168,9 +1194,10 @@
       const place = places[id];
       if (!place || !detail) return;
       detail.innerHTML = `
-        <div class="place-photo" style="--photo: url('${place.image}')"><strong>${place.name}</strong></div>
+        <div class="place-photo" style="--photo: url('${place.image}')"><strong>${place.jp}</strong></div>
         <span class="type">${place.type}</span>
         <h3>${place.name}</h3>
+        <p class="jp-name">${place.jp}</p>
         <p><b>${place.day}</b></p>
         <p>${place.text}</p>
       `;
@@ -1210,7 +1237,7 @@
 
     if (miniList) {
       miniList.innerHTML = Object.entries(places).map(([id, place]) => (
-        `<button type="button" data-id="${id}"><b>${place.name}</b><br><span class="muted">${place.day} · ${place.type}</span></button>`
+        `<button type="button" data-id="${id}"><b>${place.name}</b><br><span class="jp-name">${place.jp}</span><br><span class="muted">${place.day} · ${place.type}</span></button>`
       )).join("");
       miniList.addEventListener("click", event => {
         const button = event.target.closest("button[data-id]");
