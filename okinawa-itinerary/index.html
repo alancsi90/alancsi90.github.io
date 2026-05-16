@@ -193,6 +193,21 @@
       gap: 12px;
     }
 
+    .day-wishlist {
+      border-top: 1px solid var(--line);
+      padding: 18px 20px 20px;
+      background: #fbfdfc;
+    }
+
+    .day-wishlist h4 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .day-wishlist .map-link-grid {
+      margin-top: 12px;
+    }
+
     .map-link {
       display: block;
       min-height: 112px;
@@ -638,41 +653,6 @@
   </header>
 
   <main>
-    <div class="summary">
-      <div class="metric">
-        <strong>5 晚 6 天</strong>
-        <span>2026/5/21 19:45 抵達，5/26 20:55 起飛。</span>
-      </div>
-      <div class="metric">
-        <strong>固定住宿</strong>
-        <span>每天住 JR 九州 Blossom 那霸酒店，適合把那霸市區安排在晚上。</span>
-      </div>
-      <div class="metric">
-        <strong>建議租車</strong>
-        <span>5/22-5/26 租車最順；市區晚餐喝酒日可改單軌或計程車。</span>
-      </div>
-      <div class="metric">
-        <strong>願望清單</strong>
-        <span>主要排入 22 個，4 個列為彈性替換或雨天備案。</span>
-      </div>
-    </div>
-
-    <section>
-      <div class="note">
-        <h2>行程判斷</h2>
-        <p>你的住宿在那霸市中心，最容易犯的錯是每天往北跑一小段再回來。這份行程把北部古宇利、恩納萬座毛、Panza Zipline 合成一個完整車程日；南部玉泉洞、糸滿魚市場、ASHIBINAA、Costco 合成一日；中部咖啡、北谷美國村、AEON Rycom 排成另一日。</p>
-        <p>5/24 是 2026 年 5 月的第四個星期日，第一牧志公設市場通常第四個星期日休市，所以市場午餐避開那天，改排在 5/26 回程日前。</p>
-      </div>
-
-      <div class="route-map" aria-label="route overview">
-        <div class="route-step"><b>5/21</b><small>抵達那霸，晚餐與國際通暖身</small></div>
-        <div class="route-step"><b>5/22</b><small>首里、泊港、浦添海景商場</small></div>
-        <div class="route-step"><b>5/23</b><small>古宇利、名護咖啡、恩納夕景</small></div>
-        <div class="route-step"><b>5/24</b><small>南部鐘乳洞、魚市場、Outlet</small></div>
-        <div class="route-step"><b>5/25-26</b><small>中部北谷與那霸收尾採買</small></div>
-      </div>
-    </section>
-
     <section>
       <h2>每日行程</h2>
       <div class="day-tabs" role="tablist" aria-label="每日行程">
@@ -710,6 +690,11 @@
             <div><b>那霸國際通商店街、Public Market Alley</b><p>先感受市區，不需要購物太多；最後一天還會回來補買。</p><span class="tag">願望清單</span></div>
           </div>
         </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">抵達日晚到，只放飯店與國際通，先確認位置和宵夜路線。</p>
+          <div class="map-link-grid" data-wishlist-day="day1"></div>
+        </div>
       </article>
 
       <article class="day tab-panel" data-panel="day2" role="tabpanel">
@@ -743,8 +728,13 @@
           </div>
           <div class="item">
             <div class="time">19:00</div>
-            <div><b>晚餐：琉球料理 美栄</b><p>想吃正式一點，這餐最值得預約。主打琉球宮廷料理，距飯店不遠；週日休，週六僅午餐，放週五最穩。</p><span class="tag">奢華可</span><span class="tag">預約建議</span></div>
+            <div><b>晚餐：うりずん</b><p>沖繩居酒屋名店，可吃ドゥル天、島らっきょう、ラフテー、沖繩家常菜，距飯店也不遠；熱門時段建議先訂位。</p><span class="tag">沖繩料理</span><span class="tag">預約建議</span></div>
           </div>
+        </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">首里、泊港與浦添購物集中一天，若天氣不好可把 PARCO 或 Main Place 拉長。</p>
+          <div class="map-link-grid" data-wishlist-day="day2"></div>
         </div>
       </article>
 
@@ -786,6 +776,11 @@
             <div><b>晚餐：琉球の牛 恩納店 或回那霸吃敘敘苑</b><p>想奢華吃肉，恩納的琉球の牛很適合接在萬座毛後；若訂不到，就回那霸吃你清單裡的敘敘苑歌町店。</p><span class="tag">燒肉</span><span class="tag">願望清單備選</span></div>
           </div>
         </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">北部與恩納車程長，這些連結主要用來即時確認停車、天氣和回程時間。</p>
+          <div class="map-link-grid" data-wishlist-day="day3"></div>
+        </div>
       </article>
 
       <article class="day tab-panel" data-panel="day4" role="tabpanel">
@@ -817,6 +812,11 @@
             <div class="time">19:00</div>
             <div><b>晚餐：炸牛 元村 那霸國際通本店</b><p>你清單裡的店，放南部回飯店後剛好。想更沖繩味，可改 Nuchigafu 或 Yotsutake 這類琉球料理店。</p><span class="tag">願望清單</span></div>
           </div>
+        </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">南部景點和採買點距離較分散，建議出發前先看即時車程。</p>
+          <div class="map-link-grid" data-wishlist-day="day4"></div>
         </div>
       </article>
 
@@ -850,6 +850,11 @@
             <div><b>晚餐：AEON Rycom 內用餐，或回那霸吃阿古豬涮涮鍋</b><p>如果想吃高級一點，可提前預約那霸的阿古豬涮涮鍋或石垣牛燒肉；若逛到晚，Rycom 餐廳營業時間彈性最大。</p><span class="tag">彈性晚餐</span></div>
           </div>
         </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">中部日比較彈性，咖啡、海邊、商場可依天氣和體力調整順序。</p>
+          <div class="map-link-grid" data-wishlist-day="day5"></div>
+        </div>
       </article>
 
       <article class="day tab-panel" data-panel="day6" role="tabpanel">
@@ -867,7 +872,7 @@
           </div>
           <div class="item">
             <div class="time">11:00</div>
-            <div><b>第一牧志公設市場、Public Market Alley</b><p>市場 2 樓餐飲最後點餐約 20:00，這天是週二，避開第四週日休市。可以買一樓海鮮請二樓代客料理。</p><span class="tag">願望清單</span><span class="tag">午餐</span></div>
+            <div><b>泊いゆまち海鮮午餐、Public Market Alley</b><p>回程日午餐改成更簡單的泊港魚市場海鮮，再回國際通和市場巷弄補買伴手禮。這樣不用卡在市場二樓料理等待時間。</p><span class="tag">海鮮</span><span class="tag">採買</span></div>
           </div>
           <div class="item">
             <div class="time">13:30</div>
@@ -882,25 +887,21 @@
             <div><b>抵達那霸機場</b><p>還車、退稅、託運都抓寬一點。20:55 起飛，18:30 到機場比較安心。</p></div>
           </div>
         </div>
+        <div class="day-wishlist">
+          <h4>當日願望清單 Google Maps</h4>
+          <p class="muted">回程日只排那霸市區，方便寄放行李、補買伴手禮、準時去機場。</p>
+          <div class="map-link-grid" data-wishlist-day="day6"></div>
+        </div>
       </article>
-    </section>
-
-    <section>
-      <h2>願望清單 Google Maps 連結</h2>
-      <div class="wishlist-note">
-        <p>這一區是你一開始那份「沖繩」Google Maps 願望清單，保留 26 個點作為現場備用索引。</p>
-        <p class="muted">行程不一定全排進去；當天如果天氣、體力、營業時間有變，可以直接點開 Google Maps 查路線、評價與最新營業狀態，再替換附近景點。</p>
-      </div>
-      <div class="map-link-grid" id="wishlist-links"></div>
     </section>
 
     <section>
       <h2>餐廳優先名單</h2>
       <div class="food-grid">
         <div class="food-card">
-          <b><span class="rank">1</span>琉球料理 美栄</b>
-          <p>最符合「當地特色、奢華一點也行」。吃宮廷琉球料理，建議請飯店協助訂位。週日休，週六多半只適合午餐。</p>
-          <a href="https://ryukyu-mie.com/english.html">官方網站</a>
+          <b><span class="rank">1</span>うりずん</b>
+          <p>彈性高的沖繩料理居酒屋。適合吃ドゥル天、島らっきょう、ラフテー和泡盛，飯店回程也方便。</p>
+          <a href="https://urizn.grupo.jp/">官方網站</a>
         </div>
         <div class="food-card">
           <b><span class="rank">2</span>きしもと食堂 八重岳店</b>
@@ -923,56 +924,11 @@
           <a href="https://steak.co.jp/ko/pages/shisetu">官方資訊</a>
         </div>
         <div class="food-card">
-          <b><span class="rank">6</span>牧志市場代客料理</b>
-          <p>買海鮮到 2 樓料理最有旅行感。注意第四週日休市，這次排在 5/26 週二。</p>
-          <a href="https://en.information.okinawa/places/daiichimakishikousetsuichiba">觀光資訊</a>
+          <b><span class="rank">6</span>泊いゆまち海鮮午餐</b>
+          <p>泊港魚市場系午餐，更簡單直接，也不受市場等待時間影響。</p>
+          <a href="https://www.tomariiyumachi.com/">官方網站</a>
         </div>
       </div>
-    </section>
-
-    <section>
-      <h2>願望清單取捨</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>狀態</th>
-            <th>地點</th>
-            <th>安排理由</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>主行程</td>
-            <td>JR 九州 Blossom、國際通、Public Market Alley、Bic Camera、安利美特、琉貿百貨</td>
-            <td>都在那霸市中心，適合抵達日與回程日分散處理。</td>
-          </tr>
-          <tr>
-            <td>主行程</td>
-            <td>守禮門、Sairaiin、波上宮、泊港漁市場、San-A、PARCO CITY</td>
-            <td>那霸與浦添半日可串起，不需要長途開車。</td>
-          </tr>
-          <tr>
-            <td>主行程</td>
-            <td>古宇利海灘、Shinmei Coffee、Panza Zipline、萬座毛</td>
-            <td>北部與恩納集中一天，雖然車程長，但比拆成兩天更合理。</td>
-          </tr>
-          <tr>
-            <td>主行程</td>
-            <td>玉泉洞、糸滿魚市場、Costco、ASHIBINAA Outlet</td>
-            <td>南部一圈順路，適合週日市場替代方案。</td>
-          </tr>
-          <tr>
-            <td>主行程</td>
-            <td>Okinawa Cerrado Coffee、美國村、AEON MALL Okinawa Rycom</td>
-            <td>中部輕鬆日，咖啡、海邊、購物一路往返那霸。</td>
-          </tr>
-          <tr>
-            <td>彈性</td>
-            <td>炸牛 元村、敘敘苑、ちゅらさん6沖縄</td>
-            <td>餐廳與夜間點看訂位和體力安排；若前面吃得很滿，可留作備案。</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <section>
@@ -984,7 +940,7 @@
         </div>
         <div class="place-card">
           <b>訂位</b>
-          <p>美栄、琉球の牛、敘敘苑建議先訂。きしもと食堂、EIBUN、Hamaya 這類熱門沖繩麵店不一定接受一般訂位，早到最有效。</p>
+          <p>うりずん、琉球の牛、敘敘苑建議先訂。きしもと食堂、EIBUN、Hamaya 這類熱門沖繩麵店不一定接受一般訂位，早到最有效。</p>
         </div>
         <div class="place-card">
           <b>雨天備案</b>
@@ -1003,7 +959,7 @@
         <a href="https://www.japan.travel/en/spot/587/">國際通 JNTO</a>、
         <a href="https://en.aeonmall.global/mall/okinawarycom">AEON Rycom</a>、
         <a href="https://sobaeibun.okinawa/shop/soba-eibun/">EIBUN</a>、
-        <a href="https://ryukyu-mie.com/english.html">琉球料理 美栄</a>、
+        <a href="https://urizn.grupo.jp/">うりずん</a>、
         <a href="https://steak.co.jp/ko/pages/shisetu">Jack's Steak House</a>、
         <a href="https://www.oki-islandguide.com/food_and_drink/hamaya-soba">Hamaya Soba</a>
       </p>
@@ -1012,42 +968,54 @@
 
   <button class="print-button" onclick="window.print()">列印 / 存成 PDF</button>
   <script>
-    const wishlistPlaces = [
-      ["萬座毛", "万座毛", "恩納海岸代表景點，適合排北部回程看海與夕景。"],
-      ["Sairaiin 達磨寺", "西来院（だるま寺）", "首里附近的小寺院，可和守禮門、首里城公園一起走。"],
-      ["Okinawa Cerrado Coffee", "沖縄セラードコーヒー", "浦添港川一帶的咖啡停靠點，適合中部日早上開場。"],
-      ["Shinmei Coffee", "Shinmay Coffee Okinawa", "今歸仁/名護路線上的北部咖啡休息點，接古宇利很順。"],
-      ["守禮門", "守礼門", "首里城公園代表門景，早上去拍照和散步最穩。"],
-      ["泊港漁市場", "泊いゆまち", "那霸北側魚市場，可短停吃海鮮或買小食。"],
-      ["糸滿魚市場", "糸満お魚センター", "南部午餐好選擇，適合吃現烤海鮮、海葡萄和沖繩魚。"],
-      ["Public Market Alley", "市場本通り / 公設市場周辺", "國際通旁市場巷弄，適合回程日前採買和覓食。"],
-      ["PARCO CITY", "サンエー浦添西海岸 PARCO CITY", "浦添海邊大型商場，雨天、吹冷氣、看海都好用。"],
-      ["San-A Naha Main Place", "サンエー那覇メインプレイス", "那霸市區大型購物中心，適合補日用品、藥妝與伴手禮。"],
-      ["沖繩 ASHIBINAA Outlet", "沖縄アウトレットモール あしびなー", "南部回那霸順路的 Outlet，適合安排在糸滿後。"],
-      ["AEON MALL Okinawa Rycom", "イオンモール沖縄ライカム", "中部最大型商場之一，餐廳多，雨天備案很強。"],
-      ["古宇利海灘", "古宇利ビーチ", "北部海景重點，可順看古宇利大橋，天氣好時最值得。"],
-      ["美國村", "美浜アメリカンビレッジ", "北谷海邊散步與拍照點，下午到晚上最有氣氛。"],
-      ["波上宮", "波上宮", "那霸海邊神社，回程日上午短停很順。"],
-      ["玉泉洞", "玉泉洞 / おきなわワールド", "南部主景點，鐘乳洞和琉球文化村可一起看。"],
-      ["那霸國際通商店街", "国際通り", "飯店旁核心商店街，晚到和最後採買都方便。"],
-      ["Bic Camera Select 那霸國際通店", "ビックカメラセレクト那覇国際通り店", "國際通採買電器、美妝小物、免稅商品的便利點。"],
-      ["琉貿百貨", "デパートリウボウ", "那霸市中心百貨，適合找伴手禮、甜點與較精緻採買。"],
-      ["安利美特 那霸國際通店", "アニメイト那覇国際通り店", "動漫商品補貨點，和國際通採買可排同一段。"],
-      ["炸牛 元村 那霸國際通本店", "牛かつもと村 那覇国際通り本店", "國際通晚餐備案，想吃炸牛排時很方便。"],
-      ["敘敘苑燒肉 歌町店", "叙々苑 沖縄おもろまち店", "想吃高級燒肉時的那霸備案，建議提前訂位。"],
-      ["Panza Okinawa Zipline", "PANZA沖縄 ジップライン", "恩納活動點，天氣好、體力夠時可接在萬座毛附近。"],
-      ["JR 九州 Blossom 那霸酒店", "JR九州ホテル ブラッサム那覇", "全程住宿基地，查回飯店路線或叫車時可直接開。"],
-      ["ちゅらさん6沖縄", "ちゅらさん6沖縄", "那霸夜間備案點，視當天體力和同行需求再決定。"],
-      ["COSTCO 好市多沖繩店", "コストコ沖縄南城倉庫店", "南部採買點，適合買零食飲料，但要注意行李空間。"]
-    ];
+    const wishlistByDay = {
+      day1: [
+        ["JR 九州 Blossom 那霸酒店", "JR九州ホテル ブラッサム那覇", "全程住宿基地，查回飯店路線或叫車時可直接開。"],
+        ["那霸國際通商店街", "国際通り", "飯店旁核心商店街，晚到和最後採買都方便。"]
+      ],
+      day2: [
+        ["守禮門", "守礼門", "首里城公園代表門景，早上去拍照和散步最穩。"],
+        ["Sairaiin 達磨寺", "西来院（だるま寺）", "首里附近的小寺院，可和守禮門、首里城公園一起走。"],
+        ["泊港漁市場", "泊いゆまち", "那霸北側魚市場，可短停吃海鮮或買小食。"],
+        ["San-A Naha Main Place", "サンエー那覇メインプレイス", "那霸市區大型購物中心，適合補日用品、藥妝與伴手禮。"],
+        ["PARCO CITY", "サンエー浦添西海岸 PARCO CITY", "浦添海邊大型商場，雨天、吹冷氣、看海都好用。"]
+      ],
+      day3: [
+        ["古宇利海灘", "古宇利ビーチ", "北部海景重點，可順看古宇利大橋，天氣好時最值得。"],
+        ["Shinmei Coffee", "Shinmay Coffee Okinawa", "今歸仁/名護路線上的北部咖啡休息點，接古宇利很順。"],
+        ["Panza Okinawa Zipline", "PANZA沖縄 ジップライン", "恩納活動點，天氣好、體力夠時可接在萬座毛附近。"],
+        ["萬座毛", "万座毛", "恩納海岸代表景點，適合排北部回程看海與夕景。"]
+      ],
+      day4: [
+        ["玉泉洞", "玉泉洞 / おきなわワールド", "南部主景點，鐘乳洞和琉球文化村可一起看。"],
+        ["糸滿魚市場", "糸満お魚センター", "南部午餐好選擇，適合吃現烤海鮮、海葡萄和沖繩魚。"],
+        ["COSTCO 好市多沖繩店", "コストコ沖縄南城倉庫店", "南部採買點，適合買零食飲料，但要注意行李空間。"],
+        ["沖繩 ASHIBINAA Outlet", "沖縄アウトレットモール あしびなー", "南部回那霸順路的 Outlet，適合安排在糸滿後。"],
+        ["炸牛 元村 那霸國際通本店", "牛かつもと村 那覇国際通り本店", "國際通晚餐備案，想吃炸牛排時很方便。"]
+      ],
+      day5: [
+        ["Okinawa Cerrado Coffee", "沖縄セラードコーヒー", "浦添港川一帶的咖啡停靠點，適合中部日早上開場。"],
+        ["美國村", "美浜アメリカンビレッジ", "北谷海邊散步與拍照點，下午到晚上最有氣氛。"],
+        ["AEON MALL Okinawa Rycom", "イオンモール沖縄ライカム", "中部最大型商場之一，餐廳多，雨天備案很強。"]
+      ],
+      day6: [
+        ["波上宮", "波上宮", "那霸海邊神社，回程日上午短停很順。"],
+        ["Public Market Alley", "市場本通り / 公設市場周辺", "國際通旁市場巷弄，適合回程日前採買和覓食。"],
+        ["Bic Camera Select 那霸國際通店", "ビックカメラセレクト那覇国際通り店", "國際通採買電器、美妝小物、免稅商品的便利點。"],
+        ["琉貿百貨", "デパートリウボウ", "那霸市中心百貨，適合找伴手禮、甜點與較精緻採買。"],
+        ["安利美特 那霸國際通店", "アニメイト那覇国際通り店", "動漫商品補貨點，和國際通採買可排同一段。"],
+        ["敘敘苑燒肉 歌町店", "叙々苑 沖縄おもろまち店", "想吃高級燒肉時的那霸備案，建議提前訂位。"],
+        ["ちゅらさん6沖縄", "ちゅらさん6沖縄", "那霸夜間備案點，視當天體力和同行需求再決定。"]
+      ]
+    };
 
     function mapsUrl(name, jp) {
       return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${jp} ${name} 沖縄`)}`;
     }
 
-    const wishlistContainer = document.querySelector("#wishlist-links");
-    if (wishlistContainer) {
-      wishlistContainer.innerHTML = wishlistPlaces.map(([name, jp, desc]) => (
+    document.querySelectorAll("[data-wishlist-day]").forEach(container => {
+      const places = wishlistByDay[container.dataset.wishlistDay] || [];
+      container.innerHTML = places.map(([name, jp, desc]) => (
         `<a class="map-link" href="${mapsUrl(name, jp)}" target="_blank" rel="noopener">
           <b>${name}</b>
           <span class="jp">${jp}</span>
@@ -1055,7 +1023,7 @@
           <span class="open-map">Google Maps で開く</span>
         </a>`
       )).join("");
-    }
+    });
 
     const tabButtons = Array.from(document.querySelectorAll(".day-tab"));
     const tabPanels = Array.from(document.querySelectorAll(".tab-panel"));
