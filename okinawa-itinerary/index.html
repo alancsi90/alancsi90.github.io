@@ -189,7 +189,7 @@
 
     .map-link-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -225,6 +225,11 @@
       color: var(--sea);
       font-size: 13px;
       font-weight: 800;
+    }
+
+    .wishlist-note {
+      margin-bottom: 16px;
+      max-width: 860px;
     }
 
     .map-shell {
@@ -581,7 +586,6 @@
       .summary,
       .route-map,
       .map-shell,
-      .map-link-grid,
       .food-grid,
       .place-grid {
         grid-template-columns: 1fr;
@@ -593,6 +597,16 @@
       .map-panel,
       .map-panel svg {
         min-height: 520px;
+      }
+      .map-link {
+        min-height: 126px;
+        padding: 12px;
+      }
+      .map-link b {
+        font-size: 14px;
+      }
+      .map-link .jp {
+        font-size: 12px;
       }
       .print-button { display: none; }
     }
@@ -866,7 +880,10 @@
 
     <section>
       <h2>願望清單 Google Maps 連結</h2>
-      <p class="muted">這裡保留一開始那份「沖繩」Google Maps 願望清單的 26 個點。點開會用 Google Maps 搜尋該地點，方便你現場導航或確認營業資訊。</p>
+      <div class="wishlist-note">
+        <p>這一區是你一開始那份「沖繩」Google Maps 願望清單，保留 26 個點作為現場備用索引。</p>
+        <p class="muted">行程不一定全排進去；當天如果天氣、體力、營業時間有變，可以直接點開 Google Maps 查路線、評價與最新營業狀態，再替換附近景點。</p>
+      </div>
       <div class="map-link-grid" id="wishlist-links"></div>
     </section>
 
