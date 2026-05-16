@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>沖繩 5/21-5/26 旅遊行程攻略</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17201d;
+      --muted: #5b6761;
+      --line: #d8dfdc;
+      --paper: #fbfaf5;
+      --panel: #ffffff;
+      --sea: #007f8b;
+      --leaf: #2f7a4f;
+      --sun: #c96b2c;
+      --plum: #7a476c;
+      --sand: #efe8d8;
+      --shadow: 0 18px 45px rgba(32, 46, 42, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a { color: var(--sea); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      padding: 56px 24px 42px;
+      background:
+        linear-gradient(180deg, rgba(12, 35, 38, .20), rgba(12, 35, 38, .72)),
+        url("https://images.unsplash.com/photo-1560764332-7d9f1f5141c3?auto=format&fit=crop&w=1800&q=80") center/cover;
+      color: white;
+    }
+
+    .hero {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(38px, 8vw, 78px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 20px 0 0;
+      font-size: 18px;
+      color: rgba(255,255,255,.9);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+    }
+
+    section { margin: 42px 0; }
+    h2 { margin: 0 0 18px; font-size: 28px; line-height: 1.2; }
+    h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.3; }
+    p { margin: 0 0 12px; }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: -70px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .metric,
+    .note,
+    .day,
+    .food-card,
+    .place-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 18px;
+      min-height: 118px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .metric span,
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .note {
+      padding: 20px;
+      border-left: 6px solid var(--sea);
+    }
+
+    .route-map {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: stretch;
+      margin: 18px 0 0;
+    }
+
+    .route-step {
+      padding: 16px;
+      border-radius: 8px;
+      color: white;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .route-step:nth-child(1) { background: var(--plum); }
+    .route-step:nth-child(2) { background: var(--leaf); }
+    .route-step:nth-child(3) { background: var(--sea); }
+    .route-step:nth-child(4) { background: #355d7d; }
+    .route-step:nth-child(5) { background: var(--sun); }
+
+    .route-step b { font-size: 18px; }
+    .route-step small { color: rgba(255,255,255,.82); }
+
+    .map-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 640px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255,255,255,.85), rgba(255,255,255,0) 24%),
+        linear-gradient(160deg, #d8f0ee, #f8fbf7 58%, #f3ead9);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .map-panel svg {
+      width: 100%;
+      height: 100%;
+      min-height: 640px;
+      display: block;
+    }
+
+    .map-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-overlay {
+      position: relative;
+      z-index: 1;
+    }
+
+    .city-label {
+      fill: rgba(23, 32, 29, .58);
+      font-size: 12px;
+      font-weight: 800;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.8);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .day-layer {
+      transition: opacity .2s ease;
+    }
+
+    .route-line {
+      fill: none;
+      stroke: rgba(0, 127, 139, .22);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .72;
+      transition: opacity .2s ease, stroke-width .2s ease, filter .2s ease;
+    }
+
+    .route-line[data-day="d1"] { stroke: #7a476c; }
+    .route-line[data-day="d2"] { stroke: #2f7a4f; }
+    .route-line[data-day="d3"] { stroke: #007f8b; }
+    .route-line[data-day="d4"] { stroke: #355d7d; }
+    .route-line[data-day="d5"] { stroke: #c96b2c; }
+    .route-line[data-day="d6"] { stroke: #8f5d2a; }
+
+    .route-line.active {
+      stroke-width: 9;
+      opacity: 1;
+      filter: drop-shadow(0 3px 5px rgba(23, 32, 29, .28));
+    }
+
+    .day-layer.hidden,
+    .pin.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pin {
+      cursor: pointer;
+      transition: opacity .2s ease, transform .2s ease;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .pin circle {
+      fill: white;
+      stroke: var(--sea);
+      stroke-width: 3;
+    }
+
+    .pin text {
+      fill: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.9);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .pin.inactive {
+      opacity: .24;
+    }
+
+    .pin.active {
+      transform: scale(1.18);
+    }
+
+    .pin.active circle {
+      fill: var(--sun);
+      stroke: #7d3415;
+    }
+
+    .map-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .map-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .map-filter {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: white;
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .map-filter.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: white;
+    }
+
+    .place-detail {
+      min-height: 210px;
+      overflow: hidden;
+    }
+
+    .place-photo {
+      min-height: 185px;
+      margin: -18px -18px 16px;
+      background:
+        linear-gradient(180deg, rgba(12, 35, 38, .02), rgba(12, 35, 38, .62)),
+        var(--photo),
+        linear-gradient(135deg, #cfe8e5, #efe2c5);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: end;
+      padding: 16px;
+      color: white;
+    }
+
+    .place-photo strong {
+      font-size: 22px;
+      line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .45);
+    }
+
+    .place-detail .type {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: white;
+      background: var(--sea);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mini-list button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdfc;
+      padding: 10px 12px;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .mini-list button:hover,
+    .mini-list button.active {
+      border-color: var(--sea);
+      background: #edf7f6;
+    }
+
+    .day {
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      padding: 20px;
+      background: var(--sand);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-head .date {
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      padding: 0 20px 8px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 98px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child { border-bottom: 0; }
+    .time { font-weight: 800; color: var(--sea); }
+    .tag {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #edf4f3;
+      color: #285956;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .food-grid,
+    .place-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .food-card,
+    .place-card {
+      padding: 18px;
+      box-shadow: none;
+    }
+
+    .food-card b,
+    .place-card b {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .rank {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: white;
+      text-align: center;
+      line-height: 26px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf4f3;
+      color: #285956;
+      font-size: 13px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .sources {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .print-button {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      padding: 12px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 860px) {
+      header { min-height: 76vh; }
+      .summary,
+      .route-map,
+      .map-shell,
+      .food-grid,
+      .place-grid {
+        grid-template-columns: 1fr;
+      }
+      .summary { margin-top: -38px; }
+      .day-head { display: block; }
+      .day-head .date { display: block; margin-bottom: 6px; }
+      .item { grid-template-columns: 76px 1fr; gap: 12px; }
+      .map-panel,
+      .map-panel svg {
+        min-height: 520px;
+      }
+      .print-button { display: none; }
+    }
+
+    @media print {
+      header { min-height: auto; color: var(--ink); background: none; padding: 0; }
+      .hero p { color: var(--muted); }
+      .summary { margin-top: 24px; }
+      .day, .metric, .note, .food-card, .place-card { box-shadow: none; break-inside: avoid; }
+      .print-button { display: none; }
+      a { color: var(--ink); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <p class="eyebrow">Okinawa 2026 Travel Plan</p>
+      <h1>沖繩 5/21-5/26 順路行程攻略</h1>
+      <p>以 JR 九州 Blossom 那霸酒店為固定基地，把你的 26 個 Google Maps 願望清單整理成那霸、首里、南部、中部、恩納與古宇利路線。核心原則：遠的集中一天、近的留給晚到與回程日，餐食優先選沖繩特色與值得花錢的店。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="summary">
+      <div class="metric">
+        <strong>5 晚 6 天</strong>
+        <span>2026/5/21 19:45 抵達，5/26 20:55 起飛。</span>
+      </div>
+      <div class="metric">
+        <strong>固定住宿</strong>
+        <span>每天住 JR 九州 Blossom 那霸酒店，適合把那霸市區安排在晚上。</span>
+      </div>
+      <div class="metric">
+        <strong>建議租車</strong>
+        <span>5/22-5/26 租車最順；市區晚餐喝酒日可改單軌或計程車。</span>
+      </div>
+      <div class="metric">
+        <strong>願望清單</strong>
+        <span>主要排入 22 個，4 個列為彈性替換或雨天備案。</span>
+      </div>
+    </div>
+
+    <section>
+      <div class="note">
+        <h2>行程判斷</h2>
+        <p>你的住宿在那霸市中心，最容易犯的錯是每天往北跑一小段再回來。這份行程把北部古宇利、恩納萬座毛、Panza Zipline 合成一個完整車程日；南部玉泉洞、糸滿魚市場、ASHIBINAA、Costco 合成一日；中部咖啡、北谷美國村、AEON Rycom 排成另一日。</p>
+        <p>5/24 是 2026 年 5 月的第四個星期日，第一牧志公設市場通常第四個星期日休市，所以市場午餐避開那天，改排在 5/26 回程日前。</p>
+      </div>
+
+      <div class="route-map" aria-label="route overview">
+        <div class="route-step"><b>5/21</b><small>抵達那霸，晚餐與國際通暖身</small></div>
+        <div class="route-step"><b>5/22</b><small>首里、泊港、浦添海景商場</small></div>
+        <div class="route-step"><b>5/23</b><small>古宇利、名護咖啡、恩納夕景</small></div>
+        <div class="route-step"><b>5/24</b><small>南部鐘乳洞、魚市場、Outlet</small></div>
+        <div class="route-step"><b>5/25-26</b><small>中部北谷與那霸收尾採買</small></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>互動地圖總覽</h2>
+      <div class="map-shell">
+        <div class="map-panel" aria-label="沖繩概略地圖">
+          <img class="map-art" src="assets/okinawa-map-bg.png" alt="精緻沖繩本島旅行地圖底圖">
+          <svg class="map-overlay" viewBox="0 0 760 980" role="img" aria-labelledby="map-title map-desc">
+            <title id="map-title">沖繩行程概略地圖</title>
+            <desc id="map-desc">概略標示那霸、南部、中部、恩納、北部古宇利等行程點位。</desc>
+
+            <text x="338" y="114" class="city-label">古宇利島</text>
+            <text x="308" y="205" class="city-label">今歸仁</text>
+            <text x="374" y="272" class="city-label">名護</text>
+            <text x="402" y="430" class="city-label">恩納</text>
+            <text x="362" y="568" class="city-label">沖繩市</text>
+            <text x="316" y="632" class="city-label">北谷</text>
+            <text x="290" y="700" class="city-label">浦添</text>
+            <text x="272" y="792" class="city-label">那霸</text>
+            <text x="222" y="840" class="city-label">豐見城</text>
+            <text x="326" y="858" class="city-label">南城</text>
+            <text x="196" y="902" class="city-label">糸滿</text>
+
+            <g class="day-layer" data-day="d1">
+              <path class="route-line active" data-day="d1" d="M282 782 L296 768 L306 774"/>
+            </g>
+            <g class="day-layer" data-day="d2">
+              <path class="route-line active" data-day="d2" d="M282 782 L336 744 L306 762 L264 724 L282 704"/>
+            </g>
+            <g class="day-layer" data-day="d3">
+              <path class="route-line active" data-day="d3" d="M282 782 C332 656 366 470 372 284 C360 210 322 154 352 120 M372 284 C406 330 430 390 430 456 L410 472"/>
+            </g>
+            <g class="day-layer" data-day="d4">
+              <path class="route-line active" data-day="d4" d="M282 782 L330 856 L212 900 L250 838 L204 812"/>
+            </g>
+            <g class="day-layer" data-day="d5">
+              <path class="route-line active" data-day="d5" d="M282 782 L300 704 L322 632 L366 584"/>
+            </g>
+            <g class="day-layer" data-day="d6">
+              <path class="route-line active" data-day="d6" d="M282 782 L246 760 L300 790 L266 804"/>
+            </g>
+
+            <g class="pin" data-id="hotel" data-day="d1 d2 d3 d4 d5 d6" transform="translate(282 782)">
+              <circle r="12"/><text x="18" y="4">JR Blossom</text>
+            </g>
+            <g class="pin" data-id="kokusai" data-day="d1 d6" transform="translate(300 790)">
+              <circle r="10"/><text x="16" y="4">國際通</text>
+            </g>
+            <g class="pin" data-id="makishi" data-day="d6" transform="translate(306 796)">
+              <circle r="10"/><text x="16" y="4">牧志市場</text>
+            </g>
+            <g class="pin" data-id="shuri" data-day="d2" transform="translate(336 744)">
+              <circle r="10"/><text x="16" y="4">首里/守禮門</text>
+            </g>
+            <g class="pin" data-id="tomari" data-day="d2" transform="translate(306 762)">
+              <circle r="10"/><text x="16" y="4">泊港</text>
+            </g>
+            <g class="pin" data-id="parco" data-day="d2" transform="translate(264 724)">
+              <circle r="10"/><text x="-78" y="4">PARCO</text>
+            </g>
+            <g class="pin" data-id="kouri" data-day="d3" transform="translate(352 120)">
+              <circle r="11"/><text x="17" y="4">古宇利</text>
+            </g>
+            <g class="pin" data-id="shinmei" data-day="d3" transform="translate(372 284)">
+              <circle r="10"/><text x="16" y="4">Shinmei Coffee</text>
+            </g>
+            <g class="pin" data-id="panza" data-day="d3" transform="translate(430 456)">
+              <circle r="10"/><text x="16" y="4">Panza</text>
+            </g>
+            <g class="pin" data-id="manzamo" data-day="d3" transform="translate(410 472)">
+              <circle r="11"/><text x="16" y="4">萬座毛</text>
+            </g>
+            <g class="pin" data-id="gyokusendo" data-day="d4" transform="translate(330 856)">
+              <circle r="10"/><text x="16" y="4">玉泉洞</text>
+            </g>
+            <g class="pin" data-id="itoman" data-day="d4" transform="translate(212 900)">
+              <circle r="10"/><text x="-80" y="4">糸滿魚市場</text>
+            </g>
+            <g class="pin" data-id="costco" data-day="d4" transform="translate(250 838)">
+              <circle r="10"/><text x="16" y="4">Costco</text>
+            </g>
+            <g class="pin" data-id="ashibinaa" data-day="d4" transform="translate(204 812)">
+              <circle r="10"/><text x="-84" y="4">ASHIBINAA</text>
+            </g>
+            <g class="pin" data-id="cerrado" data-day="d5" transform="translate(300 704)">
+              <circle r="10"/><text x="16" y="4">Cerrado</text>
+            </g>
+            <g class="pin" data-id="american" data-day="d5" transform="translate(322 632)">
+              <circle r="11"/><text x="16" y="4">美國村</text>
+            </g>
+            <g class="pin" data-id="rycom" data-day="d5" transform="translate(366 584)">
+              <circle r="11"/><text x="16" y="4">AEON Rycom</text>
+            </g>
+            <g class="pin" data-id="naminoue" data-day="d6" transform="translate(246 760)">
+              <circle r="10"/><text x="-66" y="4">波上宮</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="map-side">
+          <div class="map-card">
+            <h3>每日路線篩選</h3>
+            <p class="muted">點按日期，地圖只顯示當天順路的願望清單和路線。點地圖上的點位可看圖片與安排原因。</p>
+            <div class="map-controls" role="group" aria-label="map filters">
+              <button class="map-filter active" data-filter="all" type="button">全部</button>
+              <button class="map-filter" data-filter="d1" type="button">5/21</button>
+              <button class="map-filter" data-filter="d2" type="button">5/22</button>
+              <button class="map-filter" data-filter="d3" type="button">5/23</button>
+              <button class="map-filter" data-filter="d4" type="button">5/24</button>
+              <button class="map-filter" data-filter="d5" type="button">5/25</button>
+              <button class="map-filter" data-filter="d6" type="button">5/26</button>
+            </div>
+          </div>
+
+          <div class="map-card place-detail" id="place-detail">
+            <span class="type">概略地圖</span>
+            <h3>先看整體路線</h3>
+            <p>地圖不是精準導航，而是幫你快速理解相對位置：那霸在南部偏西、首里在那霸東側、北谷與 Rycom 在中部、萬座毛與 Panza 在恩納、古宇利在北部。</p>
+            <p class="muted">實際開車仍以 Google Maps 即時路況為準。</p>
+          </div>
+
+          <div class="map-card">
+            <h3>快速查看點位</h3>
+            <div class="mini-list" id="mini-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>每日行程</h2>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>抵達日：國際通散步，不硬排</h3>
+            <p class="muted">重點是入境、領車或進市區、吃到第一餐，不把第一晚排爆。</p>
+          </div>
+          <span class="date">5/21 星期四</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">19:45</div>
+            <div><b>抵達那霸機場</b><p>若有租車，建議這晚先不取車，搭單軌或計程車進飯店，隔天早上再取車會比較輕鬆。</p></div>
+          </div>
+          <div class="item">
+            <div class="time">21:00</div>
+            <div><b>入住 JR 九州 Blossom 那霸酒店</b><p>飯店就在國際通與美榮橋、牧志一帶中間，晚上散步很方便。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">21:30</div>
+            <div><b>晚餐：Jack's Steak House 或國際通深夜小吃</b><p>Jack's 是 1953 年開業的沖繩老派牛排文化代表，現金限定、週三休。若排隊太長，改吃國際通周邊的海葡萄、島豆腐、沖繩天婦羅、Blue Seal 當輕晚餐。</p><span class="tag">餐廳首選</span></div>
+          </div>
+          <div class="item">
+            <div class="time">22:30</div>
+            <div><b>那霸國際通商店街、Public Market Alley</b><p>先感受市區，不需要購物太多；最後一天還會回來補買。</p><span class="tag">願望清單</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>首里與浦添：歷史、魚市場、海景購物</h3>
+            <p class="muted">這天車程短，適合調整第一天晚到後的體力。</p>
+          </div>
+          <span class="date">5/22 星期五</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">09:00</div>
+            <div><b>首里城公園、守禮門</b><p>免費區 4-6 月開到 19:30，付費區 8:30-19:00。早上去光線舒服，也避開午後團客。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">10:30</div>
+            <div><b>Sairaiin 達磨寺</b><p>在首里區域內，跟守禮門放一起最順。停留 30-45 分鐘即可。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">11:45</div>
+            <div><b>午餐：首里或壺屋沖繩麵</b><p>首選 OKINAWA SOBA EIBUN，官方營業 11:00-20:00、最後點餐 19:30，熱門時段可能排隊。想更順路可在首里找 Shuri Soba 類型的傳統沖繩麵。</p><span class="tag">沖繩麵</span></div>
+          </div>
+          <div class="item">
+            <div class="time">13:30</div>
+            <div><b>泊港漁市場、San-A Naha Main Place</b><p>泊港適合補一點海鮮、魚市場氣氛；San-A 可買日用品、伴手禮、藥妝。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">15:30</div>
+            <div><b>PARCO CITY 浦添</b><p>海邊大型商場，放下午剛好，天氣不好也不影響。若逛得少，可以順路看浦添西海岸夕色。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">19:00</div>
+            <div><b>晚餐：琉球料理 美栄</b><p>想吃正式一點，這餐最值得預約。主打琉球宮廷料理，距飯店不遠；週日休，週六僅午餐，放週五最穩。</p><span class="tag">奢華可</span><span class="tag">預約建議</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>北部與恩納：古宇利海、咖啡、萬座毛夕陽</h3>
+            <p class="muted">全程開車日。那霸往返北部辛苦，所以這天早出，回程用晚餐收尾。</p>
+          </div>
+          <span class="date">5/23 星期六</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">08:00</div>
+            <div><b>那霸出發往古宇利</b><p>週六北上可能塞車，建議早餐簡單吃飯店附近便利商店或麵包，直接上路。</p></div>
+          </div>
+          <div class="item">
+            <div class="time">10:30</div>
+            <div><b>古宇利海灘、古宇利大橋</b><p>海景願望點放早上，天色清澈時最漂亮。可加 Kouri Ocean Tower，但若你更想悠閒，海灘和橋就夠。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">12:00</div>
+            <div><b>午餐：百年古家 大家 Ufuya</b><p>不在願望清單，但非常順路且符合「當地特色、好吃重要」。吃阿古豬、沖繩麵、古民家氛圍；熱門，建議先訂位或早到。</p><span class="tag">阿古豬</span></div>
+          </div>
+          <div class="item">
+            <div class="time">14:00</div>
+            <div><b>Shinmei Coffee</b><p>從名護/今歸仁區域順路，當作北部咖啡休息點，不硬塞太多景點。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">16:00</div>
+            <div><b>Panza Okinawa Zipline</b><p>若想玩活動，這天最順；若下雨或太累，直接跳過，改去萬座毛早一點看海。</p><span class="tag">願望清單</span><span class="tag">天氣備案</span></div>
+          </div>
+          <div class="item">
+            <div class="time">17:30</div>
+            <div><b>萬座毛</b><p>官方資訊顯示 8:00-18:00，季節可能調整，合作金約 100 日圓。這裡是夕景強點，但要保守抓停車和入場時間。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">19:00</div>
+            <div><b>晚餐：琉球の牛 恩納店 或回那霸吃敘敘苑</b><p>想奢華吃肉，恩納的琉球の牛很適合接在萬座毛後；若訂不到，就回那霸吃你清單裡的敘敘苑歌町店。</p><span class="tag">燒肉</span><span class="tag">願望清單備選</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>南部：玉泉洞、糸滿魚市場、Outlet 與 Costco</h3>
+            <p class="muted">市場第四週日避開牧志，南部這天仍然順。Costco 是否值得看會員與行李空間。</p>
+          </div>
+          <span class="date">5/24 星期日</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">09:15</div>
+            <div><b>玉泉洞 / Okinawa World</b><p>玉泉洞一般 9:00-18:00、最後入場約 17:00。早上走洞穴比較舒服，順便看琉球王國城下町和 Eisa 表演。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">12:30</div>
+            <div><b>午餐：糸滿魚市場</b><p>吃現烤海鮮、沖繩魚、海葡萄、炸物。這天比硬排牧志市場更合理。</p><span class="tag">願望清單</span><span class="tag">海鮮</span></div>
+          </div>
+          <div class="item">
+            <div class="time">14:00</div>
+            <div><b>COSTCO 好市多沖繩店</b><p>當作新店巡禮或買零食飲料。若沒有會員或不想搬東西，縮短成 45 分鐘即可。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">15:30</div>
+            <div><b>沖繩 ASHIBINAA Outlet</b><p>接南部回那霸最順，逛到晚餐前。若想買精品、運動品牌，這天比最後一天從容。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">19:00</div>
+            <div><b>晚餐：炸牛 元村 那霸國際通本店</b><p>你清單裡的店，放南部回飯店後剛好。想更沖繩味，可改 Nuchigafu 或 Yotsutake 這類琉球料理店。</p><span class="tag">願望清單</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>中部與北谷：咖啡、美國村、AEON Rycom</h3>
+            <p class="muted">這天車程比北部輕很多，可以睡晚一點，也適合安排海邊晚餐。</p>
+          </div>
+          <span class="date">5/25 星期一</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">10:00</div>
+            <div><b>Okinawa Cerrado Coffee</b><p>浦添港川外人住宅區附近，很適合當上午咖啡和散步起點。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">11:45</div>
+            <div><b>午餐：Hamaya Soba</b><p>北谷在地名店，招牌是軟骨ソーキそば，資料顯示 10:30-20:30、每日營業。比在美國村商場隨便吃更有沖繩感。</p><span class="tag">沖繩麵</span></div>
+          </div>
+          <div class="item">
+            <div class="time">13:00</div>
+            <div><b>美國村</b><p>海邊散步、拍照、咖啡甜點。下午到傍晚最舒服，晚上燈也好看。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">16:30</div>
+            <div><b>AEON MALL Okinawa Rycom</b><p>官方資訊：商店 10:00-22:00、餐廳 11:00-23:00。放傍晚不怕天氣，買伴手禮也穩。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">19:30</div>
+            <div><b>晚餐：AEON Rycom 內用餐，或回那霸吃阿古豬涮涮鍋</b><p>如果想吃高級一點，可提前預約那霸的阿古豬涮涮鍋或石垣牛燒肉；若逛到晚，Rycom 餐廳營業時間彈性最大。</p><span class="tag">彈性晚餐</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day">
+        <div class="day-head">
+          <div>
+            <h3>回程日：那霸市場、波上宮、最後採買</h3>
+            <p class="muted">20:55 起飛，建議 18:30 前到機場。這天不要再開太遠。</p>
+          </div>
+          <span class="date">5/26 星期二</span>
+        </div>
+        <div class="timeline">
+          <div class="item">
+            <div class="time">09:30</div>
+            <div><b>波上宮</b><p>那霸海邊神社，官方觀光資訊標示境內 24 小時開放。早上去安靜，也靠近機場方向。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">11:00</div>
+            <div><b>第一牧志公設市場、Public Market Alley</b><p>市場 2 樓餐飲最後點餐約 20:00，這天是週二，避開第四週日休市。可以買一樓海鮮請二樓代客料理。</p><span class="tag">願望清單</span><span class="tag">午餐</span></div>
+          </div>
+          <div class="item">
+            <div class="time">13:30</div>
+            <div><b>國際通最後採買</b><p>Bic Camera Select、安利美特那霸國際通店、琉貿百貨都放這段。行李多的話先寄放飯店。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">16:30</div>
+            <div><b>早晚餐：敘敘苑歌町店 或 EIBUN 補吃</b><p>若前面沒吃到敘敘苑，這天早一點吃；若想保守回機場，改吃 EIBUN 沖繩麵或機場簡餐。</p><span class="tag">願望清單</span></div>
+          </div>
+          <div class="item">
+            <div class="time">18:30</div>
+            <div><b>抵達那霸機場</b><p>還車、退稅、託運都抓寬一點。20:55 起飛，18:30 到機場比較安心。</p></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>餐廳優先名單</h2>
+      <div class="food-grid">
+        <div class="food-card">
+          <b><span class="rank">1</span>琉球料理 美栄</b>
+          <p>最符合「當地特色、奢華一點也行」。吃宮廷琉球料理，建議請飯店協助訂位。週日休，週六多半只適合午餐。</p>
+          <a href="https://ryukyu-mie.com/english.html">官方網站</a>
+        </div>
+        <div class="food-card">
+          <b><span class="rank">2</span>百年古家 大家 Ufuya</b>
+          <p>北部路線午餐最順。阿古豬、沖繩麵、古民家景觀，很適合把「吃飯」變成景點。</p>
+          <a href="https://www.tablecheck.com/en/ufuya">訂位資訊</a>
+        </div>
+        <div class="food-card">
+          <b><span class="rank">3</span>OKINAWA SOBA EIBUN</b>
+          <p>那霸人氣沖繩麵，官方營業 11:00-20:00，最後點餐 19:30。適合午餐或回程日前補吃。</p>
+          <a href="https://sobaeibun.okinawa/shop/soba-eibun/">官方網站</a>
+        </div>
+        <div class="food-card">
+          <b><span class="rank">4</span>Hamaya Soba</b>
+          <p>北谷午餐首選，招牌軟骨ソーキ。接美國村很順，避免在觀光街吃得太普通。</p>
+          <a href="https://www.oki-islandguide.com/food_and_drink/hamaya-soba">介紹頁</a>
+        </div>
+        <div class="food-card">
+          <b><span class="rank">5</span>Jack's Steak House</b>
+          <p>沖繩戰後牛排文化經典，1953 年開業。週三休、現金限定，適合抵達日晚餐或宵夜。</p>
+          <a href="https://steak.co.jp/ko/pages/shisetu">官方資訊</a>
+        </div>
+        <div class="food-card">
+          <b><span class="rank">6</span>牧志市場代客料理</b>
+          <p>買海鮮到 2 樓料理最有旅行感。注意第四週日休市，這次排在 5/26 週二。</p>
+          <a href="https://en.information.okinawa/places/daiichimakishikousetsuichiba">觀光資訊</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>願望清單取捨</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>狀態</th>
+            <th>地點</th>
+            <th>安排理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>主行程</td>
+            <td>JR 九州 Blossom、國際通、Public Market Alley、Bic Camera、安利美特、琉貿百貨</td>
+            <td>都在那霸市中心，適合抵達日與回程日分散處理。</td>
+          </tr>
+          <tr>
+            <td>主行程</td>
+            <td>守禮門、Sairaiin、波上宮、泊港漁市場、San-A、PARCO CITY</td>
+            <td>那霸與浦添半日可串起，不需要長途開車。</td>
+          </tr>
+          <tr>
+            <td>主行程</td>
+            <td>古宇利海灘、Shinmei Coffee、Panza Zipline、萬座毛</td>
+            <td>北部與恩納集中一天，雖然車程長，但比拆成兩天更合理。</td>
+          </tr>
+          <tr>
+            <td>主行程</td>
+            <td>玉泉洞、糸滿魚市場、Costco、ASHIBINAA Outlet</td>
+            <td>南部一圈順路，適合週日市場替代方案。</td>
+          </tr>
+          <tr>
+            <td>主行程</td>
+            <td>Okinawa Cerrado Coffee、美國村、AEON MALL Okinawa Rycom</td>
+            <td>中部輕鬆日，咖啡、海邊、購物一路往返那霸。</td>
+          </tr>
+          <tr>
+            <td>彈性</td>
+            <td>炸牛 元村、敘敘苑、ちゅらさん6沖縄</td>
+            <td>餐廳與夜間點看訂位和體力安排；若前面吃得很滿，可留作備案。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>實用提醒</h2>
+      <div class="place-grid">
+        <div class="place-card">
+          <b>交通</b>
+          <p>北部、恩納、南部、中部都建議租車。那霸市區晚餐若喝酒，改搭單軌或計程車。</p>
+        </div>
+        <div class="place-card">
+          <b>訂位</b>
+          <p>美栄、Ufuya、琉球の牛、敘敘苑建議先訂。熱門沖繩麵店不一定接受一般訂位，早到最有效。</p>
+        </div>
+        <div class="place-card">
+          <b>雨天備案</b>
+          <p>下雨時把 Panza、萬座毛、古宇利縮短，增加 PARCO CITY、AEON Rycom、San-A、國際通室內採買。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sources">
+      <p><b>資料來源與待確認事項：</b>營業時間與休息日可能臨時異動，出發前一天請再確認官方頁面與 Google Maps。</p>
+      <p>
+        <a href="https://en.information.okinawa/places/daiichimakishikousetsuichiba">牧志公設市場</a>、
+        <a href="https://oki-park.jp/shurijo/en/info/15">首里城公園營業時間</a>、
+        <a href="https://okinawa-guide.com/en/spots/cape-manzamo/">萬座毛</a>、
+        <a href="https://www.naha-navi.or.jp/en/sightseeing/naminoue-shrine/">波上宮</a>、
+        <a href="https://www.japan.travel/en/spot/587/">國際通 JNTO</a>、
+        <a href="https://en.aeonmall.global/mall/okinawarycom">AEON Rycom</a>、
+        <a href="https://sobaeibun.okinawa/shop/soba-eibun/">EIBUN</a>、
+        <a href="https://ryukyu-mie.com/english.html">琉球料理 美栄</a>、
+        <a href="https://steak.co.jp/ko/pages/shisetu">Jack's Steak House</a>、
+        <a href="https://www.oki-islandguide.com/food_and_drink/hamaya-soba">Hamaya Soba</a>
+      </p>
+    </section>
+  </main>
+
+  <button class="print-button" onclick="window.print()">列印 / 存成 PDF</button>
+  <script>
+    const places = {
+      hotel: {
+        name: "JR 九州 Blossom 那霸酒店",
+        day: "全程住宿",
+        type: "住宿基地",
+        image: "https://source.unsplash.com/900x520/?naha,okinawa,hotel",
+        text: "每天都回到這裡，所以那霸市區景點拆到抵達日、首里日和回程日，避免把同一區重複排成整天。"
+      },
+      kokusai: {
+        name: "那霸國際通商店街",
+        day: "5/21、5/26",
+        type: "市區散步",
+        image: "https://source.unsplash.com/900x520/?naha,kokusai-dori,okinawa",
+        text: "離飯店近，最適合晚到後暖身和最後一天補買。Bic Camera、安利美特、琉貿百貨也都放在這段。"
+      },
+      makishi: {
+        name: "第一牧志公設市場 / Public Market Alley",
+        day: "5/26",
+        type: "午餐與市場",
+        image: "https://source.unsplash.com/900x520/?okinawa,market,seafood",
+        text: "5/24 是第四個星期日，市場通常休市，所以排在週二回程日。午餐可買海鮮後到 2 樓代客料理。"
+      },
+      shuri: {
+        name: "守禮門、首里城公園、Sairaiin",
+        day: "5/22",
+        type: "歷史文化",
+        image: "https://source.unsplash.com/900x520/?shuri,castle,okinawa",
+        text: "首里在那霸東側，早上從飯店出發很順。先走歷史區，再回到泊港、浦添，不需要拉長車程。"
+      },
+      tomari: {
+        name: "泊港漁市場",
+        day: "5/22",
+        type: "海鮮市場",
+        image: "https://source.unsplash.com/900x520/?okinawa,fish,market",
+        text: "接在首里之後回那霸北側，適合短停吃點海鮮或買小食，再往浦添 PARCO CITY。"
+      },
+      parco: {
+        name: "PARCO CITY 浦添",
+        day: "5/22",
+        type: "海景商場",
+        image: "https://source.unsplash.com/900x520/?okinawa,shopping,mall,sea",
+        text: "從那霸往浦添西海岸很順，放下午可躲熱或雨，也不影響晚上回市區吃琉球料理。"
+      },
+      kouri: {
+        name: "古宇利海灘 / 古宇利大橋",
+        day: "5/23",
+        type: "北部海景",
+        image: "https://source.unsplash.com/900x520/?kouri,bridge,okinawa,beach",
+        text: "北部最遠，必須早出。跟名護咖啡、恩納萬座毛合成一天，比拆成兩天更省往返時間。"
+      },
+      shinmei: {
+        name: "Shinmei Coffee",
+        day: "5/23",
+        type: "北部咖啡",
+        image: "https://source.unsplash.com/900x520/?okinawa,cafe,coffee",
+        text: "在今歸仁/名護路線上，適合古宇利後休息。這天不再塞太多北部景點，保留回程體力。"
+      },
+      panza: {
+        name: "Panza Okinawa Zipline",
+        day: "5/23",
+        type: "活動體驗",
+        image: "https://source.unsplash.com/900x520/?okinawa,zipline,resort",
+        text: "位在恩納，接在北部回程與萬座毛前後最順。若天氣差或太累，這個點可以直接跳過。"
+      },
+      manzamo: {
+        name: "萬座毛",
+        day: "5/23",
+        type: "夕景海岬",
+        image: "https://source.unsplash.com/900x520/?cape,manzamo,okinawa,cliff",
+        text: "位在恩納，是北部回那霸路上的自然停靠點。官方資訊約 8:00-18:00，建議保守抓時間。"
+      },
+      gyokusendo: {
+        name: "玉泉洞 / Okinawa World",
+        day: "5/24",
+        type: "南部景點",
+        image: "https://source.unsplash.com/900x520/?okinawa,cave,limestone",
+        text: "南部一日的主景點。早上走鐘乳洞比較舒服，後面接糸滿魚市場、Costco、Outlet 很順。"
+      },
+      itoman: {
+        name: "糸滿魚市場",
+        day: "5/24",
+        type: "午餐海鮮",
+        image: "https://source.unsplash.com/900x520/?okinawa,seafood,fish",
+        text: "接在玉泉洞後當午餐，吃沖繩魚、海葡萄、烤海鮮，比週日硬排牧志市場更穩。"
+      },
+      costco: {
+        name: "COSTCO 好市多沖繩店",
+        day: "5/24",
+        type: "採買備案",
+        image: "https://source.unsplash.com/900x520/?okinawa,shopping,warehouse",
+        text: "在南部路線上可順停。若沒有會員或行李空間不夠，縮短停留，保留時間給 Outlet。"
+      },
+      ashibinaa: {
+        name: "沖繩 ASHIBINAA Outlet",
+        day: "5/24",
+        type: "Outlet",
+        image: "https://source.unsplash.com/900x520/?okinawa,outlet,shopping",
+        text: "南部回那霸路上最順的購物點。比最後一天排 Outlet 安全，避免趕飛機壓力。"
+      },
+      cerrado: {
+        name: "Okinawa Cerrado Coffee",
+        day: "5/25",
+        type: "中部咖啡",
+        image: "https://source.unsplash.com/900x520/?okinawa,coffee,roastery",
+        text: "浦添港川附近，適合當中部輕鬆日開場。接北谷美國村動線自然。"
+      },
+      american: {
+        name: "美國村",
+        day: "5/25",
+        type: "北谷海邊",
+        image: "https://source.unsplash.com/900x520/?american-village,okinawa,chatan",
+        text: "下午到傍晚最好逛，白天看海、晚上看燈。午餐安排 Hamaya Soba，比只吃商場更有沖繩感。"
+      },
+      rycom: {
+        name: "AEON MALL Okinawa Rycom",
+        day: "5/25",
+        type: "大型商場",
+        image: "https://source.unsplash.com/900x520/?okinawa,mall,shopping",
+        text: "中部最大購物點之一，官方資訊商店到 22:00、餐廳到 23:00，適合放傍晚或雨天。"
+      },
+      naminoue: {
+        name: "波上宮",
+        day: "5/26",
+        type: "海邊神社",
+        image: "https://source.unsplash.com/900x520/?naminoue,shrine,okinawa",
+        text: "那霸市區偏機場方向，回程日早上去最順。停留 30-60 分鐘即可。"
+      }
+    };
+
+    const dayNames = {
+      all: "全部",
+      d1: "5/21 抵達那霸",
+      d2: "5/22 首里與浦添",
+      d3: "5/23 北部與恩納",
+      d4: "5/24 南部",
+      d5: "5/25 中部與北谷",
+      d6: "5/26 那霸回程"
+    };
+
+    const detail = document.querySelector("#place-detail");
+    const filters = Array.from(document.querySelectorAll(".map-filter"));
+    const pins = Array.from(document.querySelectorAll(".pin"));
+    const lines = Array.from(document.querySelectorAll(".route-line"));
+    const dayLayers = Array.from(document.querySelectorAll(".day-layer"));
+    const miniList = document.querySelector("#mini-list");
+
+    function renderDetail(id) {
+      const place = places[id];
+      if (!place || !detail) return;
+      detail.innerHTML = `
+        <div class="place-photo" style="--photo: url('${place.image}')"><strong>${place.name}</strong></div>
+        <span class="type">${place.type}</span>
+        <h3>${place.name}</h3>
+        <p><b>${place.day}</b></p>
+        <p>${place.text}</p>
+      `;
+      pins.forEach(pin => pin.classList.toggle("active", pin.dataset.id === id));
+      Array.from(document.querySelectorAll("#mini-list button")).forEach(button => {
+        button.classList.toggle("active", button.dataset.id === id);
+      });
+    }
+
+    function setFilter(day) {
+      filters.forEach(button => button.classList.toggle("active", button.dataset.filter === day));
+      pins.forEach(pin => {
+        const days = pin.dataset.day.split(" ");
+        const visible = day === "all" || days.includes(day);
+        pin.classList.toggle("hidden", !visible);
+      });
+      dayLayers.forEach(layer => {
+        layer.classList.toggle("hidden", day !== "all" && layer.dataset.day !== day);
+      });
+      lines.forEach(line => {
+        const isSelected = line.dataset.day === day;
+        line.classList.toggle("active", day === "all" || isSelected);
+      });
+      const firstVisible = pins.find(pin => day !== "all" && pin.dataset.day.split(" ").includes(day));
+      if (firstVisible) {
+        renderDetail(firstVisible.dataset.id);
+      } else if (detail) {
+        detail.innerHTML = `
+          <span class="type">概略地圖</span>
+          <h3>${dayNames[day]}</h3>
+          <p>點選日期只會留下當天路線與點位；點選地圖 pin 或下方點位，可查看該地點圖片與安排原因。</p>
+          <p class="muted">這是概略相對位置圖，實際導航請以 Google Maps 即時路況為準。</p>
+        `;
+        pins.forEach(pin => pin.classList.remove("active"));
+      }
+    }
+
+    if (miniList) {
+      miniList.innerHTML = Object.entries(places).map(([id, place]) => (
+        `<button type="button" data-id="${id}"><b>${place.name}</b><br><span class="muted">${place.day} · ${place.type}</span></button>`
+      )).join("");
+      miniList.addEventListener("click", event => {
+        const button = event.target.closest("button[data-id]");
+        if (button) renderDetail(button.dataset.id);
+      });
+    }
+
+    pins.forEach(pin => {
+      pin.addEventListener("click", () => renderDetail(pin.dataset.id));
+      pin.setAttribute("tabindex", "0");
+      pin.setAttribute("role", "button");
+      pin.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          renderDetail(pin.dataset.id);
+        }
+      });
+    });
+
+    filters.forEach(button => {
+      button.addEventListener("click", () => setFilter(button.dataset.filter));
+    });
+  </script>
+</body>
+</html>
