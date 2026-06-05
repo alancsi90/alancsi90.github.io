@@ -70,7 +70,7 @@
 
     .filters {
       display: grid;
-      grid-template-columns: repeat(3, minmax(170px, 1fr)) auto auto;
+      grid-template-columns: repeat(3, minmax(160px, 1fr)) auto auto auto auto;
       gap: 10px;
       align-items: end;
     }
@@ -184,6 +184,33 @@
       color: #ffe4a1;
     }
 
+    .price-chip {
+      margin: 0 0 12px;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .price-chip.tier-low {
+      border-color: rgba(31, 157, 255, .7);
+      background: rgba(31, 157, 255, .16);
+      color: #c8e8ff;
+      box-shadow: 0 0 18px rgba(31, 157, 255, .24);
+    }
+
+    .price-chip.tier-medium {
+      border-color: rgba(174, 87, 255, .7);
+      background: rgba(174, 87, 255, .16);
+      color: #ead8ff;
+      box-shadow: 0 0 18px rgba(174, 87, 255, .24);
+    }
+
+    .price-chip.tier-high {
+      border-color: rgba(255, 224, 112, .95);
+      background: rgba(255, 209, 92, .24);
+      color: #fff4be;
+      box-shadow: 0 0 24px rgba(255, 209, 92, .52), 0 0 42px rgba(255, 178, 36, .24);
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -252,6 +279,21 @@
     .card-back {
       transform: rotateY(180deg);
       overflow: auto;
+    }
+
+    .card.is-flipped.tier-low .card-back {
+      border-color: rgba(31, 157, 255, .82);
+      box-shadow: 0 0 0 1px rgba(31, 157, 255, .26), 0 0 32px rgba(31, 157, 255, .34), 0 22px 48px rgba(0, 0, 0, .45);
+    }
+
+    .card.is-flipped.tier-medium .card-back {
+      border-color: rgba(174, 87, 255, .86);
+      box-shadow: 0 0 0 1px rgba(174, 87, 255, .28), 0 0 34px rgba(174, 87, 255, .36), 0 22px 48px rgba(0, 0, 0, .45);
+    }
+
+    .card.is-flipped.tier-high .card-back {
+      border-color: rgba(255, 226, 110, 1);
+      box-shadow: 0 0 0 1px rgba(255, 224, 112, .48), 0 0 48px rgba(255, 209, 92, .72), 0 0 82px rgba(255, 178, 36, .34), 0 24px 54px rgba(0, 0, 0, .48);
     }
 
     .item-name {
@@ -364,6 +406,8 @@
             <label for="tag3">Tag 3</label>
             <select id="tag3"></select>
           </div>
+          <button type="button" id="singleDraw">單抽</button>
+          <button type="button" id="tenDraw">10連抽</button>
           <button type="button" id="flipAll">一次翻開</button>
           <button type="button" id="reset">清除篩選</button>
         </div>
@@ -414,12 +458,15 @@
     const tag3Select = document.querySelector("#tag3");
     const tag2Field = document.querySelector("#tag2Field");
     const tag3Field = document.querySelector("#tag3Field");
+    const singleDrawButton = document.querySelector("#singleDraw");
+    const tenDrawButton = document.querySelector("#tenDraw");
     const flipAllButton = document.querySelector("#flipAll");
     const resetButton = document.querySelector("#reset");
     const itemsNode = document.querySelector("#items");
     const countNode = document.querySelector("#count");
     const activeTagsNode = document.querySelector("#activeTags");
     let allCardsFlipped = false;
+    let drawnProducts = null;
 
     const rows = sourceRows.map((row) => ({ ...row }));
     let currentTag1 = "";
@@ -445,6 +492,39 @@
       });
       return map;
     }, new Map()).values()].sort((a, b) => a.name.localeCompare(b.name, "zh-Hant"));
+
+    const priceTierMeta = {
+      low: { label: "低單價", range: "NT$2,000 以內" },
+      medium: { label: "中單價", range: "NT$2,000 - 6,000" },
+      high: { label: "高單價", range: "NT$6,000 以上" }
+    };
+
+    const priceTierGroups = {
+      low: [
+        "刀", "小動物", "手柄", "手套", "水壺", "本地 AI 開發工具", "安全帽", "收納展示盒", "收納袋",
+        "衣服", "床包", "沐浴球", "車燈", "周邊", "抱枕", "杯", "枕頭", "炊具", "玩偶", "保養品",
+        "按摩道具", "玻璃滑鼠墊", "相機包", "音檔", "飛機杯", "食材", "時鐘", "氣氛燈", "秤", "茶酒咖啡豆",
+        "高蛋白", "啞鈴", "排汗衫", "掛畫", "掛軸", "球", "球拍", "魚", "壺", "帽子", "棉被",
+        "植栽", "毯子", "登山杖", "滑鼠墊", "瑜珈墊", "腳踏板", "遊戲", "運動服", "隔音棉",
+        "電腦遊戲", "飼料", "精油", "彈力帶", "盤子", "碼表", "線材", "線香", "調酒用具", "墨鏡", "褲子",
+        "頸枕", "營燈", "鍋", "擴香", "檯燈", "造型燈", "蠟燭", "露營椅", "CD"
+      ],
+      medium: [
+        "小螢幕", "公仔", "天幕", "手錶", "外套", "皮鞋", "立燈", "地毯", "行李箱", "冷血動物", "戒指", "車褲",
+        "武器", "娃", "背包", "香水", "旅行袋", "側背包", "帳篷", "麥克風", "喇叭", "跑鞋", "項鍊", "睡袋",
+        "腳架", "運動鞋", "記憶卡", "滑鼠", "演唱會", "播放器", "鍵盤", "懶人沙發", "繪圖板", "籠子",
+        "Cosplay", "DAC", "stream deck"
+      ],
+      high: [
+        "方向盤", "手機", "平板", "存錢出國", "耳機", "自行車", "投影機", "車", "股票", "相機", "音遊設備",
+        "渡假", "運動手錶", "電子產品開發", "電腦", "電腦桌", "電腦椅", "樂器", "養殖箱", "螢幕", "鏡頭", "GPS", "PS5",
+        "Steam Deck", "Switch", "VR 設備"
+      ]
+    };
+
+    const priceTiers = Object.fromEntries(
+      Object.entries(priceTierGroups).flatMap(([tier, names]) => names.map((name) => [name, tier]))
+    );
 
     function uniq(values) {
       return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
@@ -486,11 +566,14 @@
       });
     }
 
-    function renderItems() {
-      const visibleProducts = filteredProducts();
+    function renderItems(productsOverride = null, drawLabel = "") {
+      const fullVisibleProducts = filteredProducts();
+      const visibleProducts = productsOverride || fullVisibleProducts;
       allCardsFlipped = false;
       flipAllButton.textContent = "一次翻開";
-      countNode.textContent = `目前有 ${visibleProducts.length} 個可以買的東西`;
+      countNode.textContent = drawLabel
+        ? `${drawLabel}：${visibleProducts.length} 個（符合條件 ${fullVisibleProducts.length} 個）`
+        : `目前有 ${visibleProducts.length} 個可以買的東西`;
       renderActiveTags();
       itemsNode.innerHTML = "";
 
@@ -503,8 +586,10 @@
       }
 
       visibleProducts.forEach((product, index) => {
+        const priceTier = priceTiers[product.name] || "medium";
+        const priceMeta = priceTierMeta[priceTier];
         const card = document.createElement("article");
-        card.className = "card";
+        card.className = `card tier-${priceTier}`;
         card.tabIndex = 0;
         card.setAttribute("role", "button");
         card.setAttribute("aria-label", `翻開 ${product.name}`);
@@ -528,6 +613,10 @@
         backTitle.className = "back-title";
         backTitle.textContent = product.name;
 
+        const priceChip = document.createElement("span");
+        priceChip.className = `chip price-chip tier-${priceTier}`;
+        priceChip.textContent = `${priceMeta.label} · ${priceMeta.range}`;
+
         const tagList = document.createElement("div");
         tagList.className = "tag-list";
         product.visiblePaths.forEach((path) => {
@@ -537,7 +626,7 @@
           tagList.append(chip);
         });
 
-        back.append(backTitle, tagList);
+        back.append(backTitle, priceChip, tagList);
         inner.append(front, back);
         card.append(inner);
         card.addEventListener("click", () => {
@@ -555,6 +644,21 @@
       });
     }
 
+    function shuffleProducts(items) {
+      const shuffled = [...items];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+      }
+      return shuffled;
+    }
+
+    function drawProducts(count, label) {
+      const pool = filteredProducts();
+      drawnProducts = shuffleProducts(pool).slice(0, Math.min(count, pool.length));
+      renderItems(drawnProducts, label);
+    }
+
     function syncFlipAllButton() {
       const cards = [...itemsNode.querySelectorAll(".card")];
       allCardsFlipped = cards.length > 0 && cards.every((card) => card.classList.contains("is-flipped"));
@@ -570,6 +674,7 @@
     }
 
     function updateFilterOptions() {
+      drawnProducts = null;
       const selectedTag1 = tag1Select.value;
       const selectedTag2 = tag2Select.value;
       const selectedTag3 = tag3Select.value;
@@ -594,6 +699,12 @@
     tag1Select.addEventListener("change", updateFilterOptions);
     tag2Select.addEventListener("change", updateFilterOptions);
     tag3Select.addEventListener("change", updateFilterOptions);
+    singleDrawButton.addEventListener("click", () => {
+      drawProducts(1, "單抽");
+    });
+    tenDrawButton.addEventListener("click", () => {
+      drawProducts(10, "10連抽");
+    });
     flipAllButton.addEventListener("click", () => {
       allCardsFlipped = !allCardsFlipped;
       itemsNode.querySelectorAll(".card").forEach((card) => {
@@ -602,6 +713,7 @@
       flipAllButton.textContent = allCardsFlipped ? "全部蓋回" : "一次翻開";
     });
     resetButton.addEventListener("click", () => {
+      drawnProducts = null;
       tag1Select.value = "";
       tag2Select.value = "";
       tag3Select.value = "";
