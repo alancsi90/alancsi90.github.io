@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>興趣購物篩選器</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f5fbff;
+      --muted: #8da3b8;
+      --line: rgba(56, 241, 255, .34);
+      --panel: rgba(9, 18, 35, .88);
+      --wash: #050912;
+      --accent: #18f7ff;
+      --accent-2: #ff3df2;
+      --accent-3: #ffd15c;
+      --shadow: 0 0 0 1px rgba(24, 247, 255, .12), 0 16px 38px rgba(0, 0, 0, .38);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background:
+        linear-gradient(rgba(24, 247, 255, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 61, 242, .04) 1px, transparent 1px),
+        radial-gradient(circle at 18% 0%, rgba(24, 247, 255, .18), transparent 34%),
+        radial-gradient(circle at 86% 12%, rgba(255, 61, 242, .16), transparent 28%),
+        var(--wash);
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: -28px -18px 24px;
+      padding: 18px;
+      background: rgba(5, 9, 18, .88);
+      border-bottom: 1px solid rgba(24, 247, 255, .22);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .34);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.15;
+      font-weight: 780;
+      color: var(--ink);
+      text-shadow: 0 0 18px rgba(24, 247, 255, .48), 0 0 28px rgba(255, 61, 242, .22);
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(170px, 1fr)) auto auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .field {
+      min-width: 0;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    select,
+    button {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03), 0 0 18px rgba(24, 247, 255, .08);
+    }
+
+    select {
+      padding: 8px 36px 8px 11px;
+      outline: none;
+      accent-color: var(--accent);
+    }
+
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(24, 247, 255, .14), 0 0 24px rgba(24, 247, 255, .24);
+    }
+
+    button {
+      padding: 8px 14px;
+      font-weight: 750;
+      cursor: pointer;
+      color: #061018;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      border-color: rgba(255, 255, 255, .16);
+      white-space: nowrap;
+      text-shadow: none;
+    }
+
+    button:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 0 28px rgba(24, 247, 255, .24), 0 0 22px rgba(255, 209, 92, .18);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .summary {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    #count {
+      padding: 6px 10px;
+      border-left: 3px solid var(--accent-2);
+      background: rgba(9, 18, 35, .7);
+      color: #d8e8f7;
+    }
+
+    .active-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      max-width: 100%;
+      min-height: 26px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(24, 247, 255, .42);
+      background: rgba(24, 247, 255, .12);
+      color: #bffbff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+      box-shadow: 0 0 14px rgba(24, 247, 255, .12);
+    }
+
+    .chip:nth-child(3n + 2) {
+      border-color: rgba(255, 61, 242, .42);
+      background: rgba(255, 61, 242, .12);
+      color: #ffd4fb;
+    }
+
+    .chip:nth-child(3n) {
+      border-color: rgba(255, 209, 92, .44);
+      background: rgba(255, 209, 92, .12);
+      color: #ffe4a1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      perspective: 1200px;
+    }
+
+    .card {
+      min-height: 168px;
+      border-radius: 8px;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      outline: none;
+      perspective: 900px;
+      animation: cardReveal .52s cubic-bezier(.2, .84, .34, 1) both;
+    }
+
+    .card:focus-visible .card-inner {
+      box-shadow: 0 0 0 3px rgba(255, 209, 92, .34), 0 0 28px rgba(255, 209, 92, .22);
+    }
+
+    .card-inner {
+      position: relative;
+      min-height: inherit;
+      transform-style: preserve-3d;
+      transition: transform .55s cubic-bezier(.2, .84, .34, 1);
+    }
+
+    .card.is-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 168px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(24, 247, 255, .08), transparent 34%),
+        linear-gradient(315deg, rgba(255, 61, 242, .08), transparent 36%),
+        var(--panel);
+      backface-visibility: hidden;
+      box-shadow: var(--shadow);
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    .card:hover .card-face {
+      border-color: rgba(24, 247, 255, .68);
+      box-shadow: 0 0 0 1px rgba(24, 247, 255, .18), 0 0 30px rgba(24, 247, 255, .16), 0 20px 42px rgba(0, 0, 0, .42);
+    }
+
+    .card:hover .card-inner {
+      transform: translateY(-2px);
+    }
+
+    .card.is-flipped:hover .card-inner {
+      transform: rotateY(180deg) translateY(-2px);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      overflow: auto;
+    }
+
+    .item-name {
+      margin: 0 0 12px;
+      font-size: 19px;
+      line-height: 1.25;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      color: #ffffff;
+    }
+
+    .card-code {
+      width: fit-content;
+      margin: 0 0 10px;
+      padding: 3px 7px;
+      border: 1px solid rgba(255, 209, 92, .45);
+      border-radius: 6px;
+      color: #ffe4a1;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .flip-hint {
+      display: grid;
+      place-items: center;
+      min-height: 136px;
+      margin: 0;
+      color: var(--accent);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+      text-shadow: 0 0 18px rgba(24, 247, 255, .58), 0 0 24px rgba(255, 61, 242, .24);
+    }
+
+    .back-title {
+      margin: 0 0 14px;
+      color: #ffffff;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.1;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .empty {
+      padding: 32px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--muted);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    @keyframes cardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(18px) rotateY(-18deg) scale(.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 18px 12px 28px;
+      }
+
+      .topbar {
+        margin: -18px -12px 18px;
+        padding: 14px 12px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="topbar">
+      <div class="topbar-inner">
+        <h1>興趣購物篩選器</h1>
+        <div class="filters" aria-label="商品標籤篩選">
+          <div class="field">
+            <label for="tag1">Tag 1</label>
+            <select id="tag1"></select>
+          </div>
+          <div class="field" id="tag2Field">
+            <label for="tag2">Tag 2</label>
+            <select id="tag2"></select>
+          </div>
+          <div class="field" id="tag3Field">
+            <label for="tag3">Tag 3</label>
+            <select id="tag3"></select>
+          </div>
+          <button type="button" id="flipAll">一次翻開</button>
+          <button type="button" id="reset">清除篩選</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary" aria-live="polite">
+      <div id="count"></div>
+      <div class="active-tags" id="activeTags"></div>
+    </section>
+
+    <section class="grid" id="items"></section>
+  </main>
+
+  <script>
+    const sourceRows = [
+      { tag1: "室內", tag2: "聽音樂", tag3: "", products: "耳機、喇叭、DAC、播放器、音檔、CD、演唱會、樂器、隔音棉" },
+      { tag1: "", tag2: "咖啡茶酒", tag3: "", products: "壺、杯、秤、茶酒咖啡豆、調酒用具、盤子" },
+      { tag1: "", tag2: "料理", tag3: "", products: "刀、鍋、食材、盤子" },
+      { tag1: "", tag2: "二次元", tag3: "", products: "周邊、娃、公仔、收納展示盒、抱枕、飛機杯、Cosplay、滑鼠墊、玻璃滑鼠墊、掛軸、武器、掛畫" },
+      { tag1: "", tag2: "電腦相關", tag3: "遊戲", products: "電腦遊戲、Switch、PS5、Steam Deck" },
+      { tag1: "", tag2: "", tag3: "電腦周邊", products: "麥克風、電腦桌、電腦椅、手柄、滑鼠、鍵盤、螢幕、電腦遊戲、電腦、stream deck、線材、小螢幕、手機、平板、音遊設備、滑鼠墊、玻璃滑鼠墊、繪圖板、方向盤" },
+      { tag1: "", tag2: "", tag3: "新科技", products: "VR 設備、本地 AI 開發工具、電子產品開發、電腦、遊戲、投影機" },
+      { tag1: "", tag2: "裝飾家裡", tag3: "裝飾", products: "掛畫、地毯、抱枕、植栽、周邊、玩偶、公仔、收納展示盒、時鐘、掛軸、滑鼠墊、玻璃滑鼠墊、武器、掛畫" },
+      { tag1: "", tag2: "", tag3: "香氛", products: "擴香、蠟燭、線香、精油" },
+      { tag1: "", tag2: "", tag3: "寢具", products: "床包、枕頭、棉被、毯子、抱枕" },
+      { tag1: "", tag2: "", tag3: "燈具", products: "檯燈、立燈、造型燈、氣氛燈" },
+      { tag1: "", tag2: "寵物", tag3: "", products: "小動物、冷血動物、魚、籠子、飼料、養殖箱" },
+      { tag1: "", tag2: "舒服", tag3: "", products: "懶人沙發、投影機、飛機杯、平板、腳踏板、沐浴球、存錢出國、渡假" },
+      { tag1: "", tag2: "錢生錢", tag3: "", products: "股票、繪圖板、公仔、娃" },
+      { tag1: "室外", tag2: "攝影", tag3: "", products: "相機、鏡頭、腳架、記憶卡、相機包" },
+      { tag1: "", tag2: "露營", tag3: "", products: "帳篷、睡袋、露營椅、天幕、炊具、營燈" },
+      { tag1: "", tag2: "運動", tag3: "健身", products: "啞鈴、瑜珈墊、運動服、彈力帶、高蛋白、按摩道具" },
+      { tag1: "", tag2: "", tag3: "跑步", products: "跑鞋、運動手錶、排汗衫、水壺" },
+      { tag1: "", tag2: "", tag3: "騎自行車", products: "自行車、安全帽、車褲、車燈、碼表" },
+      { tag1: "", tag2: "", tag3: "登山", products: "登山杖、GPS、相機、鏡頭、腳架、記憶卡、相機包" },
+      { tag1: "", tag2: "", tag3: "球類運動", products: "球、球拍、手套" },
+      { tag1: "", tag2: "旅遊", tag3: "", products: "行李箱、旅行袋、頸枕、收納袋、相機、鏡頭、腳架、記憶卡、相機包、車、存錢出國、渡假" },
+      { tag1: "", tag2: "二次元", tag3: "", products: "演唱會、Cosplay、相機、鏡頭、腳架、記憶卡、相機包" },
+      { tag1: "", tag2: "逛街", tag3: "服飾", products: "衣服、褲子、外套、Cosplay" },
+      { tag1: "", tag2: "", tag3: "配件", products: "手錶、項鍊、戒指、帽子、墨鏡、Cosplay" },
+      { tag1: "", tag2: "", tag3: "保養美妝", products: "保養品、香水" },
+      { tag1: "", tag2: "", tag3: "鞋包", products: "運動鞋、皮鞋、背包、側背包" }
+    ];
+
+    const tag1Select = document.querySelector("#tag1");
+    const tag2Select = document.querySelector("#tag2");
+    const tag3Select = document.querySelector("#tag3");
+    const tag2Field = document.querySelector("#tag2Field");
+    const tag3Field = document.querySelector("#tag3Field");
+    const flipAllButton = document.querySelector("#flipAll");
+    const resetButton = document.querySelector("#reset");
+    const itemsNode = document.querySelector("#items");
+    const countNode = document.querySelector("#count");
+    const activeTagsNode = document.querySelector("#activeTags");
+    let allCardsFlipped = false;
+
+    const rows = sourceRows.map((row) => ({ ...row }));
+    let currentTag1 = "";
+    let currentTag2 = "";
+
+    rows.forEach((row) => {
+      currentTag1 = row.tag1 || currentTag1;
+      currentTag2 = row.tag2 || currentTag2;
+      row.tag1 = currentTag1;
+      row.tag2 = currentTag2;
+      row.tag3 = row.tag3 || "";
+      row.products = row.products.replace(/[\u0000-\u001f\u007f-\u009f]/g, "");
+    });
+
+    const products = [...rows.reduce((map, row) => {
+      row.products.split("、").map((name) => name.trim()).filter(Boolean).forEach((name) => {
+        const entry = map.get(name) || { name, paths: [] };
+        const label = [row.tag1, row.tag2, row.tag3].filter(Boolean).join(" / ");
+        if (!entry.paths.some((path) => path.label === label)) {
+          entry.paths.push({ tag1: row.tag1, tag2: row.tag2, tag3: row.tag3, label });
+        }
+        map.set(name, entry);
+      });
+      return map;
+    }, new Map()).values()].sort((a, b) => a.name.localeCompare(b.name, "zh-Hant"));
+
+    function uniq(values) {
+      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
+    }
+
+    function fillSelect(select, values, placeholder) {
+      select.innerHTML = "";
+      const allOption = document.createElement("option");
+      allOption.value = "";
+      allOption.textContent = placeholder;
+      select.append(allOption);
+      values.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+      });
+    }
+
+    function matches(path) {
+      return (!tag1Select.value || path.tag1 === tag1Select.value)
+        && (!tag2Select.value || path.tag2 === tag2Select.value)
+        && (!tag3Select.value || path.tag3 === tag3Select.value);
+    }
+
+    function filteredProducts() {
+      return products
+        .map((product) => ({ ...product, visiblePaths: product.paths.filter(matches) }))
+        .filter((product) => product.visiblePaths.length);
+    }
+
+    function renderActiveTags() {
+      activeTagsNode.innerHTML = "";
+      [tag1Select.value, tag2Select.value, tag3Select.value].filter(Boolean).forEach((tag) => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = tag;
+        activeTagsNode.append(chip);
+      });
+    }
+
+    function renderItems() {
+      const visibleProducts = filteredProducts();
+      allCardsFlipped = false;
+      flipAllButton.textContent = "一次翻開";
+      countNode.textContent = `目前有 ${visibleProducts.length} 個可以買的東西`;
+      renderActiveTags();
+      itemsNode.innerHTML = "";
+
+      if (!visibleProducts.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "這組標籤目前沒有商品";
+        itemsNode.append(empty);
+        return;
+      }
+
+      visibleProducts.forEach((product, index) => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `翻開 ${product.name}`);
+        card.style.animationDelay = `${Math.min(index * 34, 680)}ms`;
+
+        const inner = document.createElement("div");
+        inner.className = "card-inner";
+
+        const front = document.createElement("div");
+        front.className = "card-face card-front";
+
+        const hint = document.createElement("div");
+        hint.className = "flip-hint";
+        hint.textContent = "TAP TO FLIP";
+        front.append(hint);
+
+        const back = document.createElement("div");
+        back.className = "card-face card-back";
+
+        const backTitle = document.createElement("div");
+        backTitle.className = "back-title";
+        backTitle.textContent = product.name;
+
+        const tagList = document.createElement("div");
+        tagList.className = "tag-list";
+        product.visiblePaths.forEach((path) => {
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          chip.textContent = path.label;
+          tagList.append(chip);
+        });
+
+        back.append(backTitle, tagList);
+        inner.append(front, back);
+        card.append(inner);
+        card.addEventListener("click", () => {
+          card.classList.toggle("is-flipped");
+          syncFlipAllButton();
+        });
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            card.classList.toggle("is-flipped");
+            syncFlipAllButton();
+          }
+        });
+        itemsNode.append(card);
+      });
+    }
+
+    function syncFlipAllButton() {
+      const cards = [...itemsNode.querySelectorAll(".card")];
+      allCardsFlipped = cards.length > 0 && cards.every((card) => card.classList.contains("is-flipped"));
+      flipAllButton.textContent = allCardsFlipped ? "全部蓋回" : "一次翻開";
+    }
+
+    function optionRows(excludedTag) {
+      return rows.filter((row) => {
+        return (excludedTag === "tag1" || !tag1Select.value || row.tag1 === tag1Select.value)
+          && (excludedTag === "tag2" || !tag2Select.value || row.tag2 === tag2Select.value)
+          && (excludedTag === "tag3" || !tag3Select.value || row.tag3 === tag3Select.value);
+      });
+    }
+
+    function updateFilterOptions() {
+      const selectedTag1 = tag1Select.value;
+      const selectedTag2 = tag2Select.value;
+      const selectedTag3 = tag3Select.value;
+
+      const tag1Options = uniq(optionRows("tag1").map((row) => row.tag1));
+      fillSelect(tag1Select, tag1Options, "全部 Tag 1");
+      tag1Select.value = tag1Options.includes(selectedTag1) ? selectedTag1 : "";
+
+      const tag2Options = uniq(optionRows("tag2").map((row) => row.tag2));
+      fillSelect(tag2Select, tag2Options, "全部 Tag 2");
+      tag2Select.value = tag2Options.includes(selectedTag2) ? selectedTag2 : "";
+
+      const tag3Options = uniq(optionRows("tag3").map((row) => row.tag3));
+      fillSelect(tag3Select, tag3Options, "全部 Tag 3");
+      tag3Select.value = tag3Options.includes(selectedTag3) ? selectedTag3 : "";
+
+      renderItems();
+    }
+
+    updateFilterOptions();
+
+    tag1Select.addEventListener("change", updateFilterOptions);
+    tag2Select.addEventListener("change", updateFilterOptions);
+    tag3Select.addEventListener("change", updateFilterOptions);
+    flipAllButton.addEventListener("click", () => {
+      allCardsFlipped = !allCardsFlipped;
+      itemsNode.querySelectorAll(".card").forEach((card) => {
+        card.classList.toggle("is-flipped", allCardsFlipped);
+      });
+      flipAllButton.textContent = allCardsFlipped ? "全部蓋回" : "一次翻開";
+    });
+    resetButton.addEventListener("click", () => {
+      tag1Select.value = "";
+      tag2Select.value = "";
+      tag3Select.value = "";
+      updateFilterOptions();
+    });
+  </script>
+</body>
+</html>
